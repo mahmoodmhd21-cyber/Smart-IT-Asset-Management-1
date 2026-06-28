@@ -12,10 +12,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+
 // Register a new user account with hashed password
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body || {};
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Name, email, and password are required.' });
@@ -55,7 +57,7 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
 
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required.' });
@@ -73,7 +75,7 @@ const loginUser = async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: '1h' }
     );
 

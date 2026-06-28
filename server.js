@@ -20,6 +20,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Test Route
 app.get("/", (req, res) => {
