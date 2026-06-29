@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Smart IT Asset Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation shared by the main app pages. -->
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="Smart IT Asset Management dashboard">
+        <span class="brand-mark">SI</span>
+        <span class="brand-text">Smart IT Asset Management</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link" href="assets.html">Assets</a></li>
+          <li><a class="nav-link" href="allocations.html">Allocations</a></li>
+          <li><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar logout is always available from the main navigation area. -->
+      <div class="sidebar-footer">
+        <a class="logout-link" href="index.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Top navigation for current user details and account actions. -->
+      <nav class="top-nav" aria-label="User navigation">
+        <div class="current-user">
+          <span>Current User</span>
+          <strong>Admin User</strong>
+        </div>
+        <div class="top-nav-actions">
+          <button class="button secondary notification-button" type="button">Notifications</button>
+          <a class="button secondary" href="index.html">Logout</a>
+        </div>
+      </nav>
+
+      <!-- Page title and primary action. -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Dashboard</h1>
+          <p>Monitor asset inventory, availability, and recent activity.</p>
+        </div>
+        <a class="button" href="addAsset.html">Add Asset</a>
+      </header>
+      <!-- Summary cards for key asset metrics. -->
+        <section class="content-grid four-columns" aria-label="Asset summary">
+            <article class="card">
+                <p class="stat-value">128</p>
+                <p class="stat-label">Total Assets</p>
+            </article>
+            
+            <article class="card">
+                <p class="stat-value">94</p>
+                <p class="stat-label">Allocated Assets</p>
+            </article>
+            
+            <article class="card">
+                <p class="stat-value">17</p>
+                <p class="stat-label">Available Assets</p>
+            </article>
+
+            <article class="card">
+                <p class="stat-value">17</p>
+                <p class="stat-label">Returned Assets</p>
+            </article>
+        </section>
+
+        <section class="content-grid two-columns dashboard-sections">
+            <!-- Recent allocation activity -->
+            <article class="card">
+                <div class="card-header">
+                <div>
+                    <h2 class="card-title">Recent Allocations</h2>
+                    <p class="card-subtitle">
+                    Displays the most recent asset allocation and return activities.
+                    </p>
+                </div>
+                </div>
+
+                <div class="activity-list">
+
+                <div class="activity-item">
+                    <strong>Dell Latitude 7440</strong>
+                    <span>Allocated to Sarah Ahmed</span>
+                </div>
+
+                <div class="activity-item">
+                    <strong>iPhone 15</strong>
+                    <span>Allocated to Omar Ali</span>
+                </div>
+
+                <div class="activity-item">
+                    <strong>HP Docking Station</strong>
+                    <span>Returned by Fatima Hassan</span>
+                </div>
+
+                <div class="activity-item">
+                    <strong>MacBook Air M3</strong>
+                    <span>Allocated to Ahmed Khan</span>
+                </div>
+
+                </div>
+            </article>
+
+            <!-- Quick actions -->
+            <article class="card">
+
+                <div class="card-header">
+                <div>
+                    <h2 class="card-title">Quick Actions</h2>
+                    <p class="card-subtitle">
+                    Frequently used actions within the system.
+                    </p>
+                </div>
+                </div>
+
+                <div class="quick-actions">
+
+                <a href="addAsset.html" class="button full-width">
+                    Add New Asset
+                </a>
+
+                <a href="assets.html" class="button full-width">
+                    View Assets
+                </a>
+
+                <a href="allocations.html" class="button full-width">
+                    Allocate Asset
+                </a>
+
+                <a href="profile.html" class="button full-width">
+                    My Profile
+                </a>
+                </div>
+            </article>
+        </section>
+        
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

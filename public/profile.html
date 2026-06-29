@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Smart IT Asset Management</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation shared by the main app pages. -->
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="Smart IT Asset Management dashboard">
+        <span class="brand-mark">SI</span>
+        <span class="brand-text">Smart IT Asset Management</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link" href="assets.html">Assets</a></li>
+          <li><a class="nav-link" href="allocations.html">Allocations</a></li>
+          <li><a class="nav-link active" href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar logout is always available from the main navigation area. -->
+      <div class="sidebar-footer">
+        <a class="logout-link" href="index.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Top navigation for current user details and account actions. -->
+      <nav class="top-nav" aria-label="User navigation">
+        <div class="current-user">
+          <span>Current User</span>
+          <strong>Admin User</strong>
+        </div>
+        <div class="top-nav-actions">
+          <button class="button secondary notification-button" type="button">Notifications</button>
+          <a class="button secondary" href="index.html">Logout</a>
+        </div>
+      </nav>
+
+      <!-- Page title for profile details. -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Profile</h1>
+          <p>View your account details.</p>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Account Details</h2>
+            <p class="card-subtitle">Basic user information for the signed-in account.</p>
+          </div>
+        </div>
+
+        <!-- Profile summary with only the requested user fields. -->
+        <dl class="profile-details">
+          <div class="profile-row">
+            <dt>Name</dt>
+            <dd>Admin User</dd>
+          </div>
+
+          <div class="profile-row">
+            <dt>Email</dt>
+            <dd>admin@company.com</dd>
+          </div>
+
+          <div class="profile-row">
+            <dt>Role</dt>
+            <dd>Asset Manager</dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

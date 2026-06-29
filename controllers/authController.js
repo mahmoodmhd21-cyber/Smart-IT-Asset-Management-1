@@ -55,6 +55,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+//Login a user and return a JWT token
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body || {};

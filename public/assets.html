@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assets | Smart IT Asset Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/assets.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation shared by the main app pages. -->
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="Smart IT Asset Management dashboard">
+        <span class="brand-mark">SI</span>
+        <span class="brand-text">Smart IT Asset Management</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link active" href="assets.html">Assets</a></li>
+          <li><a class="nav-link" href="allocations.html">Allocations</a></li>
+          <li><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar logout is always available from the main navigation area. -->
+      <div class="sidebar-footer">
+        <a class="logout-link" href="index.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Top navigation for current user details and account actions. -->
+      <nav class="top-nav" aria-label="User navigation">
+        <div class="current-user">
+          <span>Current User</span>
+          <strong>Admin User</strong>
+        </div>
+        <div class="top-nav-actions">
+          <button class="button secondary notification-button" type="button">Notifications</button>
+          <a class="button secondary" href="index.html">Logout</a>
+        </div>
+      </nav>
+
+      <!-- Page title for the asset inventory section. -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Assets</h1>
+          <p>View, track, and manage company IT equipment.</p>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Asset Inventory</h2>
+            <p class="card-subtitle">Professional asset list with core inventory details.</p>
+          </div>
+        </div>
+
+        <!-- Asset action toolbar. Buttons can be connected to backend actions later. -->
+        <div class="asset-toolbar" aria-label="Asset table actions">
+          <div class="asset-toolbar-actions">
+            <a class="button" href="addAsset.html">Add</a>
+            <a class="button secondary" href="editAsset.html">Edit</a>
+            <button class="button danger" type="button">Delete</button>
+          </div>
+
+          <div class="asset-toolbar-filters">
+            <label class="sr-only" for="assetSearch">Search assets</label>
+            <input type="search" id="assetSearch" name="assetSearch" placeholder="Search assets">
+
+            <label class="sr-only" for="assetFilter">Filter assets</label>
+            <select id="assetFilter" name="assetFilter">
+              <option value="">Filter</option>
+              <option value="available">Available</option>
+              <option value="allocated">Allocated</option>
+              <option value="maintenance">Maintenance</option>
+            </select>
+
+            <button class="button secondary" type="button">Search</button>
+            <button class="button secondary" type="button">Filter</button>
+          </div>
+        </div>
+
+        <!-- Asset list table with only the requested inventory columns. -->
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Asset Name</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Serial Number</th>
+                <th>Status</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dell Latitude 7440</td>
+                <td>Laptop</td>
+                <td>Dell</td>
+                <td>Latitude 7440</td>
+                <td>DL-7440-98321</td>
+                <td><span class="status-pill success">Allocated</span></td>
+                <td>Manama Office</td>
+              </tr>
+              <tr>
+                <td>HP Docking Station</td>
+                <td>Accessory</td>
+                <td>HP</td>
+                <td>USB-C Dock G5</td>
+                <td>HP-G5-43109</td>
+                <td><span class="status-pill">Available</span></td>
+                <td>IT Store Room</td>
+              </tr>
+              <tr>
+                <td>iPhone 15</td>
+                <td>Mobile</td>
+                <td>Apple</td>
+                <td>iPhone 15</td>
+                <td>APL-15-88420</td>
+                <td><span class="status-pill success">Allocated</span></td>
+                <td>Sales Department</td>
+              </tr>
+              <tr>
+                <td>Lenovo ThinkPad T14</td>
+                <td>Laptop</td>
+                <td>Lenovo</td>
+                <td>ThinkPad T14</td>
+                <td>LNV-T14-21987</td>
+                <td><span class="status-pill warning">Maintenance</span></td>
+                <td>Repair Desk</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/assets.js"></script>
+</body>
+</html>

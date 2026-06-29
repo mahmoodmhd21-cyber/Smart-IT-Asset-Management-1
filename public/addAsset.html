@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Asset | Smart IT Asset Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/assets.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation shared by the main app pages. -->
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="Smart IT Asset Management dashboard">
+        <span class="brand-mark">SI</span>
+        <span class="brand-text">Smart IT Asset Management</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link active" href="assets.html">Assets</a></li>
+          <li><a class="nav-link" href="allocations.html">Allocations</a></li>
+          <li><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar logout is always available from the main navigation area. -->
+      <div class="sidebar-footer">
+        <a class="logout-link" href="index.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Top navigation for current user details and account actions. -->
+      <nav class="top-nav" aria-label="User navigation">
+        <div class="current-user">
+          <span>Current User</span>
+          <strong>Admin User</strong>
+        </div>
+        <div class="top-nav-actions">
+          <button class="button secondary notification-button" type="button">Notifications</button>
+          <a class="button secondary" href="index.html">Logout</a>
+        </div>
+      </nav>
+
+      <!-- Page title and back link. -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Add Asset</h1>
+          <p>Create a new asset record for inventory tracking.</p>
+        </div>
+        <a class="button secondary" href="assets.html">Back to Assets</a>
+      </header>
+
+      <section class="card form-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Asset Information</h2>
+            <p class="card-subtitle">Enter the core details needed to track this asset.</p>
+          </div>
+        </div>
+
+        <!-- Add asset form with the required inventory fields. -->
+        <form>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="assetName">Asset Name</label>
+              <input type="text" id="assetName" name="assetName" placeholder="Dell Latitude 7440">
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" name="category">
+                <option value="">Select category</option>
+                <option>Laptop</option>
+                <option>Mobile</option>
+                <option>Monitor</option>
+                <option>Accessory</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="brand">Brand</label>
+              <input type="text" id="brand" name="brand" placeholder="Dell">
+            </div>
+
+            <div class="form-group">
+              <label for="model">Model</label>
+              <input type="text" id="model" name="model" placeholder="Latitude 7440">
+            </div>
+
+            <div class="form-group">
+              <label for="serialNumber">Serial Number</label>
+              <input type="text" id="serialNumber" name="serialNumber" placeholder="DL-7440-98321">
+            </div>
+
+            <div class="form-group">
+              <label for="purchaseDate">Purchase Date</label>
+              <input type="date" id="purchaseDate" name="purchaseDate">
+            </div>
+
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" name="location" placeholder="Manama Office">
+            </div>
+
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select id="status" name="status">
+                <option value="">Select status</option>
+                <option>Available</option>
+                <option>Allocated</option>
+                <option>Maintenance</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="button secondary" type="reset">Clear</button>
+            <button class="button" type="submit">Save Asset</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

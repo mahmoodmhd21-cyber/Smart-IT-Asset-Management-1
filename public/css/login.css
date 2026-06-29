@@ -1,0 +1,108 @@
+/* Login page layout sits on top of the shared design system in style.css. */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Compact card width keeps the authentication form easy to scan. */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+}
+
+.company-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+/* Temporary text logo mark until the final image logo is added. */
+.logo-mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.login-header {
+  margin-bottom: 24px;
+}
+
+.login-header h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.login-header p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.login-card .form-group {
+  margin-bottom: 18px;
+}
+
+/* Show-password checkbox row. */
+.show-password {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.show-password input {
+  width: 16px;
+  min-height: 16px;
+  height: 16px;
+  padding: 0;
+  accent-color: var(--color-primary);
+}
+
+/* Field and form error messages. */
+.error-message {
+  min-height: 18px;
+  margin: 6px 0 0;
+  color: var(--color-danger);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.form-error {
+  margin-bottom: 12px;
+}
+
+.login-button {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 24px;
+  }
+}

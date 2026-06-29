@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allocations | Smart IT Asset Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/assets.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation shared by the main app pages. -->
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="Smart IT Asset Management dashboard">
+        <span class="brand-mark">SI</span>
+        <span class="brand-text">Smart IT Asset Management</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link" href="assets.html">Assets</a></li>
+          <li><a class="nav-link active" href="allocations.html">Allocations</a></li>
+          <li><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar logout is always available from the main navigation area. -->
+      <div class="sidebar-footer">
+        <a class="logout-link" href="index.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Top navigation for current user details and account actions. -->
+      <nav class="top-nav" aria-label="User navigation">
+        <div class="current-user">
+          <span>Current User</span>
+          <strong>Admin User</strong>
+        </div>
+        <div class="top-nav-actions">
+          <button class="button secondary notification-button" type="button">Notifications</button>
+          <a class="button secondary" href="index.html">Logout</a>
+        </div>
+      </nav>
+
+      <!-- Page title for allocation records. -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Allocations</h1>
+          <p>Track which users currently hold company assets.</p>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Current Allocations</h2>
+            <p class="card-subtitle">Active and recently returned asset assignments.</p>
+          </div>
+        </div>
+
+        <!-- Allocation action toolbar. -->
+        <div class="asset-toolbar" aria-label="Allocation table actions">
+          <div class="asset-toolbar-actions">
+            <button class="button" type="button">Allocate</button>
+            <button class="button secondary" type="button">Return</button>
+            <button class="button danger" type="button">Delete</button>
+          </div>
+        </div>
+
+        <!-- Allocation records table with the requested columns only. -->
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Asset</th>
+                <th>Allocation Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sarah Ahmed</td>
+                <td>Dell Latitude 7440</td>
+                <td>2026-06-12</td>
+                <td>-</td>
+                <td><span class="status-pill success">Active</span></td>
+              </tr>
+              <tr>
+                <td>Omar Ali</td>
+                <td>iPhone 15</td>
+                <td>2026-06-19</td>
+                <td>-</td>
+                <td><span class="status-pill success">Active</span></td>
+              </tr>
+              <tr>
+                <td>Fatima Hassan</td>
+                <td>HP Docking Station</td>
+                <td>2026-05-28</td>
+                <td>2026-06-20</td>
+                <td><span class="status-pill">Returned</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/allocations.js"></script>
+</body>
+</html>
