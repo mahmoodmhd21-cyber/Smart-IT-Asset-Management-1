@@ -162,9 +162,13 @@ exports.deleteAllocation = async (req, res) => {
       await Asset.findByIdAndUpdate(allocation.asset, { status: 'Available' });
     }
 
-    await Allocation.findByIdAndDelete(id);
+    const deletedAllocation = await Allocation.findByIdAndDelete(id);
 
-    return res.status(200).json({ success: true, message: 'Allocation deleted successfully' });
+    return res.status(200).json({
+        success: true,
+        message: 'Allocation deleted successfully',
+        data: deletedAllocation
+    });
   } catch (error) {
     console.error('deleteAllocation error:', error);
     return res.status(500).json({ success: false, message: 'Failed to delete allocation', error: error.message });

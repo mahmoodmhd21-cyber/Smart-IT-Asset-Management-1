@@ -1,6 +1,5 @@
 // Load environment variables
 require("dotenv").config();
-console.log("Test 1111111",process.env.MONGO_URI)
 
 // Import express
 const express = require("express");
@@ -10,13 +9,14 @@ const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes");
 const allocationRoutes = require("./routes/allocationRoutes");
 const assetRoutes = require("./routes/assetRoutes");
-console.log("What is connectDB?", typeof connectDB, connectDB);
 
 // Create express application
 const app = express();
+const cors = require("cors");
+app.use(cors());
+
 
 // Connect database
-console.log('Starting database connection...');
 connectDB()
   .then(() => console.log('connectDB resolved'))
   .catch((err) => console.error('connectDB rejected', err));
@@ -31,10 +31,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-app.use("/api/allocations", allocationRoutes);
 app.use("/api/assets", assetRoutes);
+app.use("/api/allocations", allocationRoutes);
 
-// Server Port$ brew install git
+// Server Port
 const PORT = process.env.PORT || 5000;
 
 // Start Server
