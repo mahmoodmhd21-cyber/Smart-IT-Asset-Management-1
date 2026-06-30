@@ -6,6 +6,8 @@ const {
   updateAsset,
   deleteAsset,
 } = require('../controllers/assetController');
+const { protect } = require("../middleware/authMiddleware");
+
 
 const router = express.Router();
 
@@ -25,7 +27,7 @@ const router = express.Router();
 router.post('/', addAsset);
 
 // Get all asset records
-router.get('/', getAllAssets);
+router.get('/', protect, getAllAssets);
 
 // Get a specific asset by ID
 router.get('/:id', getAssetById);
