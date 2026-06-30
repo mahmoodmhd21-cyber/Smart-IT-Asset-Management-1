@@ -5,6 +5,8 @@
  * Functions:
  * - registerUser: Register a new user account
  * - loginUser: Authenticate a user and return a JWT token
+ * - getLoggedInUser: Return data for the currently authenticated user
+ * - getAllUsers: Retrieve a list of all users (ID and Name only)
  *
  * Assumes a Mongoose model named `User` exists at ../models/User
  */
@@ -50,12 +52,12 @@ const registerUser = async (req, res) => {
 
     return res.status(201).json({ message: 'User registered successfully.', id: newUser._id, name: newUser.fullName, email: newUser.email, role: newUser.role });
   } catch (error) {
-    console.error(error.message);
+    console.error('Register User Error:', error.message);
     return res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
 
-//Login a user and return a JWT token
+// Login a user and return a JWT token
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -105,11 +107,29 @@ const getLoggedInUser = async (req, res) => {
   return res.status(200).json({ user: req.user });
 };
 
+// Retrieve all users (ID and Name only)
+const getAllUsers = async (req, res) => {
+  try {
+    // Add email and role back into the projection query
+    const users = await User.find({}).select('_id fullName email role');
+
+    const formattedUsers = users.map(user => ({
+      id: user._id,
+      name: user.fullName,
+      email: user.email,
+      role: user.role
+    }));
+
+    return res.status(200).json(formattedUsers);
+  } catch (error) {
+    console.error('Get All Users Error:', error.message);
+    return res.status(500).json({ message: 'Server error.' });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getLoggedInUser,
+  getAllUsers,
 };
-
-
-
