@@ -70,7 +70,7 @@ exports.updateAsset = async (req, res) => {
     }
 
     // Only allow specific fields to be updated
-    const allowed = ['assetName', 'status', 'location', 'category', 'brand', 'model', 'purchaseDate'];
+    const allowed = ['assetName', 'location', 'category', 'brand', 'model', 'purchaseDate'];
     const updates = {};
     Object.keys(req.body).forEach((k) => {
       if (allowed.includes(k)) updates[k] = req.body[k];

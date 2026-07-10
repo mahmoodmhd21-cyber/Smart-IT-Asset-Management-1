@@ -1,6 +1,5 @@
 // Load environment variables
 require("dotenv").config();
-console.log("Test 1111111",process.env.MONGO_URI)
 
 // Import express
 const express = require("express");
@@ -10,6 +9,9 @@ const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes");
 const allocationRoutes = require("./routes/allocationRoutes");
 const assetRoutes = require("./routes/assetRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+const licenseRoutes = require("./routes/licenseRoutes");
+const maintenanceRoutes = require("./routes/maintenanceRoutes");
 console.log("What is connectDB?", typeof connectDB, connectDB);
 
 // Create express application
@@ -33,6 +35,9 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/allocations", allocationRoutes);
 app.use("/api/assets", assetRoutes);
+app.use("/api/employees", employeeRoutes);
+app.use("/api/licenses", licenseRoutes);
+app.use("/api/maintenance", maintenanceRoutes);
 
 // Server Port$ brew install git
 const PORT = process.env.PORT || 5000;
