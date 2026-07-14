@@ -29,7 +29,7 @@ export interface User {
   _id: string;
   fullName: string;
   email: string;
-  role: "Admin" | "IT Staff";
+  role: "Admin" | "IT Staff" | "Employee";
   createdDate: string;
 }
 
@@ -53,6 +53,47 @@ export interface Allocation {
   allocationStatus: "Allocated" | "Returned" | "Pending";
   remarks?: string;
 }
+
+export interface License {
+  _id: string;
+  softwareName: string;
+  vendor: string;
+  licenseKey?: string;
+  licenseType: "Perpetual" | "Subscription" | "Trial" | "Open Source";
+  numberOfSeats: number;
+  seatsUsed: number;
+  purchaseDate?: string;
+  expiryDate?: string;
+  cost: number;
+  status: "Active" | "Expired" | "Expiring Soon";
+  notes?: string;
+  createdAt: string;
+}
+
+// FIX: Aligned TypeScript interface with the backend controller's payload
+export interface MaintenanceRecord {
+  _id: string;
+  asset: string | Asset;
+  maintenanceType: "Repair" | "Upgrade" | "Inspection" | "Replacement" | "Cleaning";
+  description?: string;
+  serviceProvider?: string; // Formerly technician
+  maintenanceDate: string;   // Formerly scheduledDate
+  nextMaintenanceDate?: string; // Formerly completedDate
+  cost: number;
+  status: "Scheduled" | "In Progress" | "Completed" | "Cancelled";
+}
+export interface Employee {
+  _id: string;
+  fullName: string;
+  employeeId: string;
+  email: string;
+  department: string;
+  designation: string;
+  phone?: string;
+  status: "Active" | "Inactive";
+  createdAt?: string;
+}
+
 
 export const auth = {
   login: (email: string, password: string) =>
@@ -125,6 +166,70 @@ export const allocations = {
 
   remove: (id: string) =>
     request<{ message: string }>(`/allocations/${id}`, { method: "DELETE" }),
+};
+export const licenses = {
+  list: () =>
+    request<{ success: boolean; data: License[] }>("/licenses").then((res) => res.data || []),
+  get: (id: string) =>
+    request<{ success: boolean; data: License }>(`/licenses/${id}`).then((res) => res.data),
+  create: (data: Partial<License>) =>
+    request<{ success: boolean; data: License }>("/licenses", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+  update: (id: string, data: Partial<License>) =>
+    request<{ success: boolean; data: License }>(`/licenses/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+  remove: (id: string) =>
+    request<{ message: string }>(`/licenses/${id}`, { method: "DELETE" }),
+};
+
+export const maintenance = {
+  list: () =>
+    request<{ success: boolean; data: MaintenanceRecord[] }>("/maintenance").then((res) => res.data || []),
+  get: (id: string) =>
+    request<{ success: boolean; data: MaintenanceRecord }>(`/maintenance/${id}`).then((res) => res.data),
+  create: (data: Partial<MaintenanceRecord> & { asset: string }) =>
+    request<{ success: boolean; data: MaintenanceRecord }>("/maintenance", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+  update: (id: string, data: Partial<MaintenanceRecord>) =>
+    request<{ success: boolean; data: MaintenanceRecord }>(`/maintenance/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+  remove: (id: string) =>
+    request<{ message: string }>(`/maintenance/${id}`, { method: "DELETE" }),
+};
+
+export const employees = {
+  list: () =>
+    request<{ success: boolean; data: Employee[] }>("/employees")
+      .then((res) => res.data || []),
+
+  get: (id: string) =>
+    request<{ success: boolean; data: Employee }>(`/employees/${id}`)
+      .then((res) => res.data),
+
+  create: (data: Partial<Employee>) =>
+    request<{ success: boolean; data: Employee }>("/employees", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+
+  update: (id: string, data: Partial<Employee>) =>
+    request<{ success: boolean; data: Employee }>(`/employees/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }).then((res) => res.data),
+
+  remove: (id: string) =>
+    request<{ success: boolean; message: string }>(`/employees/${id}`, {
+      method: "DELETE",
+    }),
 };
 
 export function getCurrentUser(): User | null {

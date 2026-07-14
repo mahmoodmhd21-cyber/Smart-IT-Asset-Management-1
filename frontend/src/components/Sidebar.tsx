@@ -8,6 +8,8 @@ import {
   Users,
   LogOut,
   Monitor,
+  ScrollText,
+  Wrench,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -26,6 +28,9 @@ export default function Sidebar() {
     { to: "/allocations", label: "Allocations", icon: GitBranch, show: true },
     { to: "/users", label: "Users", icon: Users, show: isAdmin },
     { to: "/profile", label: "Profile", icon: User, show: true },
+    { to: "/employees", label: "Employees", icon: Users, show: isAdmin },
+    { to: "/licenses", label: "Licenses", icon: ScrollText, show: true },
+    { to: "/maintainence", label: "Maintainence", icon: Wrench, show: true },
   ];
 
   return (

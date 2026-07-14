@@ -7,6 +7,9 @@ import EditAssetPage from "./pages/EditAssetPage";
 import AllocationsPage from "./pages/AllocationsPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateUserPage from "./pages/CreateUserPage";
+import LicensePage from "./pages/LicensePage";
+import MaintainencePage from "./pages/MaintainencePage";
+import EmployeePage from "./pages/EmployeePage";
 
 export default function App() {
   return (
@@ -20,6 +23,9 @@ export default function App() {
         <Route path="/allocations" element={<AllocationsPage />} />
         <Route path="/users" element={<CreateUserPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/licenses" element={<LicensePage />} />
+        <Route path="/maintainence" element={<MaintainencePage />} />
+        <Route path="/employees" element={<EmployeePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
