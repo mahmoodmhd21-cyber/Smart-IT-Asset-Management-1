@@ -14,6 +14,8 @@
 
 const mongoose = require('mongoose');
 const Asset = require('../models/Asset');
+const Allocation = require('../models/Allocation');
+const QRCode = require('../models/QRCode');
 
 // Create a new asset record
 exports.addAsset = async (req, res) => {
@@ -23,6 +25,15 @@ exports.addAsset = async (req, res) => {
 
     const asset = new Asset(payload);
     const saved = await asset.save();
+
+    // Every newly created asset receives one stable QR identity.
+    try {
+      await QRCode.create({ asset: saved._id });
+    } catch (qrError) {
+      // Avoid leaving a partially created asset without its required QR identity.
+      await Asset.findByIdAndDelete(saved._id);
+      throw qrError;
+    }
 
     return res.status(201).json({ success: true, data: saved });
   } catch (err) {
@@ -103,12 +114,17 @@ exports.deleteAsset = async (req, res) => {
       });
     }
 
-    // TODO:
-    // Before deleting an asset, verify that it is not currently allocated.
-    // Once the Allocation model is implemented, query the Allocations
-    // collection for an active allocation associated with this asset.
-    // If an active allocation exists, return HTTP 409 (Conflict) and
-    // prevent the asset from being deleted.
+    const activeAllocation = await Allocation.exists({
+      asset: id,
+      allocationStatus: 'Allocated'
+    });
+
+    if (activeAllocation) {
+      return res.status(409).json({
+        success: false,
+        message: 'Cannot delete an asset with an active allocation'
+      });
+    }
 
     // Delete the asset from the database
     const removed = await Asset.findByIdAndDelete(id).lean();
@@ -120,6 +136,9 @@ exports.deleteAsset = async (req, res) => {
         message: 'Asset not found'
       });
     }
+
+    // Remove the linked QR record so a deleted asset cannot still be resolved.
+    await QRCode.deleteOne({ asset: id });
 
     // Return a successful response with the deleted asset details
     return res.status(200).json({

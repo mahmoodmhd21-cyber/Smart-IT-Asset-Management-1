@@ -44,6 +44,20 @@ export interface Asset {
   purchaseDate: string;
 }
 
+export interface AssetQRCode {
+  _id: string;
+  asset: Asset;
+  token: string;
+  qrValue: string;
+  imageUrl: string;
+  imageDataUrl?: string;
+  generatedAt: string;
+  scanCount: number;
+  lastScannedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Allocation {
   _id: string;
   asset: Asset;
@@ -133,6 +147,30 @@ export const assets = {
 
   remove: (id: string) =>
     request<{ message: string }>(`/assets/${id}`, { method: "DELETE" }),
+};
+
+export const qrCodes = {
+  list: () =>
+    request<{ success: boolean; data: AssetQRCode[] }>("/qr")
+      .then((res) => res.data || []),
+
+  generate: (assetId: string, regenerate = false) =>
+    request<{ success: boolean; data: AssetQRCode }>(`/qr/assets/${assetId}/generate`, {
+      method: "POST",
+      body: JSON.stringify({ regenerate }),
+    }).then((res) => res.data),
+
+  scan: (code: string) =>
+    request<{ success: boolean; data: AssetQRCode }>("/qr/scan", {
+      method: "POST",
+      body: JSON.stringify({ code }),
+    }).then((res) => res.data),
+
+  updateStatus: (code: string, status: Asset["status"]) =>
+    request<{ success: boolean; data: AssetQRCode }>("/qr/status", {
+      method: "PATCH",
+      body: JSON.stringify({ code, status }),
+    }).then((res) => res.data),
 };
 
 export const allocations = {

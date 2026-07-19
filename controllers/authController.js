@@ -19,10 +19,16 @@ const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
 // Register a new user account with hashed password
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body || {};
+    const { name, email, password, role } = req.body || {};
+    console.log(role);
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Name, email, and password are required.' });
+    }
+
+
+    if (!role) {
+      return res.status(400).json({ message: 'Role not defined.' });
     }
 
     const emailPattern = /^\S+@\S+\.\S+$/;
@@ -46,11 +52,12 @@ const registerUser = async (req, res) => {
       fullName: name,
       email,
       password: hashedPassword,
+      role,
     });
 
     await newUser.save();
 
-    return res.status(201).json({ message: 'User registered successfully.', id: newUser._id, name: newUser.fullName, email: newUser.email, role: newUser.role });
+    return res.status(201).json({ message: 'User registered successfully.11111111111111', id: newUser._id, name: newUser.fullName, email: newUser.email, role: newUser.role });
   } catch (error) {
     console.error('Register User Error:', error.message);
     return res.status(500).json({ message: 'Server error. Please try again later.' });

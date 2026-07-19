@@ -10,6 +10,7 @@ import {
   Monitor,
   ScrollText,
   Wrench,
+  QrCode,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -25,6 +26,7 @@ export default function Sidebar() {
   const navItems = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, show: true },
     { to: "/assets", label: "Assets", icon: Server, show: true },
+    { to: "/qr-codes", label: "QR Codes", icon: QrCode, show: true },
     { to: "/allocations", label: "Allocations", icon: GitBranch, show: true },
     { to: "/users", label: "Users", icon: Users, show: isAdmin },
     { to: "/profile", label: "Profile", icon: User, show: true },

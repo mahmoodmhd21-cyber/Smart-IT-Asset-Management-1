@@ -12,6 +12,7 @@ const assetRoutes = require("./routes/assetRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
 const licenseRoutes = require("./routes/licenseRoutes");
 const maintenanceRoutes = require("./routes/maintenanceRoutes");
+const qrCodeRoutes = require("./routes/qrCodeRoutes");
 console.log("What is connectDB?", typeof connectDB, connectDB);
 
 // Create express application
@@ -38,6 +39,7 @@ app.use("/api/assets", assetRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/licenses", licenseRoutes);
 app.use("/api/maintenance", maintenanceRoutes);
+app.use("/api/qr", qrCodeRoutes);
 
 // Server Port$ brew install git
 const PORT = process.env.PORT || 5000;

@@ -10,6 +10,7 @@ import CreateUserPage from "./pages/CreateUserPage";
 import LicensePage from "./pages/LicensePage";
 import MaintainencePage from "./pages/MaintainencePage";
 import EmployeePage from "./pages/EmployeePage";
+import QRCodePage from "./pages/QRCodePage";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/licenses" element={<LicensePage />} />
         <Route path="/maintainence" element={<MaintainencePage />} />
         <Route path="/employees" element={<EmployeePage />} />
+        <Route path="/qr-codes" element={<QRCodePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
