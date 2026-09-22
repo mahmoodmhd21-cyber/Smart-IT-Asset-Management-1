@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   getLoggedInUser,
+  getAllUsers,
 } = require('../controllers/authController');
 
 const router = express.Router();
@@ -27,5 +28,7 @@ router.post('/login', loginUser);
 
 // Return the currently logged-in user
 router.get('/me', protect, getLoggedInUser);
+
+router.get('/users', getAllUsers);
 
 module.exports = router;

@@ -5,6 +5,8 @@
  * Functions:
  * - registerUser: Register a new user account
  * - loginUser: Authenticate a user and return a JWT token
+ * - getLoggedInUser: Return data for the currently authenticated user
+ * - getAllUsers: Retrieve a list of all users (ID and Name only)
  *
  * Assumes a Mongoose model named `User` exists at ../models/User
  */
@@ -14,13 +16,29 @@ const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
 
+const buildUserProfile = (user) => ({
+  _id: user._id,
+  id: user._id,
+  fullName: user.fullName,
+  name: user.fullName,
+  email: user.email,
+  role: user.role,
+  createdDate: user.createdDate,
+});
+
 // Register a new user account with hashed password
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body || {};
+    const { name, fullName, email, password, role } = req.body || {};
+    const displayName = fullName || name;
 
-    if (!name || !email || !password) {
+    if (!displayName || !email || !password) {
       return res.status(400).json({ message: 'Name, email, and password are required.' });
+    }
+
+
+    if (!role) {
+      return res.status(400).json({ message: 'Role not defined.' });
     }
 
     const emailPattern = /^\S+@\S+\.\S+$/;
@@ -41,21 +59,25 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      fullName: name,
+      fullName: displayName,
       email,
       password: hashedPassword,
+      role,
     });
 
     await newUser.save();
 
-    return res.status(201).json({ message: 'User registered successfully.', id: newUser._id, name: newUser.fullName, email: newUser.email, role: newUser.role });
+    return res.status(201).json({
+      message: 'User registered successfully.',
+      user: buildUserProfile(newUser),
+    });
   } catch (error) {
-    console.error(error.message);
+    console.error('Register User Error:', error.message);
     return res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
 
-//Login a user and return a JWT token
+// Login a user and return a JWT token
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -82,12 +104,7 @@ const loginUser = async (req, res) => {
 
     return res.status(200).json({
       token,
-      user: {
-        id: user._id,
-        name: user.fullName,
-        email: user.email,
-        role: user.role,
-      },
+      user: buildUserProfile(user),
     });
   } catch (error) {
     console.error('Login User Error:', error.message);
@@ -96,20 +113,38 @@ const loginUser = async (req, res) => {
 };
 
 const getLoggedInUser = async (req, res) => {
-  // Placeholder endpoint for the logged-in user.
-  // Replace with authentication middleware that populates req.user.
   if (!req.user) {
     return res.status(401).json({ message: 'Authentication required.' });
   }
 
-  return res.status(200).json({ user: req.user });
+  return res.status(200).json({ user: buildUserProfile(req.user) });
+};
+
+// Retrieve all users (ID and Name only)
+const getAllUsers = async (req, res) => {
+  try {
+    // Add email and role back into the projection query
+    const users = await User.find({}).select('_id fullName email role');
+
+    const formattedUsers = users.map(user => ({
+      _id: user._id,
+      id: user._id,
+      fullName: user.fullName,
+      name: user.fullName,
+      email: user.email,
+      role: user.role
+    }));
+
+    return res.status(200).json(formattedUsers);
+  } catch (error) {
+    console.error('Get All Users Error:', error.message);
+    return res.status(500).json({ message: 'Server error.' });
+  }
 };
 
 module.exports = {
   registerUser,
   loginUser,
   getLoggedInUser,
+  getAllUsers,
 };
-
-
-
