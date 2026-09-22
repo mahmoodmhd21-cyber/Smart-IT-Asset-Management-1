@@ -2,11 +2,21 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
-import { assets } from "../lib/api";
+import { assets, type Asset } from "../lib/api";
 import { ArrowLeft } from "lucide-react";
 
 const CATEGORIES = ["Laptop", "Desktop", "Monitor", "Printer", "Server", "Networking", "Phone", "Tablet", "Other"];
-const STATUSES = ["Available", "Allocated", "Maintenance", "Retired"];
+const STATUSES: Asset["status"][] = ["Available", "Allocated", "Maintenance", "Retired"];
+
+type AssetForm = {
+  assetName: string;
+  category: string;
+  brand: string;
+  model: string;
+  location: string;
+  status: Asset["status"];
+  purchaseDate: string;
+};
 
 const inputStyle = {
   width: "100%",
@@ -20,7 +30,7 @@ const inputStyle = {
 
 export default function AddAssetPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<AssetForm>({
     assetName: "",
     category: "",
     brand: "",
@@ -35,7 +45,11 @@ export default function AddAssetPage() {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((f) => ({
+      ...f,
+      [name]: name === "status" ? (value as Asset["status"]) : value,
+    }));
   }
 
   async function handleSubmit(e: React.FormEvent) {

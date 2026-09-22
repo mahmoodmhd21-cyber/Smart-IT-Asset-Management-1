@@ -6,7 +6,17 @@ import { assets, type Asset } from "../lib/api";
 import { ArrowLeft } from "lucide-react";
 
 const CATEGORIES = ["Laptop", "Desktop", "Monitor", "Printer", "Server", "Networking", "Phone", "Tablet", "Other"];
-const STATUSES = ["Available", "Allocated", "Maintenance", "Retired"];
+const STATUSES: Asset["status"][] = ["Available", "Allocated", "Maintenance", "Retired"];
+
+type AssetForm = {
+  assetName: string;
+  category: string;
+  brand: string;
+  model: string;
+  location: string;
+  status: Asset["status"];
+  purchaseDate: string;
+};
 
 const inputStyle = {
   width: "100%",
@@ -22,7 +32,7 @@ export default function EditAssetPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<AssetForm>({
     assetName: "",
     category: "",
     brand: "",
@@ -57,7 +67,11 @@ export default function EditAssetPage() {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((f) => ({
+      ...f,
+      [name]: name === "status" ? (value as Asset["status"]) : value,
+    }));
   }
 
   async function handleSubmit(e: React.FormEvent) {

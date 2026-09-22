@@ -121,7 +121,7 @@ export const auth = {
       body: JSON.stringify({ fullName, email, password, role }),
     }),
   me: () => request<{ user: User }>("/auth/me"),
-  getAllUsers: () => request<Array<{ id: string; name: string; email: string; role: string }>>("/auth/users"),
+  getAllUsers: () => request<Array<{ _id: string; id: string; fullName: string; name: string; email: string; role: string }>>("/auth/users"),
 };
 
 export const assets = {
@@ -284,5 +284,4 @@ export function getCurrentUser(): User | null {
 export function logout() {
   localStorage.removeItem("authToken");
   localStorage.removeItem("currentUser");
-  window.location.href = "/";
 }

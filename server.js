@@ -1,5 +1,6 @@
 // Load environment variables
 require("dotenv").config();
+const path = require("path");
 
 // Import express
 const express = require("express");
@@ -13,25 +14,12 @@ const employeeRoutes = require("./routes/employeeRoutes");
 const licenseRoutes = require("./routes/licenseRoutes");
 const maintenanceRoutes = require("./routes/maintenanceRoutes");
 const qrCodeRoutes = require("./routes/qrCodeRoutes");
-console.log("What is connectDB?", typeof connectDB, connectDB);
 
 // Create express application
 const app = express();
 
-// Connect database
-console.log('Starting database connection...');
-connectDB()
-  .then(() => console.log('connectDB resolved'))
-  .catch((err) => console.error('connectDB rejected', err));
-
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Test Route
-app.get("/", (req, res) => {
-    res.send("Smart IT Asset Management API Running");
-});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/allocations", allocationRoutes);
@@ -41,10 +29,20 @@ app.use("/api/licenses", licenseRoutes);
 app.use("/api/maintenance", maintenanceRoutes);
 app.use("/api/qr", qrCodeRoutes);
 
-// Server Port$ brew install git
+app.use(express.static(path.join(__dirname, "public")));
+
+// Test Route
+app.get("/", (req, res) => {
+    res.send("Smart IT Asset Management API Running");
+});
+
+// Server Port
 const PORT = process.env.PORT || 5000;
 
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+
+    connectDB()
+        .catch((err) => console.error("Unexpected database startup error:", err.message));
 });
