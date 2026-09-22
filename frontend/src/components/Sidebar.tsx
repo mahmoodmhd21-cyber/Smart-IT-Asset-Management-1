@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { getCurrentUser, logout } from "../lib/api";
 import {
   LayoutDashboard,
@@ -16,6 +17,7 @@ import {
 export default function Sidebar() {
   const user = getCurrentUser();
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   const isAdmin = user?.role === "Admin";
 
   function handleLogout() {
@@ -36,9 +38,12 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside
+    <>
+      <button onClick={() => setCollapsed(!collapsed)}>Toggle Sidebar</button>
+      <aside
+        className={collapsed ? "sidebar collapsed" : ""}
       style={{
-        width: "240px",
+        width: collapsed ? "72px" : "240px",
         backgroundColor: "#0f172a",
         color: "white",
         display: "flex",
@@ -161,5 +166,7 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+    </>
+    
   );
 }
