@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
 import { assets, type Asset } from "../lib/api";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
@@ -43,6 +43,7 @@ export default function AssetsPage() {
           a.assetName?.toLowerCase().includes(q) ||
           a.brand?.toLowerCase().includes(q) ||
           a.model?.toLowerCase().includes(q) ||
+          a.serialNumber?.toLowerCase().includes(q) ||
           a.category?.toLowerCase().includes(q)
       );
     }
@@ -146,6 +147,7 @@ export default function AssetsPage() {
                       <th className="px-6 py-3 font-medium">Asset Name</th>
                       <th className="px-6 py-3 font-medium">Category</th>
                       <th className="px-6 py-3 font-medium">Brand / Model</th>
+                      <th className="px-6 py-3 font-medium">Serial Number</th>
                       <th className="px-6 py-3 font-medium">Location</th>
                       <th className="px-6 py-3 font-medium">Status</th>
                       <th className="px-6 py-3 font-medium">Actions</th>
@@ -168,6 +170,7 @@ export default function AssetsPage() {
                           <td className="px-6 py-4" style={{ color: "#6b7280" }}>
                             {[asset.brand, asset.model].filter(Boolean).join(" / ") || "—"}
                           </td>
+                          <td className="px-6 py-4">{asset.serialNumber || "Not recorded"}</td>
                           <td className="px-6 py-4" style={{ color: "#6b7280" }}>
                             {asset.location || "—"}
                           </td>

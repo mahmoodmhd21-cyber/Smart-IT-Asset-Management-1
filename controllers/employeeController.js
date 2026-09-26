@@ -5,6 +5,16 @@
 
 const mongoose = require('mongoose');
 const Employee = require('../models/Employee');
+const Allocation = require('../models/Allocation');
+const transaction = require('../services/transaction');
+const { LifecycleError } = require('../services/assetStatusPolicy');
+
+function handleEmployeeError(res, err) {
+  if (err.status) return res.status(err.status).json({ success: false, message: err.message });
+  if (err.code === 11000) return res.status(409).json({ success: false, message: 'Employee ID or email already exists.' });
+  if (['ValidationError', 'CastError'].includes(err.name)) return res.status(400).json({ success: false, message: err.message });
+  return res.status(500).json({ success: false, message: 'Could not update employee.' });
+}
 
 const allowedFields = [
   'fullName',
@@ -98,13 +108,22 @@ const updateEmployee = async (req, res) => {
       return res.status(400).json({ success: false, message: 'No valid fields to update' });
     }
 
-    const updated = await Employee.findByIdAndUpdate(id, { $set: updates }, { new: true, runValidators: true }).lean();
+    const updated = await transaction(async session => {
+      const employee = await Employee.findByIdAndUpdate(id, { $inc: { lifecycleVersion: 1 } }, { session, returnDocument: 'after' });
+      if (!employee) return null;
+      if (updates.status === 'Inactive' && await Allocation.exists({ employee: id, allocationStatus: 'Allocated' }).session(session)) {
+        throw new LifecycleError(409, 'Return active allocations before deactivating this employee.');
+      }
+      Object.assign(employee, updates);
+      await employee.save({ session });
+      return employee;
+    });
     if (!updated) return res.status(404).json({ success: false, message: 'Employee not found' });
 
     return res.status(200).json({ success: true, data: updated });
   } catch (err) {
     console.error('updateEmployee error:', err);
-    return res.status(500).json({ success: false, message: 'Failed to update employee', error: err.message });
+    return handleEmployeeError(res, err);
   }
 };
 
@@ -117,17 +136,37 @@ const deleteEmployee = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid employee ID' });
     }
 
-    const deleted = await Employee.findByIdAndDelete(id).lean();
+    const deleted = await transaction(async session => {
+      // Allocation creation writes this same document, so delete/allocation races retry safely.
+      const employee = await Employee.findByIdAndUpdate(id, { $inc: { lifecycleVersion: 1 } }, { session, returnDocument: 'after' });
+      if (!employee) return null;
+      if (await Allocation.exists({ employee: id }).session(session)) {
+        throw new LifecycleError(409, 'Cannot delete an employee with allocation history. Deactivate them instead.');
+      }
+      await employee.deleteOne({ session });
+      return employee;
+    });
     if (!deleted) return res.status(404).json({ success: false, message: 'Employee not found' });
 
     return res.status(200).json({ success: true, data: deleted });
   } catch (err) {
     console.error('deleteEmployee error:', err);
-    return res.status(500).json({ success: false, message: 'Failed to delete employee', error: err.message });
+    return handleEmployeeError(res, err);
+  }
+};
+
+// Operational staff need an assignee picker, not access to the admin employee directory.
+const getAssignees = async (req, res) => {
+  try {
+    const employees = await Employee.find({ status: 'Active' }).select('_id fullName employeeId').lean();
+    return res.json({ success: true, data: employees });
+  } catch {
+    return res.status(500).json({ success: false, message: 'Could not load employees.' });
   }
 };
 
 module.exports = {
+  getAssignees,
   addEmployee,
   getAllEmployees,
   getEmployeeById,

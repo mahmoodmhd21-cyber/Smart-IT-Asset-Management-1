@@ -8,6 +8,8 @@ const {
 } = require('../controllers/allocationController');
 
 const router = express.Router();
+const { protect, authorize } = require('../middleware/authMiddleware');
+router.use(protect, authorize('Admin', 'IT Staff'));
 
 /**
  * Allocation Routes

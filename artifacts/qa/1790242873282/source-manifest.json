@@ -1,0 +1,237 @@
+[
+  {
+    "file": "server.js",
+    "sha256": "66d16f8ca9f38899b85e71892f5eb3d4497f927bf665bccdb8dc867de0ef3427",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/allocationController.js",
+    "sha256": "42aa0e8e1068544f9a3719ea2ff37a2b0790cdc05b55cccdab1a916362c17fc7",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/assetController.js",
+    "sha256": "d2ba6842e84099bad1d61664644fb7eefd67c84399c73aafa6ca1181545737aa",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/authController.js",
+    "sha256": "92e6c8ad024e82c9ddc32a90438863d4c98da4b5a65dfa1089d6e56f485662d8",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/employeeController.js",
+    "sha256": "b9307b61ec3cd8be4b88a3624adb6c02cce67c5e0917e67798f183c1679eb83c",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/licenseController.js",
+    "sha256": "1926d5cfb946418abbb2600ccebca57c8c8fafe39b78976844d8b6075ae757f3",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/maintenanceController.js",
+    "sha256": "f5a296fba269ae9699bea7631b5ca540353b0f80f5435af224ceb7a37242f990",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "controllers/qrCodeController.js",
+    "sha256": "fb0b5e766d19b8ed61330517275cdb7628a49dff060718a76317096768962f11",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/Allocation.js",
+    "sha256": "cb3182204d847c9f099f6d7641dd99cac973c0f5d5d7a3861f76f72db51dd47f",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/Asset.js",
+    "sha256": "62efc41576213f71f345c56269645ed411f8485db6b30082e005c8393266f0a7",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/Employee.js",
+    "sha256": "c167ac84431fedc4bf6be596c235a3d373f4551e3dc87e8c3d3d2d779eb54cbf",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/License.js",
+    "sha256": "ce7e9c2228624ba49502ec8e5685930c847b2b2a0a8e8d9f4ed491e548809ef1",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/Maintenance.js",
+    "sha256": "1c2df68f0f79508fdab926c220b99580dda25dbacb7318d2783f078324351a3d",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/QRCode.js",
+    "sha256": "03ca0482ef01c08f04ee68c38017d8e1cd38ba5d6d4ec9592f627312d13c5e35",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "models/User.js",
+    "sha256": "8021820736a5c1ac8e15ac3cd0bf67f31d8a97688dc6a9b08665b0c016d285e8",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/allocationRoutes.js",
+    "sha256": "1a92133b39d2f502c9dba7e3419ae148ce12ab534dd05f5c1fbeeef35e4dd3e5",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/assetRoutes.js",
+    "sha256": "1b720ebe07ba420a76766aa7d3406fd69a3f36b3dccc4107cbb443df75a5177c",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/authRoutes.js",
+    "sha256": "5cbdd5f8dd030bb9249814c9ecb4bd1ec3ec3716905fc7e183afd9855109e4af",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/employeeRoutes.js",
+    "sha256": "ac78a7051f356c7a08b5dcae26e5ea7620cffabef378187e5a5d81c0e2cd6f96",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/licenseRoutes.js",
+    "sha256": "12a8b08f6e92b00f8a043ff9e4a7fffbeba6270df0049b101f8114189955c25b",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/maintenanceRoutes.js",
+    "sha256": "af0c7d6328859080316c5b3bfb5c3e4056905e2110af29193bd9fc4ba0680a84",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "routes/qrCodeRoutes.js",
+    "sha256": "23c15db98d90169540196456464f98c1e692096b26807198c512ccdd3a136890",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "middleware/authMiddleware.js",
+    "sha256": "94ced089cc179e9a1dd4e4aff59e69b4c3795854a0356f3a735ea5302ee46225",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "config/db.js",
+    "sha256": "30c4f088d580fc129009ffb903935ed303bad91d28db7b33f2ddb5a1fb433266",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/App.tsx",
+    "sha256": "c8bef46563cc7b129eb4c33c4f89d1c7eff0d99d9b3abb8183863330b3f6ed55",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/components/AuthGuard.tsx",
+    "sha256": "91789e5872736c837d760a678820e27b2036a835fee1222a796ab05c49705c44",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/components/Sidebar.css",
+    "sha256": "4667e883e9511ff9482f121abca2f12bb78bb4af11294f88e1b4a6d11f0e8232",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/components/Sidebar.tsx",
+    "sha256": "518184b9557f822cf19f6be6ead5da8286aea5c6ea5ca6e33dc2426ed08d6e0a",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/index.css",
+    "sha256": "920f355fa8b0aa6ba9fe56b926d452e7012f85a953682dda28f65aaea4493d5e",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "sha256": "d1631b26c51f9d1f94b664839503e781769b38d0d35f39c5ad28e74439ee9243",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/main.tsx",
+    "sha256": "f268dc44f71240012de0cfb1569d8ac906265cccd45eb3a99059c1a663d2f830",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/AddAssetPage.tsx",
+    "sha256": "ba4f1bda6c1c9d6117884af96ab6d4753379df48a21ba2dbed21fdfa00bea7c7",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/AllocationsPage.tsx",
+    "sha256": "b7ed4af6b9554453446125fa7d114ac9bc39c69d120f5e27c681c80e41dc5f4b",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/AssetsPage.tsx",
+    "sha256": "2c358c186f6b625c7894172562453b9269fd1013c34a88fc4c646f069a8c4dc9",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/CreateUserPage.tsx",
+    "sha256": "7a6cb55679828952b21a20958824b18dd2d0420e5d85d98f7f6fcf5cf0e86cf4",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/DashboardPage.tsx",
+    "sha256": "10c271c170d72bf5460034283dac71151edf05795c027b0c326ff15a274fa216",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/EditAssetPage.tsx",
+    "sha256": "8293e7a278f7a27ad36852b1e0b6b2d6bcc306aa09ccfaed0c0b55f29797a9d0",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/EmployeePage.tsx",
+    "sha256": "b7cf9667f2cd4b7e5029c49b957fa141a59120910cb84fcdd18519f799169274",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/LicensePage.tsx",
+    "sha256": "d32c69a504c5c8577308160ad8ec4175a8f8e13c412e84ab6d233ebfaf13144b",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/LoginPage.tsx",
+    "sha256": "287818183ce727926db3c7ba3dcd57969165f807f164b2a7503cfbe4fbd7f229",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/MaintainencePage.tsx",
+    "sha256": "09551bf0581674d50f36f70241c71c4834a6c77c8f3717fa57192433b92b084a",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/ProfilePage.tsx",
+    "sha256": "be3a49b977c14c05c43d4fdb5a650e7c12a3395ad4fbe1a2527101ad6a6d4566",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/src/pages/QRCodePage.tsx",
+    "sha256": "4429dfc53f4f549f97d71249488683df00c7b3bd5a6749e7633fdbd52978e7d2",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "package.json",
+    "sha256": "91b7fcc2e88ec0521067690784e50bba7a38f16d35ceaf87f18ccb7f9c4d09b7",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "package-lock.json",
+    "sha256": "1907e9de50700c7421bac9d5e20852cfed4aa6bff56e39c885ead73248df2ae7",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/package.json",
+    "sha256": "b0d84e3cb93fa516eb48249127c3b054a5dd8009b695a55b0d4d85543d0db3f9",
+    "matchesTestedCopy": true
+  },
+  {
+    "file": "frontend/package-lock.json",
+    "sha256": "7c8592b6c36f79ae8b58461bdf4fb1bc3b9c45936f346461c75498782f70f50f",
+    "matchesTestedCopy": true
+  }
+]

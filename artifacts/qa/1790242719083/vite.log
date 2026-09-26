@@ -1,0 +1,4 @@
+  ➜  Local:   http://127.0.0.1:3301/
+12:38:39 PM [vite] Pre-transform error: Failed to load url /src/main.tsx (resolved id: /private/tmp/smart-it-qa-app/frontend/src/main.tsx). Does the file exist?
+12:39:22 PM [vite] Pre-transform error: Failed to load url /src/main.tsx (resolved id: /private/tmp/smart-it-qa-app/frontend/src/main.tsx). Does the file exist?
+12:39:42 PM [vite] Pre-transform error: Failed to load url /src/main.tsx (resolved id: /private/tmp/smart-it-qa-app/frontend/src/main.tsx). Does the file exist?

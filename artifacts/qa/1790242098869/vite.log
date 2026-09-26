@@ -1,0 +1,7 @@
+
+  VITE v6.4.3  ready in 201 ms
+
+  ➜  Local:   http://127.0.0.1:3000/
+12:38:49 PM [vite] Pre-transform error: The service is no longer running: write EPIPE
+  Plugin: vite:esbuild
+  File: /Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/frontend/src/main.tsx

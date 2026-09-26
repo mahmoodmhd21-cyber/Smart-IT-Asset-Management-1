@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
-import { auth, getCurrentUser, type User } from "../lib/api";
+import LoadError from "../components/LoadError";
+import { auth, type User } from "../lib/api";
 import { User as UserIcon, Mail, Shield, Calendar } from "lucide-react";
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<User | null>(getCurrentUser());
+  const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  function loadProfile() {
+    setLoading(true);
+    setError("");
+    setUser(null);
     auth
       .me()
       .then(({ user }) => setUser(user))
-      .catch(console.error)
+      .catch(() => setError("Profile could not be loaded."))
       .finally(() => setLoading(false));
-  }, []);
+  }
+  useEffect(() => { loadProfile(); }, []);
 
   const fields = user
     ? [
@@ -49,7 +55,7 @@ export default function ProfilePage() {
             </p>
           </div>
 
-          <div className="max-w-xl">
+          {error ? <LoadError message={error} retry={loadProfile} /> : <div className="max-w-xl">
             <div
               className="rounded-xl overflow-hidden"
               style={{ backgroundColor: "white", border: "1px solid #f3f4f6", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
@@ -112,7 +118,7 @@ export default function ProfilePage() {
                 )}
               </div>
             </div>
-          </div>
+          </div>}
         </main>
       </div>
     </AuthGuard>

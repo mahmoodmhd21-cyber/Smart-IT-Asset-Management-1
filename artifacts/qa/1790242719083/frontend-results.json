@@ -1,0 +1,42 @@
+[
+  {
+    "module": "Login",
+    "name": "protected pages redirect without a session",
+    "status": "FAIL",
+    "detail": "locator.waitFor: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('h1') to be visible\u001b[22m\n",
+    "ms": 6785,
+    "screenshot": "screenshots/failure-1.png"
+  },
+  {
+    "module": "Login",
+    "name": "required credentials prevent empty submission",
+    "status": "FAIL",
+    "detail": "locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Sign In', exact: true })\u001b[22m\n",
+    "ms": 6050,
+    "screenshot": "screenshots/failure-2.png"
+  },
+  {
+    "module": "Login",
+    "name": "invalid credentials display an error",
+    "status": "FAIL",
+    "detail": "locator.fill: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[name=\"email\"]')\u001b[22m\n",
+    "ms": 6014,
+    "screenshot": "screenshots/failure-3.png"
+  },
+  {
+    "module": "Login",
+    "name": "show-password control is available",
+    "status": "FAIL",
+    "detail": "No show-password control exists",
+    "ms": 36,
+    "screenshot": "screenshots/failure-4.png"
+  },
+  {
+    "module": "Login",
+    "name": "valid credentials open dashboard",
+    "status": "FAIL",
+    "detail": "locator.waitFor: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('h1') to be visible\u001b[22m\n",
+    "ms": 6994,
+    "screenshot": "screenshots/failure-5.png"
+  }
+]

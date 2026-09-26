@@ -11,6 +11,8 @@ import LicensePage from "./pages/LicensePage";
 import MaintainencePage from "./pages/MaintainencePage";
 import EmployeePage from "./pages/EmployeePage";
 import QRCodePage from "./pages/QRCodePage";
+import QRCodeBoundary from "./components/QRCodeBoundary";
+import AuthGuard from "./components/AuthGuard";
 
 export default function App() {
   return (
@@ -22,12 +24,12 @@ export default function App() {
         <Route path="/assets/add" element={<AddAssetPage />} />
         <Route path="/assets/:id/edit" element={<EditAssetPage />} />
         <Route path="/allocations" element={<AllocationsPage />} />
-        <Route path="/users" element={<CreateUserPage />} />
+        <Route path="/users" element={<AuthGuard adminOnly><CreateUserPage /></AuthGuard>} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/licenses" element={<LicensePage />} />
         <Route path="/maintainence" element={<MaintainencePage />} />
-        <Route path="/employees" element={<EmployeePage />} />
-        <Route path="/qr-codes" element={<QRCodePage />} />
+        <Route path="/employees" element={<AuthGuard adminOnly><EmployeePage /></AuthGuard>} />
+        <Route path="/qr-codes" element={<QRCodeBoundary><QRCodePage /></QRCodeBoundary>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

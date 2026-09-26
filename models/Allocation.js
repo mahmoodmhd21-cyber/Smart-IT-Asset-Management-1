@@ -6,10 +6,16 @@ const AllocationSchema = new mongoose.Schema({
     ref: 'Asset',
     required: true,
   },
+  employee: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee',
+    required: function () { return !this.user; },
+  },
+  // Retained only for unmapped historical assignments; new API writes require employee.
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: false,
   },
   allocationDate: {
     type: Date,
@@ -30,6 +36,13 @@ const AllocationSchema = new mongoose.Schema({
   },
 }, {
   timestamps: true,
+  autoIndex: false,
+});
+
+// Returned history is unlimited, but a device can have only one active assignment.
+AllocationSchema.index({ asset: 1 }, {
+  name: 'one_active_allocation_per_asset', unique: true,
+  partialFilterExpression: { allocationStatus: 'Allocated' },
 });
 
 module.exports = mongoose.model('Allocation', AllocationSchema);

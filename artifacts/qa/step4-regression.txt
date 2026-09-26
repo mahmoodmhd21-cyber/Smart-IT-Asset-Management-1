@@ -1,0 +1,647 @@
+▶ Access control with real HTTP routes and disposable MongoDB
+  ✔ Local bootstrap creates one Admin and refuses a second run (914.802ms)
+  ✔ anonymous GET /assets is 401 (2.017625ms)
+  ✔ anonymous POST /assets is 401 (2.2375ms)
+  ✔ anonymous GET /assets/000000000000000000000099 is 401 (3.022167ms)
+  ✔ anonymous DELETE /assets/000000000000000000000099 is 401 (5.130541ms)
+  ✔ anonymous PUT /assets/000000000000000000000099 is 401 (2.417667ms)
+  ✔ anonymous GET /allocations is 401 (1.927958ms)
+  ✔ anonymous POST /allocations is 401 (3.041ms)
+  ✔ anonymous GET /allocations/000000000000000000000099 is 401 (3.155459ms)
+  ✔ anonymous DELETE /allocations/000000000000000000000099 is 401 (3.002209ms)
+  ✔ anonymous PATCH /allocations/000000000000000000000099/return is 401 (2.894834ms)
+  ✔ anonymous GET /employees is 401 (1.274709ms)
+  ✔ anonymous POST /employees is 401 (1.200084ms)
+  ✔ anonymous GET /employees/000000000000000000000099 is 401 (0.888625ms)
+  ✔ anonymous DELETE /employees/000000000000000000000099 is 401 (1.363083ms)
+  ✔ anonymous PUT /employees/000000000000000000000099 is 401 (4.957ms)
+  ✔ anonymous GET /licenses is 401 (1.529083ms)
+  ✔ anonymous POST /licenses is 401 (2.081ms)
+  ✔ anonymous GET /licenses/000000000000000000000099 is 401 (1.745333ms)
+  ✔ anonymous DELETE /licenses/000000000000000000000099 is 401 (5.472084ms)
+  ✔ anonymous PUT /licenses/000000000000000000000099 is 401 (1.276041ms)
+  ✔ anonymous GET /maintenance is 401 (1.146791ms)
+  ✔ anonymous POST /maintenance is 401 (2.331792ms)
+  ✔ anonymous GET /maintenance/000000000000000000000099 is 401 (2.101833ms)
+  ✔ anonymous DELETE /maintenance/000000000000000000000099 is 401 (2.408667ms)
+  ✔ anonymous PUT /maintenance/000000000000000000000099 is 401 (2.247459ms)
+  ✔ anonymous POST /auth/register is 401 (1.142667ms)
+  ✔ anonymous GET /auth/users is 401 (2.198ms)
+  ✔ anonymous GET /auth/assignees is 401 (1.038583ms)
+  ✔ anonymous GET /auth/me is 401 (0.956417ms)
+  ✔ anonymous PATCH /auth/users/6ab7bd13063476d5832041ba/access is 401 (1.534416ms)
+  ✔ anonymous GET /qr is 401 (2.318917ms)
+  ✔ anonymous POST /qr/scan is 401 (1.109375ms)
+  ✔ anonymous PATCH /qr/status is 401 (2.273958ms)
+  ✔ anonymous GET /qr/resolve/token is 401 (2.222209ms)
+  ✔ anonymous POST /qr/assets/000000000000000000000099/generate is 401 (1.037916ms)
+  ✔ anonymous GET /qr/assets/000000000000000000000099/image is 401 (0.943417ms)
+  ✔ IT Staff GET /employees is 403 (4.038708ms)
+  ✔ IT Staff POST /employees is 403 (3.662833ms)
+  ✔ IT Staff GET /employees/000000000000000000000099 is 403 (1.919083ms)
+  ✔ IT Staff DELETE /employees/000000000000000000000099 is 403 (2.710541ms)
+  ✔ IT Staff PUT /employees/000000000000000000000099 is 403 (2.112ms)
+  ✔ IT Staff POST /auth/register is 403 (2.283333ms)
+  ✔ IT Staff GET /auth/users is 403 (3.1735ms)
+  ✔ IT Staff PATCH /auth/users/6ab7bd13063476d5832041ba/access is 403 (3.187416ms)
+  ✔ Admin can read /assets (4.359416ms)
+  ✔ Admin can read /allocations (4.254583ms)
+  ✔ Admin can read /licenses (3.619792ms)
+  ✔ Admin can read /maintenance (2.246542ms)
+  ✔ Admin can read /qr (5.5555ms)
+  ✔ Admin can read /auth/me (1.68775ms)
+  ✔ Admin can read /auth/assignees (4.394833ms)
+  ✔ IT Staff can read /assets (3.538916ms)
+  ✔ IT Staff can read /allocations (3.5695ms)
+  ✔ IT Staff can read /licenses (3.743375ms)
+  ✔ IT Staff can read /maintenance (3.384792ms)
+  ✔ IT Staff can read /qr (4.422292ms)
+  ✔ IT Staff can read /auth/me (2.840125ms)
+  ✔ IT Staff can read /auth/assignees (2.186042ms)
+  ✔ Admin provisioning validates roles and ignores security fields (250.723917ms)
+  ✔ Missing, short and known fallback secrets fail closed (132.780917ms)
+Auth middleware error: jwt malformed
+Auth middleware error: jwt expired
+Auth middleware error: invalid signature
+Auth middleware error: invalid algorithm
+  ✔ Invalid, expired, legacy, wrong-secret and unsupported-algorithm tokens fail (14.972875ms)
+  ✔ Existing accounts without new fields can log in (125.440667ms)
+  ✔ Revocation, disable and enable do not resurrect old sessions (370.263542ms)
+  ✔ Access payload, IDs and self-lockout are guarded (25.384791ms)
+  ✔ Concurrent revocations all invalidate a token (133.637292ms)
+  ✔ Role changes and deleted accounts take effect immediately (146.86925ms)
+  ✔ Staff CRUD, allocation and private QR image remain usable (165.530875ms)
+  ✔ Browser login, staff allocation options, private QR preview/download and admin revocation (3882.764458ms)
+✔ Access control with real HTTP routes and disposable MongoDB (9658.670708ms)
+▶ Transactional asset lifecycle on a disposable replica set
+  ✔ preflight refuses duplicates without deleting records; index blocks direct duplicates (489.724833ms)
+  ✔ 12 simultaneous requests create exactly one allocation (132.317084ms)
+  ✔ Scheduled maintenance reserves a device, completion releases it and reopening reserves it again (61.363625ms)
+  ✔ In Progress maintenance reserves a device, completion releases it and reopening reserves it again (52.39425ms)
+  ✔ multiple open jobs and assigned devices reconcile on each completion (81.630875ms)
+  ✔ return allocation preserves open maintenance (64.261458ms)
+  ✔ delete allocation preserves open maintenance (60.03475ms)
+  ✔ manual maintenance survives returns; a recorded repair replaces the manual hold (68.793208ms)
+  ✔ QR and direct edits reject bypasses and phantom allocations (147.487667ms)
+  ✔ retirement survives completion, deletion and legacy active-allocation return (79.742625ms)
+  ✔ moving and deleting maintenance reconciles both old and new assets (53.933875ms)
+  ✔ deleting returned history preserves a newer active allocation (56.369208ms)
+  ✔ duplicate returns cannot revive or overwrite a newer allocation (60.564292ms)
+  ✔ saving historical completion repairs stale status; missing records return 404 (57.844ms)
+  ✔ invalid input and nonexistent references leave no partial changes (60.965167ms)
+Asset lifecycle failed: Injected asset-write failure
+  ✔ failure after inserting allocation rolls back both records (16.945792ms)
+Asset lifecycle failed: Injected reconciliation failure
+  ✔ failure during maintenance completion rolls back the job and asset (29.391917ms)
+  ✔ concurrent maintenance create and lifecycle operations remain consistent (94.43775ms)
+  ✔ concurrent maintenance complete and lifecycle operations remain consistent (164.803833ms)
+  ✔ concurrent maintenance return and lifecycle operations remain consistent (163.173875ms)
+  ✔ concurrent maintenance delete and lifecycle operations remain consistent (179.573875ms)
+  ✔ concurrent maintenance manual and lifecycle operations remain consistent (81.226417ms)
+  ✔ concurrent maintenance move and lifecycle operations remain consistent (169.338458ms)
+  ✔ asset deletion cannot race with maintenance or allocation creation (54.279625ms)
+  ✔ returned and completed history prevent asset deletion; unreferenced asset and QR delete together (63.322875ms)
+  ✔ standalone MongoDB fails safely without persisting the attempted asset (2005.546792ms)
+  ✔ browser allocation deletion refreshes choices; maintenance completion refreshes Assets (2439.134166ms)
+✔ Transactional asset lifecycle on a disposable replica set (10229.819875ms)
+✔ Available, open maintenance=false, active allocation=false (1.113ms)
+✔ Available, open maintenance=false, active allocation=true (0.609542ms)
+✔ Available, open maintenance=true, active allocation=false (0.079292ms)
+✔ Available, open maintenance=true, active allocation=true (0.066584ms)
+✔ Allocated, open maintenance=false, active allocation=false (0.090958ms)
+✔ Allocated, open maintenance=false, active allocation=true (0.07425ms)
+✔ Allocated, open maintenance=true, active allocation=false (0.066292ms)
+✔ Allocated, open maintenance=true, active allocation=true (0.062792ms)
+✔ Maintenance, open maintenance=false, active allocation=false (0.078416ms)
+✔ Maintenance, open maintenance=false, active allocation=true (0.144167ms)
+✔ Maintenance, open maintenance=true, active allocation=false (0.079416ms)
+✔ Maintenance, open maintenance=true, active allocation=true (0.057916ms)
+✔ Retired, open maintenance=false, active allocation=false (0.047459ms)
+✔ Retired, open maintenance=false, active allocation=true (0.054625ms)
+✔ Retired, open maintenance=true, active allocation=false (0.053666ms)
+✔ Retired, open maintenance=true, active allocation=true (0.062458ms)
+✔ manual maintenance hold survives automated return or completion (0.070167ms)
+✔ manual availability rejects unfinished work and active assignments (0.810208ms)
+✔ allocated status requires a real assignment and no unfinished maintenance (0.142375ms)
+✔ retirement requires returning the active allocation (0.087083ms)
+✔ manual maintenance only holds when there is no work record (0.053666ms)
+✔ explicit release clears a manual hold (0.391542ms)
+✔ invalid status is rejected with 400 (0.067708ms)
+▶ Step 3 contracts and reference integrity
+  ✔ maintenance Preventive persists and cancellation releases availability (136.536417ms)
+  ✔ maintenance Corrective persists and cancellation releases availability (69.884584ms)
+  ✔ maintenance Repair persists and cancellation releases availability (61.828833ms)
+  ✔ maintenance Upgrade persists and cancellation releases availability (57.735167ms)
+  ✔ maintenance Inspection persists and cancellation releases availability (62.602166ms)
+  ✔ maintenance Replacement persists and cancellation releases availability (55.088541ms)
+  ✔ maintenance Cleaning persists and cancellation releases availability (55.672875ms)
+  ✔ cancellation respects active assignments, other jobs and retirement (111.339042ms)
+  ✔ maintenance validates required text, enums, dates and asset references (38.522542ms)
+  ✔ license Perpetual round-trips every form field (24.509792ms)
+  ✔ license Subscription round-trips every form field (27.599167ms)
+  ✔ license Trial round-trips every form field (22.041583ms)
+  ✔ license Open Source round-trips every form field (23.849416ms)
+  ✔ license status Active is supported (7.941ms)
+  ✔ license status Expired is supported (7.934541ms)
+  ✔ license status Expiring Soon is supported (8.056ms)
+  ✔ license status Suspended is supported (7.841917ms)
+addLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats.
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats must be a whole number.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats must be a whole number.
+        at SchemaNumber.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: 1.5,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats., numberOfSeats: Seat counts must be whole numbers.
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    },
+    numberOfSeats: ValidatorError: Seat counts must be whole numbers.
+        at SchemaNumber.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'numberOfSeats',
+      value: 2.5,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: assignedSeats: Path `assignedSeats` (-1) is less than minimum allowed value (0).
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errors: {
+    assignedSeats: ValidatorError: Path `assignedSeats` (-1) is less than minimum allowed value (0).
+        at SchemaNumber.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'min',
+      path: 'assignedSeats',
+      value: -1,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats., numberOfSeats: Path `numberOfSeats` (-1) is less than minimum allowed value (0).
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:18) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    },
+    numberOfSeats: ValidatorError: Path `numberOfSeats` (-1) is less than minimum allowed value (0).
+        at SchemaNumber.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'min',
+      path: 'numberOfSeats',
+      value: -1,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: licenseKey: Path `licenseKey` is required.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errors: {
+    licenseKey: ValidatorError: Path `licenseKey` is required.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'required',
+      path: 'licenseKey',
+      value: '',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: ValidationError: License validation failed: status: Path `status` is required.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errors: {
+    status: ValidatorError: Path `status` is required.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'required',
+      path: 'status',
+      value: null,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: Error: Use assignedSeats instead of seatsUsed.
+    at pickAllowedFields (/private/tmp/smart-it-qa-app/controllers/licenseController.js:25:19)
+    at addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:42)
+    at Layer.handle [as handle_request] (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/layer.js:95:5)
+    at /private/tmp/smart-it-qa-app/node_modules/express/lib/router/index.js:284:15
+    at router.process_params (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/index.js:346:12)
+    at next (/private/tmp/smart-it-qa-app/node_modules/express/lib/router/index.js:280:10)
+    at /private/tmp/smart-it-qa-app/middleware/authMiddleware.js:42:3 {
+  status: 400
+}
+addLicense error: ValidationError: License validation failed: cost: Cost must be finite.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errors: {
+    cost: ValidatorError: Cost must be finite.
+        at SchemaNumber.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'cost',
+      value: Infinity,
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'License validation failed'
+}
+updateLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats.
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    }
+  },
+  _message: 'License validation failed'
+}
+updateLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats.
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    }
+  },
+  _message: 'License validation failed'
+}
+addLicense error: MongoServerError: E11000 duplicate key error collection: smart_it_contracts_1790426406646.licenses index: licenseKey_1 dup key: { licenseKey: "KEY-28" }
+    at InsertOneOperation.handleOk (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/insert.js:51:19)
+    at executeOperationWithRetries (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:194:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:83:16)
+    at async Collection.insertOne (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/collection.js:154:16)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:434:16)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:64:21) {
+  errorLabelSet: Set(0) {},
+  errorResponse: {
+    index: 0,
+    code: 11000,
+    errmsg: 'E11000 duplicate key error collection: smart_it_contracts_1790426406646.licenses index: licenseKey_1 dup key: { licenseKey: "KEY-28" }',
+    keyPattern: { licenseKey: 1 },
+    keyValue: { licenseKey: 'KEY-28' }
+  },
+  index: 0,
+  code: 11000,
+  keyPattern: { licenseKey: 1 },
+  keyValue: { licenseKey: 'KEY-28' }
+}
+  ✔ license seat validation includes partial updates and concurrent edits (66.930625ms)
+  ✔ legacy license usage is retained and missing fields remain unknown (22.008708ms)
+deleteEmployee error: LifecycleError: Cannot delete an employee with allocation history. Deactivate them instead.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:144:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async deleteEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:139:21) {
+  status: 409
+}
+updateEmployee error: LifecycleError: Return active allocations before deactivating this employee.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:115:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async updateEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:111:21) {
+  status: 409
+}
+deleteEmployee error: LifecycleError: Cannot delete an employee with allocation history. Deactivate them instead.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:144:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async deleteEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:139:21) {
+  status: 409
+}
+  ✔ new employees are allocatable without login accounts; picker is authenticated and limited (95.2145ms)
+  ✔ employee delete cannot race with an allocation (152.553ms)
+  ✔ employee deactivate cannot race with an allocation (142.774917ms)
+addEmployee error: ValidationError: Employee validation failed: email: Path `email` is invalid (invalid).
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:42:22) {
+  errors: {
+    email: ValidatorError: Path `email` is invalid (invalid).
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'regexp',
+      path: 'email',
+      value: 'invalid',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Employee validation failed'
+}
+updateEmployee error: MongoServerError: E11000 duplicate key error collection: smart_it_contracts_1790426406646.employees index: email_1 dup key: { email: "person49@example.test" }
+    at UpdateOneOperation.handleOk (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/update.js:70:19)
+    at executeOperationWithRetries (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:194:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:83:16)
+    at async Collection.updateOne (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/collection.js:238:16)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:483:18)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async /private/tmp/smart-it-qa-app/controllers/employeeController.js:118:7
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12) {
+  errorLabelSet: Set(0) {},
+  errorResponse: {
+    index: 0,
+    code: 11000,
+    errmsg: 'E11000 duplicate key error collection: smart_it_contracts_1790426406646.employees index: email_1 dup key: { email: "person49@example.test" }',
+    keyPattern: { email: 1 },
+    keyValue: { email: 'person49@example.test' }
+  },
+  index: 0,
+  code: 11000,
+  keyPattern: { email: 1 },
+  keyValue: { email: 'person49@example.test' }
+}
+updateEmployee error: ValidationError: Employee validation failed: email: Path `email` is invalid (invalid).
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async /private/tmp/smart-it-qa-app/controllers/employeeController.js:118:7
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async updateEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:111:21) {
+  errors: {
+    email: ValidatorError: Path `email` is invalid (invalid).
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'regexp',
+      path: 'email',
+      value: 'invalid',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Employee validation failed'
+}
+  ✔ employee validation and duplicate updates return useful errors (44.2885ms)
+  ✔ migration is dry-run by default, idempotent, explicit and preserves legacy identity (65.7ms)
+  ✔ legacy active assignments remain returnable without inventing employees (32.684417ms)
+generateQRCode error: LifecycleError: Asset not found.
+    at lockAssets (/private/tmp/smart-it-qa-app/services/assetLifecycle.js:44:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /private/tmp/smart-it-qa-app/services/assetLifecycle.js:185:20
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async exports.generateQRCode (/private/tmp/smart-it-qa-app/controllers/qrCodeController.js:104:20) {
+  status: 404
+}
+generateQRCode error: LifecycleError: Asset not found.
+    at lockAssets (/private/tmp/smart-it-qa-app/services/assetLifecycle.js:44:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /private/tmp/smart-it-qa-app/services/assetLifecycle.js:185:20
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async exports.generateQRCode (/private/tmp/smart-it-qa-app/controllers/qrCodeController.js:104:20) {
+  status: 404
+}
+generateQRCode error: LifecycleError: Asset not found.
+    at lockAssets (/private/tmp/smart-it-qa-app/services/assetLifecycle.js:44:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /private/tmp/smart-it-qa-app/services/assetLifecycle.js:185:20
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async exports.generateQRCode (/private/tmp/smart-it-qa-app/controllers/qrCodeController.js:104:20) {
+  status: 404
+}
+  ✔ QR creation/regeneration and backfill cannot leave deleted-asset references (189.717459ms)
+  ✔ browser registers a company employee and allocates a device to that employee (609.198ms)
+  ✔ browser license fields survive save, reload and edit; decimal amounts work (415.708208ms)
+  ✔ browser maintenance accepts Upgrade and Cancelled, with decimal cost (628.802ms)
+✔ Step 3 contracts and reference integrity (7482.164458ms)
+▶ Step 4 QR camera lifecycle
+  ✔ repeated starts, duplicate clicks, stop and responsive camera rendering (1483.756959ms)
+  ✔ NotAllowedError preserves the page and allows retry (838.09825ms)
+  ✔ NotFoundError preserves the page and allows retry (801.4115ms)
+  ✔ NotReadableError preserves the page and allows retry (680.445917ms)
+  ✔ navigation releases camera (pending permission: false) (1006.609917ms)
+  ✔ navigation releases camera (pending permission: true) (762.4295ms)
+  ✔ stop during pending permission releases the eventual stream (526.755875ms)
+  ✔ unsupported media API gives an actionable error without crashing (361.707416ms)
+  ✔ real decoder reads a synthetic QR stream, stops, and retrieves once (649.552041ms)
+  ✔ render failure is contained and retry restores the QR route (465.960542ms)
+✔ Step 4 QR camera lifecycle (8430.941334ms)
+ℹ tests 162
+ℹ suites 0
+ℹ pass 162
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 37582.940459

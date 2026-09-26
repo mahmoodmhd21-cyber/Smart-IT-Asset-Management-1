@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import LoadError from "../components/LoadError";
 import { assets, allocations, getCurrentUser, type Asset, type Allocation } from "../lib/api";
 import { Server, GitBranch, CheckCircle, AlertCircle, Plus } from "lucide-react";
 
@@ -9,17 +10,21 @@ export default function DashboardPage() {
   const [assetList, setAssetList] = useState<Asset[]>([]);
   const [allocationList, setAllocationList] = useState<Allocation[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const user = getCurrentUser();
 
-  useEffect(() => {
+  function loadDashboard() {
+    setLoading(true);
+    setError("");
     Promise.all([assets.list(), allocations.list()])
       .then(([a, al]) => {
         setAssetList(Array.isArray(a) ? a : []);
         setAllocationList(Array.isArray(al) ? al : []);
       })
-      .catch(console.error)
+      .catch(() => setError("Dashboard data could not be loaded."))
       .finally(() => setLoading(false));
-  }, []);
+  }
+  useEffect(() => { loadDashboard(); }, []);
 
   const total = assetList.length;
   const available = assetList.filter((a) => a.status === "Available").length;
@@ -51,7 +56,7 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {loading ? (
+          {error ? <LoadError message={error} retry={loadDashboard} /> : loading ? (
             <div style={{ color: "#9ca3af" }} className="text-sm">
               Loading...
             </div>

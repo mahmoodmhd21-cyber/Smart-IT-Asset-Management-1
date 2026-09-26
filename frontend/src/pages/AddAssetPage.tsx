@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
 import { assets, type Asset } from "../lib/api";
 import { ArrowLeft } from "lucide-react";
 
 const CATEGORIES = ["Laptop", "Desktop", "Monitor", "Printer", "Server", "Networking", "Phone", "Tablet", "Other"];
-const STATUSES: Asset["status"][] = ["Available", "Allocated", "Maintenance", "Retired"];
+// Allocation is created through the assignment workflow, not a standalone label.
+const STATUSES: Asset["status"][] = ["Available", "Maintenance", "Retired"];
 
 type AssetForm = {
   assetName: string;
   category: string;
   brand: string;
   model: string;
+  serialNumber: string;
   location: string;
   status: Asset["status"];
   purchaseDate: string;
@@ -35,6 +37,7 @@ export default function AddAssetPage() {
     category: "",
     brand: "",
     model: "",
+    serialNumber: "",
     location: "",
     status: "Available",
     purchaseDate: "",
@@ -139,6 +142,10 @@ export default function AddAssetPage() {
                     Model
                   </label>
                   <input name="model" value={form.model} onChange={handleChange} placeholder="e.g. XPS 15" style={inputStyle} />
+                </div>
+                <div>
+                  <label htmlFor="serialNumber" className="block text-sm font-medium mb-1">Serial Number</label>
+                  <input id="serialNumber" name="serialNumber" maxLength={120} value={form.serialNumber} onChange={handleChange} style={inputStyle} />
                 </div>
 
                 <div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
 import { assets, type Asset } from "../lib/api";
 import { ArrowLeft } from "lucide-react";
@@ -13,6 +13,7 @@ type AssetForm = {
   category: string;
   brand: string;
   model: string;
+  serialNumber: string;
   location: string;
   status: Asset["status"];
   purchaseDate: string;
@@ -37,6 +38,7 @@ export default function EditAssetPage() {
     category: "",
     brand: "",
     model: "",
+    serialNumber: "",
     location: "",
     status: "Available",
     purchaseDate: "",
@@ -55,6 +57,7 @@ export default function EditAssetPage() {
           category: a.category || "",
           brand: a.brand || "",
           model: a.model || "",
+          serialNumber: a.serialNumber || "",
           location: a.location || "",
           status: a.status || "Available",
           purchaseDate: a.purchaseDate ? a.purchaseDate.split("T")[0] : "",
@@ -151,6 +154,10 @@ export default function EditAssetPage() {
                   <div>
                     <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Model</label>
                     <input name="model" value={form.model} onChange={handleChange} style={inputStyle} />
+                  </div>
+                  <div>
+                    <label htmlFor="serialNumber" className="block text-sm font-medium mb-1">Serial Number</label>
+                    <input id="serialNumber" name="serialNumber" maxLength={120} value={form.serialNumber} onChange={handleChange} style={inputStyle} />
                   </div>
 
                   <div>

@@ -1,3 +1,4 @@
+import { clearSession, handleUnauthorized } from "./session";
 const API_BASE = "/api";
 
 function getToken(): string | null {
@@ -17,6 +18,7 @@ async function request<T>(
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  if (path !== "/auth/login") handleUnauthorized(res.status, token);
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
@@ -41,6 +43,7 @@ export interface Asset {
   category: string;
   brand: string;
   model: string;
+  serialNumber?: string;
   purchaseDate: string;
 }
 
@@ -61,7 +64,8 @@ export interface AssetQRCode {
 export interface Allocation {
   _id: string;
   asset: Asset;
-  user: User;
+  employee?: Employee | null;
+  user?: User | null; // Unmapped legacy assignments remain readable and returnable.
   allocationDate: string;
   returnDate?: string;
   allocationStatus: "Allocated" | "Returned" | "Pending";
@@ -72,27 +76,26 @@ export interface License {
   _id: string;
   softwareName: string;
   vendor: string;
-  licenseKey?: string;
-  licenseType: "Perpetual" | "Subscription" | "Trial" | "Open Source";
+  licenseKey: string;
+  licenseType: "Perpetual" | "Subscription" | "Trial" | "Open Source" | null;
   numberOfSeats: number;
-  seatsUsed: number;
+  assignedSeats: number;
   purchaseDate?: string;
   expiryDate?: string;
-  cost: number;
-  status: "Active" | "Expired" | "Expiring Soon";
+  cost: number | null;
+  status: "Active" | "Expired" | "Expiring Soon" | "Suspended";
   notes?: string;
   createdAt: string;
 }
 
-// FIX: Aligned TypeScript interface with the backend controller's payload
 export interface MaintenanceRecord {
   _id: string;
   asset: string | Asset;
-  maintenanceType: "Repair" | "Upgrade" | "Inspection" | "Replacement" | "Cleaning";
-  description?: string;
-  serviceProvider?: string; // Formerly technician
-  maintenanceDate: string;   // Formerly scheduledDate
-  nextMaintenanceDate?: string; // Formerly completedDate
+  maintenanceType: "Preventive" | "Corrective" | "Repair" | "Upgrade" | "Inspection" | "Replacement" | "Cleaning";
+  description: string;
+  serviceProvider?: string;
+  maintenanceDate: string;
+  nextMaintenanceDate?: string;
   cost: number;
   status: "Scheduled" | "In Progress" | "Completed" | "Cancelled";
 }
@@ -121,7 +124,14 @@ export const auth = {
       body: JSON.stringify({ fullName, email, password, role }),
     }),
   me: () => request<{ user: User }>("/auth/me"),
-  getAllUsers: () => request<Array<{ _id: string; id: string; fullName: string; name: string; email: string; role: string }>>("/auth/users"),
+  getAllUsers: () => request<Array<{ _id: string; id: string; fullName: string; name: string; email: string; role: string; isActive: boolean }>>("/auth/users"),
+  updateUser: (id: string, changes: { fullName: string; email: string; role: string }) =>
+    request<{ user: User }>(`/auth/users/${id}`, { method: "PATCH", body: JSON.stringify(changes) }),
+  updateAccess: (id: string, changes: { isActive?: boolean; revokeSessions?: true }) =>
+    request<{ user: User }>(`/auth/users/${id}/access`, {
+      method: "PATCH", body: JSON.stringify(changes),
+    }),
+  getAssignees: () => request<Array<{ id: string; name: string }>>("/auth/assignees"),
 };
 
 export const assets = {
@@ -150,6 +160,16 @@ export const assets = {
 };
 
 export const qrCodes = {
+  // Images need the same bearer authentication as JSON requests.
+  image: async (assetId: string) => {
+    const token = getToken();
+    const res = await fetch(`${API_BASE}/qr/assets/${assetId}/image`, {
+      headers: { Authorization: `Bearer ${token || ""}` },
+    });
+    handleUnauthorized(res.status, token);
+    if (!res.ok) throw new Error("Could not load QR image.");
+    return URL.createObjectURL(await res.blob());
+  },
   list: () =>
     request<{ success: boolean; data: AssetQRCode[] }>("/qr")
       .then((res) => res.data || []),
@@ -182,18 +202,17 @@ export const allocations = {
     request<{ success: boolean; data: Allocation }>(`/allocations/${id}`)
       .then((res) => res.data),
 
-  // REMAPPED CREATE FUNCTION HERE
-  create: (data: { asset: string; user: string; allocationDate: string; remarks?: string }) => {
+  create: (data: { asset: string; employee: string; allocationDate: string; remarks?: string }) => {
     const backendPayload = {
       assetId: data.asset,
-      userId: data.user,
+      employeeId: data.employee,
       allocationDate: data.allocationDate,
       remarks: data.remarks
     };
 
     return request<{ success: boolean; data: Allocation }>("/allocations", { 
       method: "POST", 
-      body: JSON.stringify(backendPayload) // Sends assetId and userId now
+      body: JSON.stringify(backendPayload)
     }).then((res) => res.data);
   },
 
@@ -244,6 +263,8 @@ export const maintenance = {
 };
 
 export const employees = {
+  assignees: () => request<{ success: boolean; data: Array<Pick<Employee, "_id" | "fullName" | "employeeId">> }>("/employees/assignees")
+    .then(res => res.data),
   list: () =>
     request<{ success: boolean; data: Employee[] }>("/employees")
       .then((res) => res.data || []),
@@ -282,6 +303,5 @@ export function getCurrentUser(): User | null {
 }
 
 export function logout() {
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("currentUser");
+  clearSession();
 }

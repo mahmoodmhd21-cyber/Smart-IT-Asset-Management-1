@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import LoadError from "../components/LoadError";
+import ManagementEditor from "../components/ManagementEditor";
 import { employees, type Employee } from "../lib/api";
-import { Users, Search, Building2, ShieldCheck, ShieldAlert } from "lucide-react";
+import { Users, Search, Building2, ShieldCheck, ShieldAlert, Pencil, Trash2 } from "lucide-react";
 
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   Active: { bg: "#dcfce7", color: "#15803d" },
@@ -12,16 +14,32 @@ const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
 export default function EmployeePage() {
   const [employeeList, setEmployeeList] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [actionError, setActionError] = useState("");
+  const [editing, setEditing] = useState<Employee | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("All");
 
-  useEffect(() => {
-    employees
+  function loadEmployees() {
+    setLoading(true);
+    setLoadError("");
+    return employees
       .list()
       .then((data) => setEmployeeList(Array.isArray(data) ? data : []))
-      .catch(console.error)
+      .catch(() => setLoadError("Employees could not be loaded. Displayed records may be out of date."))
       .finally(() => setLoading(false));
-  }, []);
+  }
+  useEffect(() => { void loadEmployees(); }, []);
+
+  async function deleteEmployee(employee: Employee) {
+    if (deleting || !confirm(`Delete ${employee.fullName}? Employees with allocation history cannot be deleted.`)) return;
+    setDeleting(true);
+    setActionError("");
+    try { await employees.remove(employee._id); await loadEmployees(); }
+    catch (err) { setActionError(err instanceof Error ? err.message : "Could not delete employee."); }
+    finally { setDeleting(false); }
+  }
 
   const filtered = employeeList.filter((emp) => {
     const matchSearch =
@@ -43,8 +61,10 @@ export default function EmployeePage() {
     <AuthGuard>
       <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#f8fafc" }}>
         <Sidebar />
-        <main style={{ flex: 1, padding: "32px", overflowY: "auto" }}>
+        <main style={{ flex: 1, minWidth: 0, padding: "32px", overflowY: "auto" }}>
           <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            {loadError && <LoadError message={loadError} retry={loadEmployees} />}
+            {actionError && <p role="alert" className="mb-4 text-red-700">{actionError}</p>}
             {/* Header */}
             <div style={{ marginBottom: "28px" }}>
               <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
@@ -85,7 +105,7 @@ export default function EmployeePage() {
                       <span style={{ fontSize: "0.8125rem", fontWeight: 500 }}>{tab.name} Employees</span>
                       <Icon size={15} />
                     </div>
-                    <p style={{ margin: "6px 0 0", fontSize: "1.5rem", fontWeight: 700 }}>{tab.count}</p>
+                    <p style={{ margin: "6px 0 0", fontSize: "1.5rem", fontWeight: 700 }}>{loadError ? "N/A" : loading ? "..." : tab.count}</p>
                   </button>
                 );
               })}
@@ -121,13 +141,13 @@ export default function EmployeePage() {
                 borderRadius: "12px",
                 border: "1px solid #e2e8f0",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-                overflow: "hidden",
+                overflowX: "auto",
               }}
             >
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
                   <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-                    {["Employee ID", "Name", "Email", "Department & Designation", "Status"].map((h) => (
+                    {["Employee ID", "Name", "Email", "Department & Designation", "Status", "Actions"].map((h) => (
                       <th
                         key={h}
                         style={{
@@ -148,13 +168,13 @@ export default function EmployeePage() {
                 <tbody>
                   {loading ? (
                     <tr>
-                      <td colSpan={5} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
                         Loading employees…
                       </td>
                     </tr>
-                  ) : filtered.length === 0 ? (
+                  ) : loadError ? <tr><td colSpan={6} className="p-5">Employee data unavailable.</td></tr> : filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={5} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
                         No employees found.
                       </td>
                     </tr>
@@ -223,6 +243,10 @@ export default function EmployeePage() {
                               {emp.status}
                             </span>
                           </td>
+                          <td className="px-4 py-3"><div className="flex gap-2">
+                            <button title="Edit employee" aria-label={`Edit ${emp.fullName}`} onClick={() => setEditing(emp)} className="rounded border p-2"><Pencil size={16} /></button>
+                            <button title="Delete employee" aria-label={`Delete ${emp.fullName}`} disabled={deleting} onClick={() => void deleteEmployee(emp)} className="rounded border p-2 text-red-700"><Trash2 size={16} /></button>
+                          </div></td>
                         </tr>
                       );
                     })
@@ -232,9 +256,18 @@ export default function EmployeePage() {
             </div>
 
             <p style={{ marginTop: "12px", fontSize: "0.8125rem", color: "#94a3b8" }}>
-              Showing {filtered.length} of {employeeList.length} employees
+              {loadError ? "Employee count unavailable" : `Showing ${filtered.length} of ${employeeList.length} employees`}
             </p>
           </div>
+          {editing && <ManagementEditor title="Edit employee" initial={{ fullName: editing.fullName, email: editing.email, employeeId: editing.employeeId, department: editing.department, designation: editing.designation, phone: editing.phone || "", status: editing.status }} fields={[
+            { name: "fullName", label: "Full Name" }, { name: "email", label: "Email", type: "email" },
+            { name: "employeeId", label: "Employee ID" }, { name: "department", label: "Department" },
+            { name: "designation", label: "Designation" }, { name: "phone", label: "Phone", optional: true },
+            { name: "status", label: "Status", options: ["Active", "Inactive"] },
+          ]} onClose={() => setEditing(null)} onSave={async values => {
+            await employees.update(editing._id, { ...values, status: values.status as Employee["status"] });
+            await loadEmployees();
+          }} />}
         </main>
       </div>
     </AuthGuard>

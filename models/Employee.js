@@ -17,7 +17,9 @@ const employeeSchema = new mongoose.Schema(
       required: true,
       trim: true,
       lowercase: true,
+      match: /^\S+@\S+\.\S+$/,
     },
+    lifecycleVersion: { type: Number, default: 0 },
     department: {
       type: String,
       required: true,

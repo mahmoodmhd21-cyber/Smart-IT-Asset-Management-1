@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const License = require('../models/License');
+const transaction = require('../services/transaction');
 
 // Fields that are allowed to be created or updated through the API.
 const allowedFields = [
@@ -11,10 +12,20 @@ const allowedFields = [
   'numberOfSeats',
   'assignedSeats',
   'status',
+  'licenseType',
+  'cost',
+  'notes',
 ];
 
 // Copy only approved fields from the request body.
 const pickAllowedFields = (body) => {
+  body = body || {};
+  // Reject the old frontend typo instead of silently losing the supplied usage.
+  if (body.seatsUsed !== undefined) {
+    const error = new Error('Use assignedSeats instead of seatsUsed.');
+    error.status = 400;
+    throw error;
+  }
   const payload = {};
   allowedFields.forEach((field) => {
     if (body[field] !== undefined) payload[field] = body[field];
@@ -27,6 +38,7 @@ const getDuplicateField = (error) => Object.keys(error.keyPattern || error.keyVa
 
 // Convert common Mongoose/MongoDB errors into consistent API responses.
 const handleLicenseError = (res, err, fallbackMessage) => {
+  if (err.status) return res.status(err.status).json({ success: false, message: err.message });
   if (err.code === 11000) {
     const field = getDuplicateField(err) || 'field';
     return res.status(409).json({
@@ -35,6 +47,7 @@ const handleLicenseError = (res, err, fallbackMessage) => {
     });
   }
 
+  if (err.name === 'CastError') return res.status(400).json({ success: false, message: err.message });
   if (err.name === 'ValidationError') {
     return res.status(400).json({
       success: false,
@@ -59,7 +72,7 @@ const addLicense = async (req, res) => {
 // Retrieve all software licenses.
 const getAllLicenses = async (req, res) => {
   try {
-    const licenses = await License.find().lean();
+    const licenses = await License.find();
     return res.status(200).json({ success: true, data: licenses });
   } catch (err) {
     console.error('getAllLicenses error:', err);
@@ -76,7 +89,7 @@ const getLicenseById = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid license ID' });
     }
 
-    const license = await License.findById(id).lean();
+    const license = await License.findById(id);
     if (!license) return res.status(404).json({ success: false, message: 'License not found' });
 
     return res.status(200).json({ success: true, data: license });
@@ -101,7 +114,15 @@ const updateLicense = async (req, res) => {
       return res.status(400).json({ success: false, message: 'No valid fields to update' });
     }
 
-    const updated = await License.findByIdAndUpdate(id, { $set: updates }, { new: true, runValidators: true }).lean();
+    // Validate the complete merged document, including unchanged seat fields.
+    // Write conflicts retry concurrent edits so the seat limit cannot be bypassed.
+    const updated = await transaction(async session => {
+      const license = await License.findById(id).session(session);
+      if (!license) return null;
+      Object.assign(license, updates);
+      await license.save({ session });
+      return license;
+    });
     if (!updated) return res.status(404).json({ success: false, message: 'License not found' });
 
     return res.status(200).json({ success: true, message: 'License updated successfully', data: updated });

@@ -1,0 +1,53 @@
+▶ Step 5 sessions, feedback, management and serial numbers
+  ✔ serials persist, trim, search contract and blank historical values remain optional (134.547125ms)
+  ✔ database serial uniqueness covers case, edits and concurrent creates (74.246667ms)
+  ✔ account edits require Admin, reject unsafe fields/self edits and revoke sessions (189.929791ms)
+Auth middleware error: jwt malformed
+  ✔ 401 clears session and login returns to intended route; password toggle and bad login work (1507.9575ms)
+  ✔ 403 stays signed in; staff cannot mount employee directory (1041.532709ms)
+  ✔ QR image 401 clears the session too (475.765708ms)
+  ✔ a late 401 cannot clear a newer login (455.429291ms)
+  ✔ logout in another tab redirects protected content (459.618041ms)
+  ✔ /dashboard server failure is visible and retry recovers (422.655666ms)
+  ✔ /dashboard network failure is visible and retry recovers (382.764292ms)
+  ✔ /profile server failure is visible and retry recovers (409.2025ms)
+  ✔ /profile network failure is visible and retry recovers (399.091ms)
+  ✔ /employees server failure is visible and retry recovers (384.396959ms)
+  ✔ /employees network failure is visible and retry recovers (484.964333ms)
+  ✔ /licenses server failure is visible and retry recovers (732.277792ms)
+  ✔ /licenses network failure is visible and retry recovers (612.934833ms)
+  ✔ /maintainence server failure is visible and retry recovers (408.588125ms)
+  ✔ /maintainence network failure is visible and retry recovers (386.804917ms)
+  ✔ /users server failure is visible and retry recovers (375.1275ms)
+  ✔ /users network failure is visible and retry recovers (369.550875ms)
+  ✔ asset browser add/edit/list/search retains serial numbers (575.209916ms)
+  ✔ licenses delete failure remains visible without losing the row (353.568041ms)
+  ✔ maintenance delete failure remains visible without losing the row (403.015917ms)
+  ✔ employee edit is prefilled, failed save retains values, cancel and deletion work (1231.463375ms)
+deleteEmployee error: LifecycleError: Cannot delete an employee with allocation history. Deactivate them instead.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:144:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async deleteEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:139:21) {
+  status: 409
+}
+updateEmployee error: LifecycleError: Return active allocations before deactivating this employee.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:115:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async updateEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:111:21) {
+  status: 409
+}
+  ✔ employee history conflicts remain visible in the editor and on deletion (743.006167ms)
+  ✔ account browser editing revokes sessions and provisioning success survives refresh (1060.8325ms)
+✔ Step 5 sessions, feedback, management and serial numbers (20414.581542ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20834.33925

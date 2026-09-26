@@ -1,25 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
-  Camera,
   CheckCircle2,
   Download,
   QrCode,
   RefreshCw,
   ScanLine,
-  Square,
 } from "lucide-react";
 import AuthGuard from "../components/AuthGuard";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
+import QRScanner from "../components/QRScanner";
 import {
   assets,
   qrCodes,
   type Asset,
   type AssetQRCode,
 } from "../lib/api";
-
-type ScannerInstance = InstanceType<
-  (typeof import("html5-qrcode"))["Html5Qrcode"]
->;
 
 const STATUSES: Asset["status"][] = [
   "Available",
@@ -47,10 +42,9 @@ export default function QRCodePage() {
   const [generating, setGenerating] = useState(false);
   const [lookingUp, setLookingUp] = useState(false);
   const [updating, setUpdating] = useState(false);
-  const [scanning, setScanning] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  const scannerRef = useRef<ScannerInstance | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const recordByAsset = useMemo(
     () => new Map(records.map((record) => [record.asset._id, record])),
@@ -73,18 +67,23 @@ export default function QRCodePage() {
   }, [recordByAsset, selectedAssetId]);
 
   useEffect(() => {
-    return () => {
-      const scanner = scannerRef.current;
-      if (!scanner) return;
-      void scanner.stop().catch(() => undefined).finally(() => {
-        try {
-          scanner.clear();
-        } catch {
-          // The scanner may already have cleared itself after decoding.
-        }
+    let cancelled = false;
+    let objectUrl = "";
+    setImageUrl("");
+    if (selectedRecord) {
+      qrCodes.image(selectedRecord.asset._id).then(url => {
+        objectUrl = url;
+        if (cancelled) URL.revokeObjectURL(url);
+        else setImageUrl(url);
+      }).catch((err: Error) => {
+        if (!cancelled) setError(err.message);
       });
+    }
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, []);
+  }, [selectedRecord]);
 
   function showError(err: unknown, fallback: string) {
     setNotice("");
@@ -124,24 +123,6 @@ export default function QRCodePage() {
     }
   }
 
-  async function stopCamera() {
-    const scanner = scannerRef.current;
-    scannerRef.current = null;
-    setScanning(false);
-    if (!scanner) return;
-
-    try {
-      await scanner.stop();
-    } catch {
-      // Stopping an already stopped camera is harmless.
-    }
-    try {
-      scanner.clear();
-    } catch {
-      // The scanner container may already be empty.
-    }
-  }
-
   async function handleLookup(code = manualCode) {
     if (!code.trim()) {
       setError("Scan a QR code or enter its value first.");
@@ -162,29 +143,6 @@ export default function QRCodePage() {
       showError(err, "QR code lookup failed");
     } finally {
       setLookingUp(false);
-    }
-  }
-
-  async function startCamera() {
-    setError("");
-    setNotice("");
-    try {
-      const { Html5Qrcode } = await import("html5-qrcode");
-      const scanner = new Html5Qrcode("qr-reader");
-      scannerRef.current = scanner;
-      setScanning(true);
-
-      await scanner.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 230, height: 230 } },
-        (decodedText) => {
-          void stopCamera().then(() => handleLookup(decodedText));
-        },
-        () => undefined
-      );
-    } catch (err) {
-      await stopCamera();
-      showError(err, "Camera access could not be started");
     }
   }
 
@@ -212,7 +170,7 @@ export default function QRCodePage() {
     <AuthGuard>
       <div className="flex min-h-screen">
         <Sidebar />
-        <main className="flex-1 overflow-auto p-8">
+        <main className="min-w-0 flex-1 overflow-auto p-4 md:p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-900">QR Code Management</h1>
             <p className="mt-1 text-sm text-gray-500">
@@ -222,6 +180,7 @@ export default function QRCodePage() {
 
           {(error || notice) && (
             <div
+              role={error ? "alert" : "status"}
               className="mb-5 rounded-lg border px-4 py-3 text-sm"
               style={
                 error
@@ -233,8 +192,8 @@ export default function QRCodePage() {
             </div>
           )}
 
-          <div className="grid gap-5 xl:grid-cols-2">
-            <section className="rounded-lg border border-gray-200 bg-white p-5">
+          <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+            <section className="min-w-0 rounded-lg border border-gray-200 bg-white p-5">
               <div className="mb-5 flex items-center gap-3">
                 <div className="rounded-lg bg-blue-50 p-2 text-blue-600">
                   <QrCode size={20} />
@@ -266,7 +225,7 @@ export default function QRCodePage() {
               <div className="mt-5 flex min-h-[300px] items-center justify-center border-y border-gray-100 py-5">
                 {selectedRecord ? (
                   <img
-                    src={selectedRecord.imageDataUrl || selectedRecord.imageUrl}
+                    src={imageUrl || undefined}
                     alt={`QR code for ${selectedRecord.asset.assetName}`}
                     className="h-64 w-64 object-contain"
                   />
@@ -290,13 +249,14 @@ export default function QRCodePage() {
                   </button>
                 ) : (
                   <>
-                    <a
-                      href={`${selectedRecord.imageUrl}?download=1`}
+                    {imageUrl && <a
+                      href={imageUrl}
+                      download={`asset-${selectedRecord.asset._id}.png`}
                       className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
                     >
                       <Download size={16} />
                       Download PNG
-                    </a>
+                    </a>}
                     <button
                       onClick={() => handleGenerate(true)}
                       disabled={generating}
@@ -310,7 +270,7 @@ export default function QRCodePage() {
               </div>
             </section>
 
-            <section className="rounded-lg border border-gray-200 bg-white p-5">
+            <section className="min-w-0 rounded-lg border border-gray-200 bg-white p-5">
               <div className="mb-5 flex items-center gap-3">
                 <div className="rounded-lg bg-emerald-50 p-2 text-emerald-700">
                   <ScanLine size={20} />
@@ -321,38 +281,7 @@ export default function QRCodePage() {
                 </div>
               </div>
 
-              <div
-                id="qr-reader"
-                className="flex min-h-[280px] items-center justify-center overflow-hidden bg-gray-950 text-white"
-                style={{ aspectRatio: "16 / 9", borderRadius: "8px" }}
-              >
-                {!scanning && (
-                  <div className="text-center text-gray-400">
-                    <Camera className="mx-auto mb-3" size={42} strokeWidth={1.4} />
-                    <p className="text-sm">Camera is off</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-4 flex gap-2">
-                {!scanning ? (
-                  <button
-                    onClick={startCamera}
-                    className="inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2 text-sm font-medium text-white"
-                  >
-                    <Camera size={16} />
-                    Start camera
-                  </button>
-                ) : (
-                  <button
-                    onClick={stopCamera}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 text-sm font-medium text-white"
-                  >
-                    <Square size={15} />
-                    Stop camera
-                  </button>
-                )}
-              </div>
+              <QRScanner onDecode={handleLookup} />
 
               <div className="my-4 flex items-center gap-3 text-xs uppercase text-gray-400">
                 <span className="h-px flex-1 bg-gray-200" />

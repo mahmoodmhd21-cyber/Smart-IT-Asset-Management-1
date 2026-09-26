@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
-import { allocations, assets, auth, type Allocation, type Asset } from "../lib/api";
+import { allocations, assets, employees, type Allocation, type Asset, type Employee } from "../lib/api";
 import { Plus, RotateCcw, Trash2, X } from "lucide-react";
 
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
@@ -23,8 +23,7 @@ const inputStyle = {
 export default function AllocationsPage() {
   const [list, setList] = useState<Allocation[]>([]);
   const [availableAssets, setAvailableAssets] = useState<Asset[]>([]);
-  // Updated state type to match the minimal user array format
-  const [users, setUsers] = useState<Array<{ id: string; name: string }>>([]);
+  const [assignees, setAssignees] = useState<Array<Pick<Employee, "_id" | "fullName" | "employeeId">>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -32,19 +31,19 @@ export default function AllocationsPage() {
   const [formError, setFormError] = useState("");
   const [form, setForm] = useState({
     asset: "",
-    user: "",
+    employee: "",
     allocationDate: new Date().toISOString().split("T")[0],
     remarks: "",
   });
 
   function loadData() {
     setLoading(true);
-    // Swapped auth.me() with auth.getAllUsers()
-    Promise.all([allocations.list(), assets.list(), auth.getAllUsers()])
+    // Only active company employees can receive new assignments.
+    Promise.all([allocations.list(), assets.list(), employees.assignees()])
       .then(([al, ass, usersData]) => {
         setList(al);
         setAvailableAssets(ass.filter((a) => a.status === "Available"));
-        setUsers(usersData);
+        setAssignees(usersData);
       })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
@@ -63,13 +62,13 @@ export default function AllocationsPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.asset) { setFormError("Please select an asset."); return; }
-    if (!form.user) { setFormError("Please select a user."); return; }
+    if (!form.employee) { setFormError("Please select an employee."); return; }
     setFormError("");
     setSubmitting(true);
     try {
       await allocations.create(form);
       setShowModal(false);
-      setForm({ asset: "", user: "", allocationDate: new Date().toISOString().split("T")[0], remarks: "" });
+      setForm({ asset: "", employee: "", allocationDate: new Date().toISOString().split("T")[0], remarks: "" });
       loadData();
     } catch (err: unknown) {
       setFormError(err instanceof Error ? err.message : "Failed to create allocation");
@@ -92,7 +91,8 @@ export default function AllocationsPage() {
     if (!confirm("Delete this allocation record?")) return;
     try {
       await allocations.remove(id);
-      setList((prev) => prev.filter((a) => a._id !== id));
+      // Deleting an active assignment can change the available-asset dropdown too.
+      loadData();
     } catch (e: unknown) {
       alert(e instanceof Error ? e.message : "Delete failed");
     }
@@ -155,8 +155,10 @@ export default function AllocationsPage() {
                             {al.asset?.assetName || "Unknown"}
                           </td>
                           <td className="px-6 py-4" style={{ color: "#374151" }}>
-                            <div>{al.user?.fullName || "Unknown"}</div>
-                            <div className="text-xs mt-0.5" style={{ color: "#9ca3af" }}>{al.user?.email || ""}</div>
+                            <div>{al.employee?.fullName || al.user?.fullName || "Unavailable assignee"}</div>
+                            <div className="text-xs mt-0.5" style={{ color: "#9ca3af" }}>
+                              {al.employee?.employeeId || (al.user ? "Legacy account assignment" : "Missing reference")}
+                            </div>
                           </td>
                           <td className="px-6 py-4" style={{ color: "#6b7280" }}>
                             {al.allocationDate ? new Date(al.allocationDate).toLocaleDateString() : "—"}
@@ -224,10 +226,10 @@ export default function AllocationsPage() {
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Assign To *</label>
                 {/* Updated dropdown mapping to use u.id and u.name */}
-                <select name="user" value={form.user} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
-                  <option value="">Select user</option>
-                  {users.map((u) => (
-                    <option key={u.id} value={u.id}>{u.name}</option>
+                <select name="employee" aria-label="Employee" value={form.employee} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
+                  <option value="">Select employee</option>
+                  {assignees.map((employee) => (
+                    <option key={employee._id} value={employee._id}>{employee.fullName} ({employee.employeeId})</option>
                   ))}
                 </select>
               </div>

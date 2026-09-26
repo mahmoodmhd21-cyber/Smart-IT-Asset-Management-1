@@ -1,0 +1,230 @@
+[
+  {
+    "module": "Authentication",
+    "name": "valid login and profile",
+    "status": "PASS"
+  },
+  {
+    "module": "Authentication",
+    "name": "invalid password rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authentication",
+    "name": "anonymous administrator registration blocked",
+    "status": "FAIL",
+    "detail": "Anonymous Admin creation returned HTTP 201"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /assets is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /allocations is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /employees is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /licenses is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /maintenance is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /qr is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /auth/users is rejected",
+    "status": "FAIL",
+    "detail": "Unauthenticated data access returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "IT Staff cannot create an Admin",
+    "status": "FAIL",
+    "detail": "IT Staff created an Admin: HTTP 201\n\n201 !== 403\n"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset creation is rejected",
+    "status": "FAIL",
+    "detail": "Anonymous asset creation returned HTTP 201"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset update is rejected",
+    "status": "FAIL",
+    "detail": "Anonymous asset update returned HTTP 200"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset deletion is rejected",
+    "status": "FAIL",
+    "detail": "Anonymous asset deletion returned HTTP 200"
+  },
+  {
+    "module": "Assets",
+    "name": "asset create/read/update/delete and QR cleanup",
+    "status": "PASS"
+  },
+  {
+    "module": "Assets",
+    "name": "serial number survives saving",
+    "status": "FAIL",
+    "detail": "serialNumber is silently discarded\n+ actual - expected\n\n+ undefined\n- 'QA-SERIAL-001'\n"
+  },
+  {
+    "module": "Assets",
+    "name": "invalid status returns validation error",
+    "status": "PASS"
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate, prevent duplicates, return, delete",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "completing last job restores Available",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "another unfinished job prevents release",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Scheduled maintenance makes device unavailable",
+    "status": "FAIL",
+    "detail": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Available'\n- 'Maintenance'\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "In Progress maintenance makes device unavailable",
+    "status": "FAIL",
+    "detail": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Available'\n- 'Maintenance'\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Repair is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Upgrade is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 400: {\"success\":false,\"message\":\"`Upgrade` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Inspection is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 400: {\"success\":false,\"message\":\"`Inspection` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Replacement is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 400: {\"success\":false,\"message\":\"`Replacement` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Cleaning is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 400: {\"success\":false,\"message\":\"`Cleaning` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled option is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 200; got 400: {\"success\":false,\"message\":\"`Cancelled` is not a valid enum value for path `status`.\"}\n\n400 !== 200\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "returning an allocation preserves ongoing maintenance",
+    "status": "FAIL",
+    "detail": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Available'\n- 'Maintenance'\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "deleting allocation preserves ongoing maintenance",
+    "status": "FAIL",
+    "detail": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Available'\n- 'Maintenance'\n"
+  },
+  {
+    "module": "QR codes",
+    "name": "status endpoint respects unfinished maintenance",
+    "status": "FAIL",
+    "detail": "QR endpoint released device: HTTP 200\n\n200 !== 409\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "deleting asset cannot orphan maintenance",
+    "status": "FAIL",
+    "detail": "Delete returned 200; maintenance still exists with asset=null"
+  },
+  {
+    "module": "Maintenance",
+    "name": "nonexistent asset reference is rejected",
+    "status": "FAIL",
+    "detail": "Orphan maintenance created: HTTP 201"
+  },
+  {
+    "module": "Employees",
+    "name": "employee update and duplicate validation",
+    "status": "PASS"
+  },
+  {
+    "module": "Employees",
+    "name": "company employees can receive allocations",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 404: {\"success\":false,\"message\":\"User not found.\"}\n\n404 !== 201\n"
+  },
+  {
+    "module": "Employees",
+    "name": "delete employee",
+    "status": "PASS"
+  },
+  {
+    "module": "Licenses",
+    "name": "all form fields persist",
+    "status": "FAIL",
+    "detail": "seatsUsed was discarded; backend uses assignedSeats\n\nundefined !== 3\n"
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon form option is accepted",
+    "status": "FAIL",
+    "detail": "Expected HTTP 200; got 400: {\"success\":false,\"message\":\"`Expiring Soon` is not a valid enum value for path `status`.\"}\n\n400 !== 200\n"
+  },
+  {
+    "module": "Licenses",
+    "name": "seat usage cannot exceed licensed seats",
+    "status": "FAIL",
+    "detail": "11 assigned seats for a 10-seat license accepted: HTTP 200\n\n200 !== 400\n"
+  },
+  {
+    "module": "Licenses",
+    "name": "edit supported fields and delete",
+    "status": "PASS"
+  }
+]

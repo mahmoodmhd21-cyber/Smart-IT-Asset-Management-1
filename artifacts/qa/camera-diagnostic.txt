@@ -1,0 +1,84 @@
+▶ Step 4 QR camera lifecycle
+  ✖ repeated starts, duplicate clicks, stop and responsive camera rendering (1887.43225ms)
+  ✔ NotAllowedError preserves the page and allows retry (851.455292ms)
+  ✔ NotFoundError preserves the page and allows retry (849.153958ms)
+  ✔ NotReadableError preserves the page and allows retry (570.339583ms)
+  ✔ navigation releases camera (pending permission: false) (922.55775ms)
+  ✖ navigation releases camera (pending permission: true) (595.358042ms)
+  ✖ stop during pending permission releases the eventual stream (616.228625ms)
+  ✔ unsupported media API gives an actionable error without crashing (968.8485ms)
+  ✔ real decoder reads a synthetic QR stream, stops, and retrieves once (1110.174833ms)
+  ✔ render failure is contained and retry restores the QR route (427.722875ms)
+✖ Step 4 QR camera lifecycle (11408.215917ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 7
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11854.523167
+
+✖ failing tests:
+
+test at tests/qrCamera.test.cjs:66:13
+✖ repeated starts, duplicate clicks, stop and responsive camera rendering (1887.43225ms)
+  AssertionError [ERR_ASSERTION]: {"width":768,"box":{"x":293,"y":330,"width":497.765625,"height":373.3125}}
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:76:18)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:66:5)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/qrCamera.test.cjs:104:15
+✖ navigation releases camera (pending permission: true) (595.358042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'The play() request was interrupted because the media was removed from the document. https://goo.gl/LdLk22'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:114:18)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:104:7)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'The play() request was interrupted because the media was removed from the document. https://goo.gl/LdLk22' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/qrCamera.test.cjs:124:13
+✖ stop during pending permission releases the eventual stream (616.228625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'The play() request was interrupted because the media was removed from the document. https://goo.gl/LdLk22'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:134:16)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qrCamera.test.cjs:124:5)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'The play() request was interrupted because the media was removed from the document. https://goo.gl/LdLk22' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

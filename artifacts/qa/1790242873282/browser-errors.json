@@ -1,0 +1,152 @@
+[
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/assets/6ab541d4c12611afc96d918e/edit",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/licenses",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "pageerror",
+    "message": "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node."
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "pageerror",
+    "message": "Cannot stop, scanner is not running or paused."
+  },
+  {
+    "url": "http://127.0.0.1:3301/licenses",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/licenses",
+    "type": "console",
+    "message": "Error: QA service unavailable\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)\n    at async Y (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:265:44541)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Error: QA service unavailable\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)\n    at async Promise.all (index 0)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/employees",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/employees",
+    "type": "console",
+    "message": "Error: QA service unavailable\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/dashboard",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/dashboard",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/dashboard",
+    "type": "console",
+    "message": "Error: QA service unavailable\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)\n    at async Promise.all (index 0)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/profile",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/profile",
+    "type": "console",
+    "message": "Error: QA service unavailable\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/assets",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Error: Authorization token required.\n    at pe (http://127.0.0.1:3301/assets/index-BBxRHYPt.js:60:24249)"
+  }
+]

@@ -6,10 +6,11 @@ const {
   updateAsset,
   deleteAsset,
 } = require('../controllers/assetController');
-const { protect } = require("../middleware/authMiddleware");
+const { protect, authorize } = require("../middleware/authMiddleware");
 
 
 const router = express.Router();
+router.use(protect, authorize('Admin', 'IT Staff'));
 
 /**
  * Asset Routes
@@ -27,7 +28,7 @@ const router = express.Router();
 router.post('/', addAsset);
 
 // Get all asset records
-router.get('/', protect, getAllAssets);
+router.get('/', getAllAssets);
 
 // Get a specific asset by ID
 router.get('/:id', getAssetById);

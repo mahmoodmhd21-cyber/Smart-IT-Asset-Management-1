@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const QRCodeImage = require('qrcode');
 const Asset = require('../models/Asset');
 const QRCode = require('../models/QRCode');
+const lifecycle = require('../services/assetLifecycle');
 
 const ASSET_STATUSES = ['Available', 'Allocated', 'Maintenance', 'Retired'];
 const TOKEN_PATTERN = /^[a-f0-9]{48}$/i;
@@ -67,23 +68,16 @@ exports.getAllQRCodes = async (req, res) => {
     const registered = new Set(registeredAssetIds.map(String));
     const missingAssets = assets.filter((asset) => !registered.has(String(asset._id)));
 
-    if (missingAssets.length > 0) {
-      await QRCode.bulkWrite(
-        missingAssets.map((asset) => ({
-          updateOne: {
-            filter: { asset: asset._id },
-            update: {
-              $setOnInsert: {
-                asset: asset._id,
-                token: QRCode.createToken(),
-                generatedAt: new Date(),
-              },
-            },
-            upsert: true,
-          },
-        })),
-        { ordered: false }
-      );
+    for (const asset of missingAssets) {
+      try {
+        await lifecycle.withAsset(asset._id, async (_, session) => {
+          if (!await QRCode.exists({ asset: asset._id }).session(session)) {
+            await QRCode.create([{ asset: asset._id }], { session });
+          }
+        });
+      } catch (error) {
+        if (error.status !== 404) throw error; // The asset may have been deleted since listing.
+      }
     }
 
     const records = await QRCode.find().populate('asset').sort({ createdAt: -1 });
@@ -107,38 +101,34 @@ exports.generateQRCode = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid asset ID' });
     }
 
-    const asset = await Asset.findById(assetId).lean();
-    if (!asset) return res.status(404).json({ success: false, message: 'Asset not found' });
-
-    let created = false;
-    let qrCode = await QRCode.findOne({ asset: assetId });
-    if (!qrCode) {
-      qrCode = await QRCode.create({ asset: assetId });
-      created = true;
-    } else if (regenerate) {
-      qrCode.token = QRCode.createToken();
-      qrCode.generatedAt = new Date();
-      qrCode.scanCount = 0;
-      qrCode.lastScannedAt = null;
-      await qrCode.save();
-    }
-
-    await qrCode.populate('asset');
-    const data = serializeQRCode(req, qrCode);
+    const result = await lifecycle.withAsset(assetId, async (asset, session) => {
+      let qrCode = await QRCode.findOne({ asset: assetId }).session(session);
+      const created = !qrCode;
+      if (!qrCode) qrCode = new QRCode({ asset: assetId });
+      else if (regenerate) {
+        qrCode.token = QRCode.createToken();
+        qrCode.generatedAt = new Date();
+        qrCode.scanCount = 0;
+        qrCode.lastScannedAt = null;
+      }
+      await qrCode.save({ session });
+      return { created, record: { ...qrCode.toObject(), asset: asset.toObject() } };
+    });
+    const data = serializeQRCode(req, result.record);
     data.imageDataUrl = await QRCodeImage.toDataURL(data.qrValue, {
       errorCorrectionLevel: 'H',
       margin: 2,
       width: 420,
     });
 
-    return res.status(created ? 201 : 200).json({
+    return res.status(result.created ? 201 : 200).json({
       success: true,
       message: regenerate ? 'QR code regenerated successfully' : 'QR code generated successfully',
       data,
     });
   } catch (err) {
     console.error('generateQRCode error:', err);
-    return res.status(500).json({ success: false, message: 'Failed to generate QR code' });
+    return lifecycle.sendError(res, err);
   }
 };
 
@@ -218,11 +208,7 @@ exports.updateAssetStatusByQRCode = async (req, res) => {
     const result = await findScannedQRCode(code, false);
     if (result.error) return res.status(result.status).json({ success: false, message: result.error });
 
-    const asset = await Asset.findByIdAndUpdate(
-      result.qrCode.asset._id,
-      { $set: { status } },
-      { new: true, runValidators: true }
-    ).lean();
+    const asset = await lifecycle.updateAsset(result.qrCode.asset._id, { status });
 
     return res.status(200).json({
       success: true,
@@ -230,7 +216,6 @@ exports.updateAssetStatusByQRCode = async (req, res) => {
       data: { ...serializeQRCode(req, result.qrCode), asset },
     });
   } catch (err) {
-    console.error('updateAssetStatusByQRCode error:', err);
-    return res.status(500).json({ success: false, message: 'Failed to update asset status' });
+    return lifecycle.sendError(res, err);
   }
 };

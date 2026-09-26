@@ -1,0 +1,162 @@
+[
+  {
+    "module": "Navigation",
+    "name": "sidebar Dashboard link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Assets link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar QR Codes link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Allocations link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Users link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Profile link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Employees link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Licenses link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Maintainence link",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/allocations modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/allocations modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/allocations modal traps keyboard focus",
+    "status": "FAIL",
+    "detail": "Tab leaves the open modal instead of staying inside it",
+    "screenshot": "screenshots/control-12.png"
+  },
+  {
+    "module": "Controls",
+    "name": "/licenses modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/licenses modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/licenses modal traps keyboard focus",
+    "status": "FAIL",
+    "detail": "Tab leaves the open modal instead of staying inside it",
+    "screenshot": "screenshots/control-15.png"
+  },
+  {
+    "module": "Controls",
+    "name": "/maintainence modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/maintainence modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/maintainence modal traps keyboard focus",
+    "status": "FAIL",
+    "detail": "Tab leaves the open modal instead of staying inside it",
+    "screenshot": "screenshots/control-18.png"
+  },
+  {
+    "module": "Forms",
+    "name": "/licenses accepts fractional currency amounts",
+    "status": "FAIL",
+    "detail": "Cost input has default integer step and blocks 12.50\n\ntrue !== false\n",
+    "screenshot": "screenshots/control-19.png"
+  },
+  {
+    "module": "Forms",
+    "name": "/maintainence accepts fractional currency amounts",
+    "status": "FAIL",
+    "detail": "Cost input has default integer step and blocks 12.50\n\ntrue !== false\n",
+    "screenshot": "screenshots/control-20.png"
+  },
+  {
+    "module": "Forms",
+    "name": "maintenance required description matches backend validation",
+    "status": "FAIL",
+    "detail": "Backend requires description but the form does not mark or validate it as required\n\nfalse !== true\n",
+    "screenshot": "screenshots/control-21.png"
+  },
+  {
+    "module": "Forms",
+    "name": "license required key matches backend validation",
+    "status": "FAIL",
+    "detail": "Backend requires licenseKey but the form does not mark or validate it as required\n\nfalse !== true\n",
+    "screenshot": "screenshots/control-22.png"
+  },
+  {
+    "module": "Assets",
+    "name": "add form rejects whitespace-only name visibly",
+    "status": "PASS"
+  },
+  {
+    "module": "Users",
+    "name": "duplicate user shows useful error",
+    "status": "PASS"
+  },
+  {
+    "module": "Users",
+    "name": "user edit/delete or disable controls exist",
+    "status": "FAIL",
+    "detail": "User provisioning only supports creation; no account edit, revoke or delete controls",
+    "screenshot": "screenshots/control-25.png"
+  },
+  {
+    "module": "QR camera",
+    "name": "test browser has a functioning synthetic video device",
+    "status": "PASS"
+  },
+  {
+    "module": "QR camera",
+    "name": "Start camera preserves the rendered application",
+    "status": "FAIL",
+    "detail": "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.\n+ actual - expected\n\n+ \"Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.\"\n- null\n",
+    "screenshot": "screenshots/control-27.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "user provisioning remains readable at 390px",
+    "status": "FAIL",
+    "detail": "Full-name input shrinks to 74px in the fixed two-column layout",
+    "screenshot": "screenshots/control-28.png"
+  }
+]

@@ -1,0 +1,20 @@
+▶ Step 4 QR camera lifecycle
+  ✔ repeated starts, duplicate clicks, stop and responsive camera rendering (2186.298292ms)
+  ✔ NotAllowedError preserves the page and allows retry (1066.710667ms)
+  ✔ NotFoundError preserves the page and allows retry (628.977459ms)
+  ✔ NotReadableError preserves the page and allows retry (958.450375ms)
+  ✔ navigation releases camera (pending permission: false) (1266.876708ms)
+  ✔ navigation releases camera (pending permission: true) (799.61925ms)
+  ✔ stop during pending permission releases the eventual stream (573.964917ms)
+  ✔ unsupported media API gives an actionable error without crashing (422.688625ms)
+  ✔ real decoder reads a synthetic QR stream, stops, and retrieves once (759.726292ms)
+  ✔ render failure is contained and retry restores the QR route (426.157209ms)
+✔ Step 4 QR camera lifecycle (11494.901583ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11913.818375

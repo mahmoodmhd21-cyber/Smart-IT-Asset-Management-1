@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 // FIX: Imported both auth and employees services
 import { auth, employees, getCurrentUser, type Employee } from "../lib/api"; 
-import { UserPlus, Briefcase, Shield, UserCheck, Users } from "lucide-react";
+import { UserPlus, Briefcase, Shield, UserCheck, Users, UserX, LogOut, Pencil } from "lucide-react";
+import LoadError from "../components/LoadError";
+import ManagementEditor from "../components/ManagementEditor";
 
 const USER_ROLES = ["IT Staff", "Admin"] as const;
 
@@ -32,6 +34,7 @@ interface SimpleUser {
   name: string;
   email?: string;
   role?: string;
+  isActive?: boolean;
 }
 
 export default function CreateUserPage() {
@@ -68,6 +71,9 @@ export default function CreateUserPage() {
   const [userList, setUserList] = useState<SimpleUser[]>([]);
   const [employeeList, setEmployeeList] = useState<Employee[]>([]);
   const [listLoading, setListLoading] = useState(true);
+  const [accessBusy, setAccessBusy] = useState(false);
+  const [editing, setEditing] = useState<SimpleUser | null>(null);
+  const [listError, setListError] = useState("");
 
   useEffect(() => {
     if (!currentUser || currentUser.role !== "Admin") {
@@ -79,8 +85,7 @@ export default function CreateUserPage() {
 
   async function loadData() {
     setListLoading(true);
-    setError("");
-    setSuccess("");
+    setListError("");
     try {
       if (activeTab === "user") {
         const data = await auth.getAllUsers();
@@ -90,9 +95,26 @@ export default function CreateUserPage() {
         setEmployeeList(data);
       }
     } catch (err) {
-      setError("Failed to load list data.");
+      setListError("Directory could not be loaded. Displayed records may be out of date.");
     } finally {
       setListLoading(false);
+    }
+  }
+
+  async function changeAccess(user: SimpleUser, revokeOnly = false) {
+    const action = revokeOnly ? "Revoke sessions for" : user.isActive === false ? "Enable" : "Disable";
+    if (!confirm(`${action} ${user.name}?`)) return;
+    setAccessBusy(true);
+    setError("");
+    setSuccess("");
+    try {
+      await auth.updateAccess(user.id, revokeOnly ? { revokeSessions: true } : { isActive: user.isActive === false });
+      await loadData();
+      setSuccess(`Account access updated for ${user.name}.`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not update access.");
+    } finally {
+      setAccessBusy(false);
     }
   }
 
@@ -168,6 +190,7 @@ export default function CreateUserPage() {
       <Sidebar />
       <main style={{ flex: 1, padding: "32px", overflowY: "auto" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          {listError && <LoadError message={listError} retry={loadData} />}
           
           {/* Header */}
           <div style={{ marginBottom: "24px" }}>
@@ -328,7 +351,7 @@ export default function CreateUserPage() {
               <div style={{ maxHeight: "480px", overflowY: "auto" }}>
                 {listLoading ? (
                   <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading directory…</div>
-                ) : activeTab === "user" ? (
+                ) : listError ? <p className="p-5">Directory data unavailable.</p> : activeTab === "user" ? (
                   // SYSTEM USERS LIST RENDERER
                   userList.length === 0 ? (
                     <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>No users found.</div>
@@ -344,7 +367,25 @@ export default function CreateUserPage() {
                             <p style={{ margin: "1px 0 0", fontSize: "0.75rem", color: "#94a3b8" }}>{u.email || "No Email"}</p>
                           </div>
                         </div>
-                        <div>{roleBadge(u.role || "Employee")}</div>
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+                          {roleBadge(u.role || "IT Staff")}
+                          <span style={{ fontSize: "12px" }}>{u.isActive === false ? "Disabled" : "Active"}</span>
+                          {/* Access changes retain the account and its allocation history. */}
+                          {u.id !== currentUser?._id && <>
+                            <button title="Edit account" aria-label={`Edit ${u.name}`} onClick={() => setEditing(u)} className="rounded border border-gray-300 p-2"><Pencil size={16} /></button>
+                            <button type="button" disabled={accessBusy}
+                              title={u.isActive === false ? "Enable account" : "Disable account"}
+                              aria-label={`${u.isActive === false ? "Enable" : "Disable"} ${u.name}`}
+                              onClick={() => changeAccess(u)} className="rounded border border-gray-300 p-2 disabled:opacity-50">
+                              {u.isActive === false ? <UserCheck size={16} /> : <UserX size={16} />}
+                            </button>
+                            <button type="button" disabled={accessBusy || u.isActive === false}
+                              title="Revoke sessions" aria-label={`Revoke sessions for ${u.name}`}
+                              onClick={() => changeAccess(u, true)} className="rounded border border-gray-300 p-2 disabled:opacity-50">
+                              <LogOut size={16} />
+                            </button>
+                          </>}
+                        </div>
                       </div>
                     ))
                   )
@@ -376,6 +417,14 @@ export default function CreateUserPage() {
 
           </div>
         </div>
+        {editing && <ManagementEditor title="Edit account" initial={{ fullName: editing.name, email: editing.email || "", role: editing.role || "IT Staff" }} fields={[
+          { name: "fullName", label: "Full Name" }, { name: "email", label: "Email", type: "email" },
+          { name: "role", label: "Role", options: [...USER_ROLES] },
+        ]} onClose={() => setEditing(null)} onSave={async values => {
+          await auth.updateUser(editing.id, { fullName: values.fullName, email: values.email, role: values.role });
+          await loadData();
+          setSuccess("Account updated. Existing sessions have been revoked.");
+        }} />}
       </main>
     </div>
   );

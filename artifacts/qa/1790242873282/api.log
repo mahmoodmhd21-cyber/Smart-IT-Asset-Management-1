@@ -1,0 +1,369 @@
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+Server running on port 5301
+MongoDB connected successfully
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Upgrade` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Upgrade` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Upgrade',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Inspection` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Inspection` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Inspection',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Replacement` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Replacement` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Replacement',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Cleaning` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Cleaning` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Cleaning',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+updateMaintenance error: ValidationError: Validation failed: status: `Cancelled` is not a valid enum value for path `status`.
+    at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4189:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+    at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+    at async updateMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:111:21) {
+  errors: {
+    status: ValidatorError: `Cancelled` is not a valid enum value for path `status`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at updateValidators (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/helpers/updateValidators.js:137:22)
+        at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4187:36)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+        at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+        at async updateMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:111:21) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'status',
+      value: 'Cancelled',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Validation failed'
+}
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+addEmployee error: MongoServerError: E11000 duplicate key error collection: smart_it_qa_1790242873282.employees index: employeeId_1 dup key: { employeeId: "QA-1790242873282" }
+    at InsertOneOperation.handleOk (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/insert.js:51:19)
+    at executeOperationWithRetries (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:194:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:83:16)
+    at async Collection.insertOne (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/collection.js:154:16)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:434:16)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:32:22) {
+  errorLabelSet: Set(0) {},
+  errorResponse: {
+    index: 0,
+    code: 11000,
+    errmsg: 'E11000 duplicate key error collection: smart_it_qa_1790242873282.employees index: employeeId_1 dup key: { employeeId: "QA-1790242873282" }',
+    keyPattern: { employeeId: 1 },
+    keyValue: { employeeId: 'QA-1790242873282' }
+  },
+  index: 0,
+  code: 11000,
+  keyPattern: { employeeId: 1 },
+  keyValue: { employeeId: 'QA-1790242873282' }
+}
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+updateLicense error: ValidationError: Validation failed: status: `Expiring Soon` is not a valid enum value for path `status`.
+    at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4189:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+    at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+    at async updateLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:104:21) {
+  errors: {
+    status: ValidatorError: `Expiring Soon` is not a valid enum value for path `status`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at updateValidators (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/helpers/updateValidators.js:137:22)
+        at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4187:36)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+        at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+        at async updateLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:104:21) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'status',
+      value: 'Expiring Soon',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Validation failed'
+}
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Upgrade` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Upgrade` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Upgrade',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Inspection` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Inspection` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Inspection',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Replacement` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Replacement` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Replacement',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: maintenanceType: `Cleaning` is not a valid enum value for path `maintenanceType`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    maintenanceType: ValidatorError: `Cleaning` is not a valid enum value for path `maintenanceType`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'maintenanceType',
+      value: 'Cleaning',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+createMaintenance error: ValidationError: Maintenance validation failed: status: `Cancelled` is not a valid enum value for path `status`.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addMaintenance (/private/tmp/smart-it-qa-app/controllers/maintenanceController.js:54:25) {
+  errors: {
+    status: ValidatorError: `Cancelled` is not a valid enum value for path `status`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'status',
+      value: 'Cancelled',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Maintenance validation failed'
+}
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+updateLicense error: ValidationError: Validation failed: status: `Expiring Soon` is not a valid enum value for path `status`.
+    at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4189:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+    at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+    at async updateLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:104:21) {
+  errors: {
+    status: ValidatorError: `Expiring Soon` is not a valid enum value for path `status`.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at updateValidators (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/helpers/updateValidators.js:137:22)
+        at model.Query.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4187:36)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.Query._findOneAndUpdate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:3616:5)
+        at async maybeTracedQueryExec (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/query.js:4801:65)
+        at async updateLicense (/private/tmp/smart-it-qa-app/controllers/licenseController.js:104:21) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'status',
+      value: 'Expiring Soon',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Validation failed'
+}
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:7193) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+addAsset error: ValidationError: Asset validation failed: assetName: Path `assetName` is required.
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async exports.addAsset (/private/tmp/smart-it-qa-app/controllers/assetController.js:28:19) {
+  errors: {
+    assetName: ValidatorError: Path `assetName` is required.
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'required',
+      path: 'assetName',
+      value: '',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Asset validation failed'
+}
+Auth middleware error: jwt malformed

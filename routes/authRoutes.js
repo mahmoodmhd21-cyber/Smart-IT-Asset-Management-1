@@ -4,11 +4,14 @@ const {
   loginUser,
   getLoggedInUser,
   getAllUsers,
+  getAssignees,
+  updateUserAccess,
+  updateUser,
 } = require('../controllers/authController');
 
 const router = express.Router();
 
-const { protect } = require('../middleware/authMiddleware');
+const { protect, authorize } = require('../middleware/authMiddleware');
 
 /**
  * Auth Routes
@@ -21,7 +24,7 @@ const { protect } = require('../middleware/authMiddleware');
  */
 
 // Register a new user account
-router.post('/register', registerUser);
+router.post('/register', protect, authorize('Admin'), registerUser);
 
 // Authenticate a user and return a JWT token
 router.post('/login', loginUser);
@@ -29,6 +32,9 @@ router.post('/login', loginUser);
 // Return the currently logged-in user
 router.get('/me', protect, getLoggedInUser);
 
-router.get('/users', getAllUsers);
+router.get('/users', protect, authorize('Admin'), getAllUsers);
+router.patch('/users/:id/access', protect, authorize('Admin'), updateUserAccess);
+router.patch('/users/:id', protect, authorize('Admin'), updateUser);
+router.get('/assignees', protect, authorize('Admin', 'IT Staff'), getAssignees);
 
 module.exports = router;

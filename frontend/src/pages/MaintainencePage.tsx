@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import LoadError from "../components/LoadError";
 import { maintenance, assets, type Asset, type MaintenanceRecord } from "../lib/api";
 import { Wrench, Plus, Pencil, Trash2, X, CheckCircle, Clock, AlertCircle } from "lucide-react";
 
-const TYPE_OPTIONS = ["Repair", "Upgrade", "Inspection", "Replacement", "Cleaning"] as const;
+const TYPE_OPTIONS = ["Preventive", "Corrective", "Repair", "Upgrade", "Inspection", "Replacement", "Cleaning"] as const;
 const STATUS_OPTIONS = ["Scheduled", "In Progress", "Completed", "Cancelled"] as const;
 
 const STATUS_STYLES: Record<string, { bg: string; color: string; icon: typeof CheckCircle }> = {
@@ -55,25 +56,24 @@ export default function MaintenancePage() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState("");
+  const [actionError, setActionError] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
   useEffect(() => {
-    Promise.all([maintenance.list(), assets.list()])
-      .then(([m, a]) => {
-        setRecords(Array.isArray(m) ? (m as MaintenanceRecord[]) : []);
-        setAssetList(Array.isArray(a) ? a : []);
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    void fetchRecords();
   }, []);
 
   async function fetchRecords() {
+    setLoading(true);
+    setLoadError("");
     try {
-      const data = await maintenance.list();
+      const [data, allAssets] = await Promise.all([maintenance.list(), assets.list()]);
       setRecords(Array.isArray(data) ? (data as MaintenanceRecord[]) : []);
+      setAssetList(allAssets);
     } catch (e) {
-      console.error(e);
-    }
+      setLoadError("Maintenance data could not be loaded. Displayed records may be out of date.");
+    } finally { setLoading(false); }
   }
 
   function openAdd() {
@@ -111,9 +111,9 @@ export default function MaintenancePage() {
     setSaving(true);
     try {
       if (editing) {
-        await maintenance.update(editing._id, form as any);
+        await maintenance.update(editing._id, form);
       } else {
-        await maintenance.create(form as any);
+        await maintenance.create(form);
       }
       setShowModal(false);
       fetchRecords();
@@ -126,11 +126,12 @@ export default function MaintenancePage() {
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this maintenance record?")) return;
+    setActionError("");
     try {
       await maintenance.remove(id);
       fetchRecords();
     } catch (e) {
-      console.error(e);
+      setActionError(e instanceof Error ? e.message : "Could not delete maintenance record.");
     }
   }
 
@@ -150,6 +151,8 @@ export default function MaintenancePage() {
         <Sidebar />
         <main style={{ flex: 1, padding: "32px", overflowY: "auto" }}>
           <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            {loadError && <LoadError message={loadError} retry={fetchRecords} />}
+            {actionError && <p role="alert" className="mb-4 text-red-700">{actionError}</p>}
             {/* Header */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
               <div>
@@ -190,7 +193,7 @@ export default function MaintenancePage() {
                       transition: "all 0.15s",
                     }}
                   >
-                    {s} ({counts[s] ?? 0})
+                    {s} ({loadError ? "Unavailable" : loading ? "..." : counts[s] ?? 0})
                   </button>
                 );
               })}
@@ -211,7 +214,7 @@ export default function MaintenancePage() {
                 <tbody>
                   {loading ? (
                     <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading records…</td></tr>
-                  ) : filtered.length === 0 ? (
+                  ) : loadError ? <tr><td colSpan={7} className="p-5">Maintenance data unavailable.</td></tr> : filtered.length === 0 ? (
                     <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
                       <Wrench size={32} style={{ margin: "0 auto 8px", color: "#cbd5e1" }} />
                       <p style={{ margin: 0 }}>No maintenance records {statusFilter !== "All" ? `with status "${statusFilter}"` : "yet"}.</p>
@@ -252,7 +255,7 @@ export default function MaintenancePage() {
                               <button onClick={() => openEdit(r)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Pencil size={14} color="#475569" />
                               </button>
-                              <button onClick={() => handleDelete(r._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                              <button aria-label="Delete maintenance record" title="Delete maintenance record" onClick={() => handleDelete(r._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Trash2 size={14} color="#dc2626" />
                               </button>
                             </div>
@@ -318,11 +321,11 @@ export default function MaintenancePage() {
                 </div>
                 <div>
                   <label style={labelStyle}>Cost ($)</label>
-                  <input name="cost" type="number" min={0} value={form.cost} onChange={handleChange} style={fieldStyle} />
+                  <input name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>Description</label>
-                  <textarea name="description" value={form.description} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical" }} placeholder="What needs to be done…" />
+                  <label style={labelStyle}>Description *</label>
+                  <textarea name="description" required value={form.description} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical" }} placeholder="What needs to be done…" />
                 </div>
                 {/* FIX: Removed the non-whitelisted "Notes" text area since Mongoose controller drops it */}
               </div>

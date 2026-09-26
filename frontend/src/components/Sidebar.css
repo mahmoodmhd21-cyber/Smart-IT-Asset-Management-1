@@ -1,0 +1,189 @@
+/* The flex layout lets the page reclaim space as the sidebar retracts. */
+.app-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #0f172a;
+  color: white;
+  transition: width 0.2s ease;
+}
+
+.app-sidebar[data-collapsed="true"] {
+  width: 72px;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 80px;
+  padding: 18px;
+  border-bottom: 1px solid #1e293b;
+  overflow: hidden;
+}
+
+.sidebar-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background-color: #2563eb;
+}
+
+.sidebar-brand-text {
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sidebar-brand-text p,
+.sidebar-user-text p {
+  margin: 0;
+}
+
+.sidebar-brand-text p + p,
+.sidebar-user-text p + p {
+  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.sidebar-controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px 0;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 8px;
+}
+
+.sidebar-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.sidebar-action svg,
+.sidebar-user svg {
+  flex-shrink: 0;
+}
+
+.sidebar-action:hover {
+  background-color: #1e293b;
+  color: white;
+}
+
+.sidebar-action:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.sidebar-link {
+  margin-bottom: 2px;
+}
+
+.sidebar-link.is-active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.sidebar-toggle {
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar-footer {
+  padding: 12px 8px;
+  border-top: 1px solid #1e293b;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+}
+
+.sidebar-user-text {
+  min-width: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.sidebar-user-text p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-logout {
+  width: 100%;
+}
+
+.app-sidebar[data-collapsed="true"] .sidebar-action,
+.app-sidebar[data-collapsed="true"] .sidebar-user {
+  justify-content: center;
+  gap: 0;
+}
+
+/* Tooltips also appear on keyboard focus so hidden labels remain discoverable. */
+.app-sidebar[data-collapsed="true"] .sidebar-action::after,
+.sidebar-toggle::after {
+  content: attr(aria-label);
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #0f172a;
+  color: white;
+  box-shadow: 0 2px 8px #0003;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.sidebar-action:hover,
+.sidebar-action:focus-visible {
+  z-index: 1;
+}
+
+.sidebar-action:hover::after,
+.sidebar-action:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-sidebar,
+  .sidebar-action {
+    transition: none;
+  }
+}

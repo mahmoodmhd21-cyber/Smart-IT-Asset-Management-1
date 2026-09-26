@@ -1,0 +1,746 @@
+[
+  {
+    "module": "Login",
+    "name": "protected pages redirect without a session",
+    "status": "PASS",
+    "ms": 761
+  },
+  {
+    "module": "Login",
+    "name": "required credentials prevent empty submission",
+    "status": "PASS",
+    "ms": 282
+  },
+  {
+    "module": "Login",
+    "name": "invalid credentials display an error",
+    "status": "PASS",
+    "ms": 2638
+  },
+  {
+    "module": "Login",
+    "name": "show-password control is available",
+    "status": "FAIL",
+    "detail": "No show-password control exists",
+    "ms": 4,
+    "screenshot": "screenshots/failure-4.png"
+  },
+  {
+    "module": "Login",
+    "name": "valid credentials open dashboard",
+    "status": "PASS",
+    "ms": 919
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /dashboard",
+    "status": "PASS",
+    "ms": 1516
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets",
+    "status": "PASS",
+    "ms": 1207
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets/add",
+    "status": "PASS",
+    "ms": 1140
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /allocations",
+    "status": "PASS",
+    "ms": 1209
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /users",
+    "status": "PASS",
+    "ms": 1210
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /employees",
+    "status": "PASS",
+    "ms": 1167
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /licenses",
+    "status": "PASS",
+    "ms": 1132
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /maintainence",
+    "status": "PASS",
+    "ms": 1147
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /qr-codes",
+    "status": "PASS",
+    "ms": 1339
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /profile",
+    "status": "PASS",
+    "ms": 1149
+  },
+  {
+    "module": "Sidebar",
+    "name": "collapse, persist across navigation, expand with keyboard",
+    "status": "PASS",
+    "ms": 937
+  },
+  {
+    "module": "Assets",
+    "name": "create asset through form",
+    "status": "PASS",
+    "ms": 772
+  },
+  {
+    "module": "Assets",
+    "name": "edit form is prefilled and persists updates",
+    "status": "PASS",
+    "ms": 680
+  },
+  {
+    "module": "Assets",
+    "name": "search and status filter work",
+    "status": "PASS",
+    "ms": 612
+  },
+  {
+    "module": "Assets",
+    "name": "cancel does not create an asset",
+    "status": "PASS",
+    "ms": 707
+  },
+  {
+    "module": "Assets",
+    "name": "serial number can be entered",
+    "status": "FAIL",
+    "detail": "Serial Number field is missing",
+    "ms": 572,
+    "screenshot": "screenshots/failure-21.png"
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate through modal",
+    "status": "PASS",
+    "ms": 743
+  },
+  {
+    "module": "Allocations",
+    "name": "return action restores availability",
+    "status": "PASS",
+    "ms": 729
+  },
+  {
+    "module": "Allocations",
+    "name": "delete returned allocation",
+    "status": "PASS",
+    "ms": 808
+  },
+  {
+    "module": "Allocations",
+    "name": "deleting active allocation refreshes available-asset dropdown",
+    "status": "FAIL",
+    "detail": "Returned-to-available asset is absent until a page refresh",
+    "ms": 837,
+    "screenshot": "screenshots/failure-25.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "create Repair through form",
+    "status": "PASS",
+    "ms": 973
+  },
+  {
+    "module": "Maintenance",
+    "name": "starting maintenance updates the Assets page",
+    "status": "FAIL",
+    "detail": "The input did not match the regular expression /Maintenance/. Input:\n\n'QA UI Laptop Updated\\tLaptop\\tQA Brand / QA Model\\tQA Lab\\tAvailable\\t'\n",
+    "ms": 629,
+    "screenshot": "screenshots/failure-27.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "manual availability is blocked with a visible error",
+    "status": "PASS",
+    "ms": 653
+  },
+  {
+    "module": "Maintenance",
+    "name": "complete repair through modal updates linked asset",
+    "status": "PASS",
+    "ms": 780
+  },
+  {
+    "module": "Maintenance",
+    "name": "Upgrade form option saves successfully",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Upgrade` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n",
+    "ms": 773,
+    "screenshot": "screenshots/failure-30.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Inspection form option saves successfully",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Inspection` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n",
+    "ms": 733,
+    "screenshot": "screenshots/failure-31.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Replacement form option saves successfully",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Replacement` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n",
+    "ms": 781,
+    "screenshot": "screenshots/failure-32.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cleaning form option saves successfully",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Cleaning` is not a valid enum value for path `maintenanceType`.\"}\n\n400 !== 201\n",
+    "ms": 755,
+    "screenshot": "screenshots/failure-33.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled form option saves successfully",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Cancelled` is not a valid enum value for path `status`.\"}\n\n400 !== 201\n",
+    "ms": 753,
+    "screenshot": "screenshots/failure-34.png"
+  },
+  {
+    "module": "Maintenance",
+    "name": "status filter and delete completed record",
+    "status": "PASS",
+    "ms": 701
+  },
+  {
+    "module": "Maintenance",
+    "name": "Escape closes the maintenance modal",
+    "status": "FAIL",
+    "detail": "Modal stays open after Escape\n\n1 !== 0\n",
+    "ms": 973,
+    "screenshot": "screenshots/failure-36.png"
+  },
+  {
+    "module": "Users",
+    "name": "create system user via form",
+    "status": "PASS",
+    "ms": 831
+  },
+  {
+    "module": "Users",
+    "name": "successful creation shows confirmation",
+    "status": "FAIL",
+    "detail": "Success message is cleared by loadData immediately",
+    "ms": 2,
+    "screenshot": "screenshots/failure-38.png"
+  },
+  {
+    "module": "Employees",
+    "name": "register company employee via form",
+    "status": "PASS",
+    "ms": 1290
+  },
+  {
+    "module": "Employees",
+    "name": "search and status filters",
+    "status": "PASS",
+    "ms": 67
+  },
+  {
+    "module": "Employees",
+    "name": "registered employee appears in allocation options",
+    "status": "FAIL",
+    "detail": "Allocation uses system users, not the company employee directory",
+    "ms": 625,
+    "screenshot": "screenshots/failure-41.png"
+  },
+  {
+    "module": "Employees",
+    "name": "employee edit and delete controls exist",
+    "status": "FAIL",
+    "detail": "Personnel Directory contains no edit or delete controls",
+    "ms": 771,
+    "screenshot": "screenshots/failure-42.png"
+  },
+  {
+    "module": "Licenses",
+    "name": "create license through form",
+    "status": "PASS",
+    "ms": 970
+  },
+  {
+    "module": "Licenses",
+    "name": "type, usage, cost and notes survive reload",
+    "status": "FAIL",
+    "detail": "The input did not match the regular expression /Subscription/. Input:\n\n'QA UI Software\\n\\nQA-UI-KEY-179024…\\n\\n\\tQA Vendor\\t\\t/10\\t—\\t—\\t\\nActive\\t'\n",
+    "ms": 614,
+    "screenshot": "screenshots/failure-44.png"
+  },
+  {
+    "module": "Licenses",
+    "name": "edit software name",
+    "status": "PASS",
+    "ms": 905
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon saves through form",
+    "status": "FAIL",
+    "detail": "HTTP 400: {\"success\":false,\"message\":\"`Expiring Soon` is not a valid enum value for path `status`.\"}\n\n400 !== 200\n",
+    "ms": 740,
+    "screenshot": "screenshots/failure-46.png"
+  },
+  {
+    "module": "Licenses",
+    "name": "delete license",
+    "status": "PASS",
+    "ms": 730
+  },
+  {
+    "module": "QR codes",
+    "name": "image renders, View selects asset and Download PNG works",
+    "status": "PASS",
+    "ms": 1069
+  },
+  {
+    "module": "QR codes",
+    "name": "invalid lookup displays error",
+    "status": "PASS",
+    "ms": 81
+  },
+  {
+    "module": "QR codes",
+    "name": "manual lookup and status update",
+    "status": "PASS",
+    "ms": 865
+  },
+  {
+    "module": "QR codes",
+    "name": "regenerate invalidates previous token",
+    "status": "PASS",
+    "ms": 198
+  },
+  {
+    "module": "QR codes",
+    "name": "camera start and stop using synthetic test camera",
+    "status": "FAIL",
+    "detail": "locator.waitFor: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#qr-reader video') to be visible\u001b[22m\n",
+    "ms": 6798,
+    "screenshot": "screenshots/failure-52.png"
+  },
+  {
+    "module": "Profile",
+    "name": "name email and role displayed",
+    "status": "PASS",
+    "ms": 933
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /dashboard",
+    "status": "FAIL",
+    "detail": "color-contrast: 1 elements (serious)\n\n1 !== 0\n",
+    "ms": 1723,
+    "screenshot": "screenshots/failure-54.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets",
+    "status": "FAIL",
+    "detail": "color-contrast: 8 elements (serious); select-name: 1 elements (critical)\n\n2 !== 0\n",
+    "ms": 1676,
+    "screenshot": "screenshots/failure-55.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets/add",
+    "status": "FAIL",
+    "detail": "label: 1 elements (critical); select-name: 2 elements (critical)\n\n2 !== 0\n",
+    "ms": 1522,
+    "screenshot": "screenshots/failure-56.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /allocations",
+    "status": "FAIL",
+    "detail": "color-contrast: 1 elements (serious)\n\n1 !== 0\n",
+    "ms": 1552,
+    "screenshot": "screenshots/failure-57.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /users",
+    "status": "FAIL",
+    "detail": "color-contrast: 5 elements (serious); select-name: 1 elements (critical)\n\n2 !== 0\n",
+    "ms": 1052,
+    "screenshot": "screenshots/failure-58.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /employees",
+    "status": "FAIL",
+    "detail": "color-contrast: 1 elements (serious)\n\n1 !== 0\n",
+    "ms": 1563,
+    "screenshot": "screenshots/failure-59.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /licenses",
+    "status": "FAIL",
+    "detail": "color-contrast: 1 elements (serious)\n\n1 !== 0\n",
+    "ms": 1047,
+    "screenshot": "screenshots/failure-60.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /maintainence",
+    "status": "FAIL",
+    "detail": "button-name: 24 elements (critical); color-contrast: 4 elements (serious)\n\n2 !== 0\n",
+    "ms": 1268,
+    "screenshot": "screenshots/failure-61.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /qr-codes",
+    "status": "FAIL",
+    "detail": "color-contrast: 21 elements (serious)\n\n1 !== 0\n",
+    "ms": 2050,
+    "screenshot": "screenshots/failure-62.png"
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /profile",
+    "status": "PASS",
+    "ms": 964
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1440px",
+    "status": "PASS",
+    "ms": 742
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1440px",
+    "status": "PASS",
+    "ms": 740
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1440px",
+    "status": "PASS",
+    "ms": 673
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1440px",
+    "status": "PASS",
+    "ms": 639
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1440px",
+    "status": "PASS",
+    "ms": 628
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1440px",
+    "status": "PASS",
+    "ms": 647
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1440px",
+    "status": "PASS",
+    "ms": 643
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1440px",
+    "status": "PASS",
+    "ms": 910
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1440px",
+    "status": "PASS",
+    "ms": 665
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1024px",
+    "status": "PASS",
+    "ms": 723
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1024px",
+    "status": "PASS",
+    "ms": 687
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1024px",
+    "status": "PASS",
+    "ms": 612
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1024px",
+    "status": "PASS",
+    "ms": 830
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1024px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 662,
+    "screenshot": "screenshots/failure-77.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1024px",
+    "status": "PASS",
+    "ms": 621
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1024px",
+    "status": "PASS",
+    "ms": 775
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1024px",
+    "status": "PASS",
+    "ms": 1136
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1024px",
+    "status": "PASS",
+    "ms": 698
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 768px",
+    "status": "PASS",
+    "ms": 1065
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 768px",
+    "status": "PASS",
+    "ms": 1528
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 768px",
+    "status": "PASS",
+    "ms": 658
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 768px",
+    "status": "PASS",
+    "ms": 770
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 768px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 926,
+    "screenshot": "screenshots/failure-86.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 768px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 1051,
+    "screenshot": "screenshots/failure-87.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 768px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 959,
+    "screenshot": "screenshots/failure-88.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 768px",
+    "status": "PASS",
+    "ms": 1158
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 768px",
+    "status": "PASS",
+    "ms": 813
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 390px",
+    "status": "PASS",
+    "ms": 1204
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 390px",
+    "status": "PASS",
+    "ms": 833
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 390px",
+    "status": "PASS",
+    "ms": 727
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 390px",
+    "status": "PASS",
+    "ms": 810
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 390px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 675,
+    "screenshot": "screenshots/failure-95.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 390px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 660,
+    "screenshot": "screenshots/failure-96.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 390px",
+    "status": "FAIL",
+    "detail": "Table overflows a container with hidden horizontal overflow\n\n1 !== 0\n",
+    "ms": 729,
+    "screenshot": "screenshots/failure-97.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 390px",
+    "status": "PASS",
+    "ms": 1701
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 390px",
+    "status": "PASS",
+    "ms": 751
+  },
+  {
+    "module": "Error handling",
+    "name": "/licenses visibly reports API failure",
+    "status": "FAIL",
+    "detail": "API failure is hidden as empty data or stale data",
+    "ms": 978,
+    "screenshot": "screenshots/failure-100.png"
+  },
+  {
+    "module": "Error handling",
+    "name": "/maintainence visibly reports API failure",
+    "status": "FAIL",
+    "detail": "API failure is hidden as empty data or stale data",
+    "ms": 762,
+    "screenshot": "screenshots/failure-101.png"
+  },
+  {
+    "module": "Error handling",
+    "name": "/employees visibly reports API failure",
+    "status": "FAIL",
+    "detail": "API failure is hidden as empty data or stale data",
+    "ms": 708,
+    "screenshot": "screenshots/failure-102.png"
+  },
+  {
+    "module": "Error handling",
+    "name": "/dashboard visibly reports API failure",
+    "status": "FAIL",
+    "detail": "API failure is hidden as empty data or stale data",
+    "ms": 635,
+    "screenshot": "screenshots/failure-103.png"
+  },
+  {
+    "module": "Error handling",
+    "name": "/profile visibly reports API failure",
+    "status": "FAIL",
+    "detail": "API failure is hidden as empty data or stale data",
+    "ms": 1208,
+    "screenshot": "screenshots/failure-104.png"
+  },
+  {
+    "module": "Assets",
+    "name": "delete confirmation can be cancelled",
+    "status": "PASS",
+    "ms": 3113
+  },
+  {
+    "module": "Assets",
+    "name": "delete asset through UI",
+    "status": "PASS",
+    "ms": 2097
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot access user provisioning",
+    "status": "PASS",
+    "ms": 2630
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot open hidden employee administration route",
+    "status": "FAIL",
+    "detail": "Sidebar hides Employees, but direct URL is allowed",
+    "ms": 697,
+    "screenshot": "screenshots/failure-108.png"
+  },
+  {
+    "module": "Session",
+    "name": "invalid token redirects to login",
+    "status": "FAIL",
+    "detail": "Expired or invalid session remains inside the application\n\n'/assets' !== '/'\n",
+    "ms": 675,
+    "screenshot": "screenshots/failure-109.png"
+  },
+  {
+    "module": "Session",
+    "name": "logout clears session and protects routes",
+    "status": "PASS",
+    "ms": 1826
+  },
+  {
+    "module": "Accessibility",
+    "name": "login form automated accessibility",
+    "status": "PASS",
+    "ms": 1714
+  }
+]

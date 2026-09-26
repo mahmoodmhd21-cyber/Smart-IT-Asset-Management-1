@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import LoadError from "../components/LoadError";
 import { licenses, type License } from "../lib/api";
 import { KeyRound, Plus, Pencil, Trash2, X, CheckCircle, AlertTriangle, Clock } from "lucide-react";
 
 const TYPE_OPTIONS = ["Perpetual", "Subscription", "Trial", "Open Source"] as const;
-const STATUS_OPTIONS = ["Active", "Expired", "Expiring Soon"] as const;
+const STATUS_OPTIONS = ["Active", "Expired", "Expiring Soon", "Suspended"] as const;
 
 const STATUS_STYLES: Record<string, { bg: string; color: string; icon: typeof CheckCircle }> = {
   Active: { bg: "#dcfce7", color: "#15803d", icon: CheckCircle },
   Expired: { bg: "#fee2e2", color: "#dc2626", icon: X },
+  Suspended: { bg: "#e5e7eb", color: "#374151", icon: Clock },
   "Expiring Soon": { bg: "#fef9c3", color: "#a16207", icon: AlertTriangle },
 };
 
@@ -17,12 +19,12 @@ const emptyForm = {
   softwareName: "",
   vendor: "",
   licenseKey: "",
-  licenseType: "Subscription" as License["licenseType"],
+  licenseType: "Subscription" as License["licenseType"] | "",
   numberOfSeats: 1,
-  seatsUsed: 0,
+  assignedSeats: 0,
   purchaseDate: "",
   expiryDate: "",
-  cost: 0,
+  cost: 0 as number | "",
   status: "Active" as License["status"],
   notes: "",
 };
@@ -55,6 +57,8 @@ export default function LicensePage() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState("");
+  const [actionError, setActionError] = useState("");
 
   useEffect(() => {
     fetchLicenses();
@@ -62,11 +66,12 @@ export default function LicensePage() {
 
   async function fetchLicenses() {
     setLoading(true);
+    setLoadError("");
     try {
       const data = await licenses.list();
       setLicenseList(Array.isArray(data) ? data : []);
     } catch (e) {
-      console.error(e);
+      setLoadError("Licenses could not be loaded. Displayed records may be out of date.");
     } finally {
       setLoading(false);
     }
@@ -85,12 +90,12 @@ export default function LicensePage() {
       softwareName: l.softwareName,
       vendor: l.vendor,
       licenseKey: l.licenseKey || "",
-      licenseType: l.licenseType,
+      licenseType: l.licenseType || "",
       numberOfSeats: l.numberOfSeats,
-      seatsUsed: l.seatsUsed,
+      assignedSeats: l.assignedSeats,
       purchaseDate: l.purchaseDate ? l.purchaseDate.split("T")[0] : "",
       expiryDate: l.expiryDate ? l.expiryDate.split("T")[0] : "",
-      cost: l.cost,
+      cost: l.cost ?? "",
       status: l.status,
       notes: l.notes || "",
     });
@@ -100,7 +105,7 @@ export default function LicensePage() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value, type } = e.target;
-    setForm((f) => ({ ...f, [name]: type === "number" ? Number(value) : value }));
+    setForm((f) => ({ ...f, [name]: type === "number" && value !== "" ? Number(value) : value }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -108,10 +113,12 @@ export default function LicensePage() {
     setError("");
     setSaving(true);
     try {
+      // Preserve unknown historical values instead of inventing a type or purchase cost.
+      const payload = { ...form, licenseType: form.licenseType || null, cost: form.cost === "" ? null : form.cost };
       if (editing) {
-        await licenses.update(editing._id, form);
+        await licenses.update(editing._id, payload);
       } else {
-        await licenses.create(form);
+        await licenses.create(payload);
       }
       setShowModal(false);
       fetchLicenses();
@@ -124,11 +131,12 @@ export default function LicensePage() {
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this license?")) return;
+    setActionError("");
     try {
       await licenses.remove(id);
       fetchLicenses();
     } catch (e) {
-      console.error(e);
+      setActionError(e instanceof Error ? e.message : "Could not delete license.");
     }
   }
 
@@ -138,6 +146,8 @@ export default function LicensePage() {
         <Sidebar />
         <main style={{ flex: 1, padding: "32px", overflowY: "auto" }}>
           <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            {loadError && <LoadError message={loadError} retry={fetchLicenses} />}
+            {actionError && <p role="alert" className="mb-4 text-red-700">{actionError}</p>}
             {/* Header */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
               <div>
@@ -192,7 +202,7 @@ export default function LicensePage() {
                 <tbody>
                   {loading ? (
                     <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading licenses…</td></tr>
-                  ) : licenseList.length === 0 ? (
+                  ) : loadError ? <tr><td colSpan={8} className="p-5">License data unavailable.</td></tr> : licenseList.length === 0 ? (
                     <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
                       <KeyRound size={32} style={{ margin: "0 auto 8px", color: "#cbd5e1" }} />
                       <p style={{ margin: 0 }}>No licenses yet. Add your first one.</p>
@@ -215,16 +225,16 @@ export default function LicensePage() {
                             </div>
                           </td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>{l.vendor}</td>
-                          <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>{l.licenseType}</td>
+                          <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>{l.licenseType || "Not recorded"}</td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#0f172a" }}>
-                            <span style={{ fontWeight: 600 }}>{l.seatsUsed}</span>
+                            <span style={{ fontWeight: 600 }}>{l.assignedSeats}</span>
                             <span style={{ color: "#94a3b8" }}>/{l.numberOfSeats}</span>
                           </td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>
                             {l.expiryDate ? new Date(l.expiryDate).toLocaleDateString() : "—"}
                           </td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#0f172a", fontWeight: 600 }}>
-                            {l.cost > 0 ? `$${l.cost.toLocaleString()}` : "—"}
+                            {l.cost != null ? `$${l.cost.toLocaleString()}` : "Not recorded"}
                           </td>
                           <td style={{ padding: "14px 16px" }}>
                             <span style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "3px 10px", borderRadius: "999px", fontSize: "0.75rem", fontWeight: 600, backgroundColor: s.bg, color: s.color }}>
@@ -237,7 +247,7 @@ export default function LicensePage() {
                               <button onClick={() => openEdit(l)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Pencil size={14} color="#475569" />
                               </button>
-                              <button onClick={() => handleDelete(l._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                              <button aria-label={`Delete ${l.softwareName}`} title="Delete license" onClick={() => handleDelete(l._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Trash2 size={14} color="#dc2626" />
                               </button>
                             </div>
@@ -277,21 +287,22 @@ export default function LicensePage() {
                 </div>
                 <div>
                   <label style={labelStyle}>License Type</label>
-                  <select name="licenseType" value={form.licenseType} onChange={handleChange} style={fieldStyle}>
+                  <select name="licenseType" value={form.licenseType || ""} onChange={handleChange} style={fieldStyle}>
+                    <option value="">Not recorded</option>
                     {TYPE_OPTIONS.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>License Key</label>
-                  <input name="licenseKey" value={form.licenseKey} onChange={handleChange} style={fieldStyle} placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
+                  <label style={labelStyle}>License Key *</label>
+                  <input name="licenseKey" required value={form.licenseKey} onChange={handleChange} style={fieldStyle} placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
                 </div>
                 <div>
-                  <label style={labelStyle}>Total numberOfSeats</label>
-                  <input name="numberOfSeats" type="number" min={1} value={form.numberOfSeats} onChange={handleChange} style={fieldStyle} />
+                  <label style={labelStyle}>Purchased Seats *</label>
+                  <input name="numberOfSeats" type="number" required min={0} step={1} value={form.numberOfSeats} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>numberOfSeats Used</label>
-                  <input name="seatsUsed" type="number" min={0} value={form.seatsUsed} onChange={handleChange} style={fieldStyle} />
+                  <label style={labelStyle}>Assigned Seats *</label>
+                  <input name="assignedSeats" type="number" required min={0} max={form.numberOfSeats} step={1} value={form.assignedSeats} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
                   <label style={labelStyle}>Purchase Date</label>
@@ -303,7 +314,7 @@ export default function LicensePage() {
                 </div>
                 <div>
                   <label style={labelStyle}>Cost ($)</label>
-                  <input name="cost" type="number" min={0} value={form.cost} onChange={handleChange} style={fieldStyle} />
+                  <input name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
                   <label style={labelStyle}>Status</label>

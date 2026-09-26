@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../lib/api";
-import { Monitor } from "lucide-react";
+import { Monitor, Eye, EyeOff } from "lucide-react";
+import { loginDestination, SESSION_CHANGED } from "../lib/session";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +24,8 @@ export default function LoginPage() {
       const { token, user } = await auth.login(form.email, form.password);
       localStorage.setItem("authToken", token);
       localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/dashboard");
+      window.dispatchEvent(new Event(SESSION_CHANGED));
+      navigate(loginDestination(location.state?.from), { replace: true });
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Invalid email or password.");
     } finally {
@@ -123,6 +127,9 @@ export default function LoginPage() {
                   Email Address
                 </label>
                 <input
+                  id="login-email"
+                  aria-label="Email Address"
+                  autoComplete="username"
                   name="email"
                   type="email"
                   value={form.email}
@@ -145,19 +152,26 @@ export default function LoginPage() {
                 >
                   Password
                 </label>
-                <input
+                <div style={{ position: "relative" }}><input
+                  id="login-password"
+                  aria-label="Password"
+                  autoComplete="current-password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={form.password}
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  style={fieldStyle}
+                  style={{ ...fieldStyle, paddingRight: "48px" }}
                 />
+                <button type="button" aria-label={showPassword ? "Hide password" : "Show password"} title={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} onClick={() => setShowPassword(value => !value)} style={{ position: "absolute", right: 8, top: 8, padding: 4 }}>
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button></div>
               </div>
 
               {error && (
                 <div
+                  role="alert"
                   style={{
                     padding: "12px",
                     backgroundColor: "#fef2f2",

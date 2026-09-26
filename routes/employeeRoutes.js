@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const { protect, authorize } = require('../middleware/authMiddleware');
 
 const {
     addEmployee,
     getAllEmployees,
     getEmployeeById,
     updateEmployee,
-    deleteEmployee
+    deleteEmployee,
+    getAssignees
 } = require("../controllers/employeeController");
+
+router.get('/assignees', protect, authorize('Admin', 'IT Staff'), getAssignees);
+router.use(protect, authorize('Admin'));
 
 // Create a new employee
 router.post("/", addEmployee);

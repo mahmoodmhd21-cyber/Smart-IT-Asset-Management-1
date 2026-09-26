@@ -16,7 +16,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
+  // Keep accounts for allocation history while allowing immediate access revocation.
+  isActive: { type: Boolean, default: true },
+  tokenVersion: { type: Number, default: 0 },
   role: {
     type: String,
     enum: ['Admin', 'IT Staff'],

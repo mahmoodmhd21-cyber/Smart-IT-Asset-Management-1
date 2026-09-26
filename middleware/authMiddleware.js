@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+const { secret, algorithms } = require('../config/auth');
 
 /**
  * Authentication middleware
@@ -19,10 +19,11 @@ exports.protect = async (req, res, next) => {
       return res.status(401).json({ message: 'Authorization token required.' });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, secret, { algorithms });
     const user = await User.findById(decoded.userId).select('-password');
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid token: user not found.' });
+    // Read current account state on every request; JWT role claims are not authority.
+    if (!user || user.isActive === false || decoded.tokenVersion !== user.tokenVersion) {
+      return res.status(401).json({ message: 'Session is no longer valid. Please log in again.' });
     }
 
     req.user = user;
@@ -31,4 +32,12 @@ exports.protect = async (req, res, next) => {
     console.error('Auth middleware error:', error.message);
     return res.status(401).json({ message: 'Not authorized. Token failed.' });
   }
+};
+
+exports.authorize = (...roles) => (req, res, next) => {
+  if (!req.user) return res.status(401).json({ message: 'Authentication required.' });
+  if (!roles.includes(req.user.role)) {
+    return res.status(403).json({ message: 'You do not have permission for this action.' });
+  }
+  next();
 };

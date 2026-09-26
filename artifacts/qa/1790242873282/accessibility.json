@@ -1,0 +1,572 @@
+[
+  {
+    "route": "/dashboard",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".py-8"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/assets",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "tr:nth-child(6) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(9) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(10) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(11) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(12) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(13) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(14) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(19) > td:nth-child(5) > .px-2\\.5.py-1.rounded-full"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.41 (foreground color: #dc2626, background color: #fef2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "help": "Select element must have an accessible name",
+        "nodes": [
+          {
+            "target": [
+              "select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/assets/add",
+    "violations": [
+      {
+        "id": "label",
+        "impact": "critical",
+        "help": "Form elements must have labels",
+        "nodes": [
+          {
+            "target": [
+              "input[type=\"date\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "help": "Select element must have an accessible name",
+        "nodes": [
+          {
+            "target": [
+              "select[name=\"category\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "select[name=\"status\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/allocations",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".mt-0\\.5"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/users",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(5) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "help": "Select element must have an accessible name",
+        "nodes": [
+          {
+            "target": [
+              "select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/employees",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "main > div > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.45 (foreground color: #94a3b8, background color: #f8fafc, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/licenses",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "td > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.56 (foreground color: #94a3b8, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/maintainence",
+    "violations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": [
+          {
+            "target": [
+              "tr:nth-child(1) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(1) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(2) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(2) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(3) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(3) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(4) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(4) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(5) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(5) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(6) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(6) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(7) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(7) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(8) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(8) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(9) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(9) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(10) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(10) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(11) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(11) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(12) > td:nth-child(7) > div > button:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          },
+          {
+            "target": [
+              "tr:nth-child(12) > td:nth-child(7) > div > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "div:nth-child(2) > button:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "button:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "button:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "button:nth-child(5)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/qr-codes",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".my-4"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(1) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(2) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(3) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(4) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(5) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(6) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(7) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(8) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(9) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(10) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(11) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(12) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(13) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(14) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(15) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(16) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(17) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(18) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(19) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".border-gray-50:nth-child(20) > td:nth-child(1) > .text-gray-400.text-xs"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.6 (foreground color: #99a1af, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/profile",
+    "violations": []
+  },
+  {
+    "route": "/",
+    "violations": []
+  }
+]

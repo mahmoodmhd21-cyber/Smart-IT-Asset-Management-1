@@ -12,7 +12,7 @@ const maintenanceSchema = new mongoose.Schema(
     // Type of maintenance being performed.
     maintenanceType: {
       type: String,
-      enum: ['Preventive', 'Corrective', 'Repair'],
+      enum: ['Preventive', 'Corrective', 'Repair', 'Upgrade', 'Inspection', 'Replacement', 'Cleaning'],
       required: true,
     },
     // Details about the issue, work performed, or planned maintenance.
@@ -40,12 +40,14 @@ const maintenanceSchema = new mongoose.Schema(
       type: Number,
       min: 0,
       default: 0,
+      validate: { validator: Number.isFinite, message: 'Cost must be finite.' },
     },
     // Current progress of the maintenance record.
     status: {
       type: String,
-      enum: ['Scheduled', 'In Progress', 'Completed'],
+      enum: ['Scheduled', 'In Progress', 'Completed', 'Cancelled'],
       default: 'Scheduled',
+      required: true,
     },
   },
   {
