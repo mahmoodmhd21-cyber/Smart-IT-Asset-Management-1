@@ -39,9 +39,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <button onClick={() => setCollapsed(!collapsed)}>Toggle Sidebar</button>
       <aside
-        className={collapsed ? "sidebar collapsed" : ""}
       style={{
         width: collapsed ? "72px" : "240px",
         backgroundColor: "#0f172a",
