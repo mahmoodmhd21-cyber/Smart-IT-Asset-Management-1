@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import Modal from "../components/Modal";
 import LoadError from "../components/LoadError";
 import { maintenance, assets, type Asset, type MaintenanceRecord } from "../lib/api";
 import { Wrench, Plus, Pencil, Trash2, X, CheckCircle, Clock, AlertCircle } from "lucide-react";
@@ -12,7 +13,7 @@ const STATUS_STYLES: Record<string, { bg: string; color: string; icon: typeof Ch
   Scheduled: { bg: "#dbeafe", color: "#1d4ed8", icon: Clock },
   "In Progress": { bg: "#fef9c3", color: "#a16207", icon: AlertCircle },
   Completed: { bg: "#dcfce7", color: "#15803d", icon: CheckCircle },
-  Cancelled: { bg: "#f1f5f9", color: "#64748b", icon: X },
+  Cancelled: { bg: "#f1f5f9", color: "#475569", icon: X },
 };
 
 // FIX: Updated initial keys to match Mongoose schema properties
@@ -154,7 +155,7 @@ export default function MaintenancePage() {
             {loadError && <LoadError message={loadError} retry={fetchRecords} />}
             {actionError && <p role="alert" className="mb-4 text-red-700">{actionError}</p>}
             {/* Header */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
+            <div className="page-toolbar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
               <div>
                 <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
                   Maintenance Records
@@ -189,7 +190,7 @@ export default function MaintenancePage() {
                       cursor: "pointer",
                       border: "none",
                       backgroundColor: active ? (s === "All" ? "#0f172a" : style.color) : "#f1f5f9",
-                      color: active ? "white" : "#64748b",
+                      color: active ? "white" : "#475569",
                       transition: "all 0.15s",
                     }}
                   >
@@ -200,7 +201,7 @@ export default function MaintenancePage() {
             </div>
 
             {/* Table */}
-            <div style={{ backgroundColor: "white", borderRadius: "12px", border: "1px solid #e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", overflow: "hidden" }}>
+            <div className="table-scroll" style={{ backgroundColor: "white", borderRadius: "12px", border: "1px solid #e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
                   <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
@@ -213,9 +214,9 @@ export default function MaintenancePage() {
                 </thead>
                 <tbody>
                   {loading ? (
-                    <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading records…</td></tr>
+                    <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>Loading records…</td></tr>
                   ) : loadError ? <tr><td colSpan={7} className="p-5">Maintenance data unavailable.</td></tr> : filtered.length === 0 ? (
-                    <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                    <tr><td colSpan={7} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>
                       <Wrench size={32} style={{ margin: "0 auto 8px", color: "#cbd5e1" }} />
                       <p style={{ margin: 0 }}>No maintenance records {statusFilter !== "All" ? `with status "${statusFilter}"` : "yet"}.</p>
                     </td></tr>
@@ -252,11 +253,11 @@ export default function MaintenancePage() {
                           </td>
                           <td style={{ padding: "14px 16px" }}>
                             <div style={{ display: "flex", gap: "6px" }}>
-                              <button onClick={() => openEdit(r)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                              <button aria-label="Edit" title="Edit" onClick={() => openEdit(r)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Pencil size={14} color="#475569" />
                               </button>
                               <button aria-label="Delete maintenance record" title="Delete maintenance record" onClick={() => handleDelete(r._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
-                                <Trash2 size={14} color="#dc2626" />
+                                <Trash2 size={14} color="#b91c1c" />
                               </button>
                             </div>
                           </td>
@@ -273,64 +274,64 @@ export default function MaintenancePage() {
 
       {/* Modal */}
       {showModal && (
-        <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: "16px" }}>
+        <Modal title={editing ? "Edit Record" : "New Maintenance Record"} busy={saving} onClose={() => setShowModal(false)}>
           <div style={{ backgroundColor: "white", borderRadius: "16px", width: "100%", maxWidth: "560px", maxHeight: "90vh", overflowY: "auto", boxShadow: "0 25px 50px rgba(0,0,0,0.25)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: "1px solid #e2e8f0" }}>
+            <div className="page-toolbar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: "1px solid #e2e8f0" }}>
               <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 700, color: "#0f172a" }}>
                 {editing ? "Edit Record" : "New Maintenance Record"}
               </h2>
-              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", cursor: "pointer" }}>
-                <X size={20} color="#94a3b8" />
+              <button aria-label="Close dialog" title="Close dialog" onClick={() => setShowModal(false)} style={{ background: "none", border: "none", cursor: "pointer" }}>
+                <X size={20} color="#64748b" />
               </button>
             </div>
             <form onSubmit={handleSubmit} style={{ padding: "24px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+              <div className="responsive-grid" style={{ display: "grid", minWidth: 0, gap: "16px" }}>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>Asset *</label>
-                  <select name="asset" value={form.asset} onChange={handleChange} required style={fieldStyle}>
+                  <label htmlFor="MaintainencePage-field-1" style={labelStyle}>Asset *</label>
+                  <select id="MaintainencePage-field-1" name="asset" value={form.asset} onChange={handleChange} required style={fieldStyle}>
                     <option value="">Select asset…</option>
                     {assetList.map((a) => <option key={a._id} value={a._id}>{a.assetName}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label style={labelStyle}>Maintenance Type</label>
-                  <select name="maintenanceType" value={form.maintenanceType} onChange={handleChange} style={fieldStyle}>
+                  <label htmlFor="MaintainencePage-field-2" style={labelStyle}>Maintenance Type</label>
+                  <select id="MaintainencePage-field-2" name="maintenanceType" value={form.maintenanceType} onChange={handleChange} style={fieldStyle}>
                     {TYPE_OPTIONS.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label style={labelStyle}>Status</label>
-                  <select name="status" value={form.status} onChange={handleChange} style={fieldStyle}>
+                  <label htmlFor="MaintainencePage-field-3" style={labelStyle}>Status</label>
+                  <select id="MaintainencePage-field-3" name="status" value={form.status} onChange={handleChange} style={fieldStyle}>
                     {STATUS_OPTIONS.map((s) => <option key={s}>{s}</option>)}
                   </select>
                 </div>
                 <div>
                   {/* FIX: Input mapped to maintenanceDate instead of scheduledDate */}
-                  <label style={labelStyle}>Scheduled Date *</label>
-                  <input name="maintenanceDate" type="date" value={form.maintenanceDate} onChange={handleChange} required style={fieldStyle} />
+                  <label htmlFor="MaintainencePage-field-4" style={labelStyle}>Scheduled Date *</label>
+                  <input id="MaintainencePage-field-4" name="maintenanceDate" type="date" value={form.maintenanceDate} onChange={handleChange} required style={fieldStyle} />
                 </div>
                 <div>
                   {/* FIX: Input mapped to nextMaintenanceDate instead of completedDate */}
-                  <label style={labelStyle}>Next/Completion Date</label>
-                  <input name="nextMaintenanceDate" type="date" value={form.nextMaintenanceDate} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="MaintainencePage-field-5" style={labelStyle}>Next/Completion Date</label>
+                  <input id="MaintainencePage-field-5" name="nextMaintenanceDate" type="date" value={form.nextMaintenanceDate} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
                   {/* FIX: Input mapped to serviceProvider instead of technician */}
-                  <label style={labelStyle}>Service Provider / Technician</label>
-                  <input name="serviceProvider" value={form.serviceProvider} onChange={handleChange} style={fieldStyle} placeholder="Technician or company" />
+                  <label htmlFor="MaintainencePage-field-6" style={labelStyle}>Service Provider / Technician</label>
+                  <input id="MaintainencePage-field-6" name="serviceProvider" value={form.serviceProvider} onChange={handleChange} style={fieldStyle} placeholder="Technician or company" />
                 </div>
                 <div>
-                  <label style={labelStyle}>Cost ($)</label>
-                  <input name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="MaintainencePage-field-7" style={labelStyle}>Cost ($)</label>
+                  <input id="MaintainencePage-field-7" name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>Description *</label>
-                  <textarea name="description" required value={form.description} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical" }} placeholder="What needs to be done…" />
+                  <label htmlFor="MaintainencePage-field-8" style={labelStyle}>Description *</label>
+                  <textarea id="MaintainencePage-field-8" name="description" required value={form.description} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical" }} placeholder="What needs to be done…" />
                 </div>
                 {/* FIX: Removed the non-whitelisted "Notes" text area since Mongoose controller drops it */}
               </div>
 
-              {error && <div style={{ marginTop: "12px", padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#dc2626", fontSize: "0.8125rem" }}>{error}</div>}
+              {error && <div style={{ marginTop: "12px", padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#b91c1c", fontSize: "0.8125rem" }}>{error}</div>}
 
               <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "20px" }}>
                 <button type="button" onClick={() => setShowModal(false)} style={{ padding: "10px 20px", border: "1px solid #e2e8f0", borderRadius: "8px", fontSize: "0.875rem", backgroundColor: "white", cursor: "pointer" }}>Cancel</button>
@@ -340,7 +341,7 @@ export default function MaintenancePage() {
               </div>
             </form>
           </div>
-        </div>
+        </Modal>
       )}
     </AuthGuard>
   );

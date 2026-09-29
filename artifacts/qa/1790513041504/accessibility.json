@@ -1,0 +1,46 @@
+[
+  {
+    "route": "/dashboard",
+    "violations": []
+  },
+  {
+    "route": "/assets",
+    "violations": []
+  },
+  {
+    "route": "/assets/add",
+    "violations": []
+  },
+  {
+    "route": "/allocations",
+    "violations": []
+  },
+  {
+    "route": "/users",
+    "violations": []
+  },
+  {
+    "route": "/employees",
+    "violations": []
+  },
+  {
+    "route": "/licenses",
+    "violations": []
+  },
+  {
+    "route": "/maintainence",
+    "violations": []
+  },
+  {
+    "route": "/qr-codes",
+    "violations": []
+  },
+  {
+    "route": "/profile",
+    "violations": []
+  },
+  {
+    "route": "/",
+    "violations": []
+  }
+]

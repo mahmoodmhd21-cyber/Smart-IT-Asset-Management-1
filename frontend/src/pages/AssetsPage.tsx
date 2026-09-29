@@ -8,7 +8,7 @@ import { Plus, Pencil, Trash2, Search } from "lucide-react";
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   Available: { bg: "#f0fdf4", color: "#15803d" },
   Allocated: { bg: "#fffbeb", color: "#b45309" },
-  Maintenance: { bg: "#fef2f2", color: "#dc2626" },
+  Maintenance: { bg: "#fef2f2", color: "#b91c1c" },
   Retired: { bg: "#f9fafb", color: "#6b7280" },
 };
 
@@ -98,7 +98,7 @@ export default function AssetsPage() {
               <div className="relative flex-1">
                 <Search
                   size={16}
-                  style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#9ca3af" }}
+                  style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#64748b" }}
                 />
                 <input
                   value={search}
@@ -110,7 +110,7 @@ export default function AssetsPage() {
                   onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
                 />
               </div>
-              <select
+            <select aria-label="Filter by status"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-3 py-2 text-sm rounded-lg border outline-none bg-white"
@@ -125,19 +125,19 @@ export default function AssetsPage() {
             </div>
 
             {loading ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#9ca3af" }}>
+              <div className="p-12 text-center text-sm" style={{ color: "#64748b" }}>
                 Loading assets...
               </div>
             ) : error ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#dc2626" }}>
+              <div className="p-12 text-center text-sm" style={{ color: "#b91c1c" }}>
                 {error}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#9ca3af" }}>
+              <div className="p-12 text-center text-sm" style={{ color: "#64748b" }}>
                 No assets found
               </div>
             ) : (
-              <div style={{ overflowX: "auto" }}>
+              <div className="table-scroll" style={{ overflowX: "auto" }}>
                 <table className="w-full text-sm">
                   <thead>
                     <tr
@@ -187,7 +187,7 @@ export default function AssetsPage() {
                               <Link
                                 to={`/assets/${asset._id}/edit`}
                                 className="p-1.5 rounded-lg transition-colors"
-                                style={{ color: "#9ca3af" }}
+                                style={{ color: "#64748b" }}
                                 title="Edit"
                               >
                                 <Pencil size={15} />
@@ -196,7 +196,7 @@ export default function AssetsPage() {
                                 onClick={() => handleDelete(asset._id)}
                                 disabled={deleting === asset._id}
                                 className="p-1.5 rounded-lg transition-colors"
-                                style={{ color: "#9ca3af" }}
+                                style={{ color: "#64748b" }}
                                 title="Delete"
                               >
                                 <Trash2 size={15} />

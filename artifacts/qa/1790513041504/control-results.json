@@ -1,0 +1,142 @@
+[
+  {
+    "module": "Navigation",
+    "name": "sidebar Dashboard link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Assets link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Allocations link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Maintenance link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Licenses link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar QR Codes link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Employees link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Users link",
+    "status": "PASS"
+  },
+  {
+    "module": "Navigation",
+    "name": "sidebar Profile link",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/allocations modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/allocations modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/allocations modal traps keyboard focus",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/licenses modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/licenses modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/licenses modal traps keyboard focus",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/maintainence modal Cancel button",
+    "status": "PASS"
+  },
+  {
+    "module": "Controls",
+    "name": "/maintainence modal close icon",
+    "status": "PASS"
+  },
+  {
+    "module": "Keyboard",
+    "name": "/maintainence modal traps keyboard focus",
+    "status": "PASS"
+  },
+  {
+    "module": "Forms",
+    "name": "/licenses accepts fractional currency amounts",
+    "status": "PASS"
+  },
+  {
+    "module": "Forms",
+    "name": "/maintainence accepts fractional currency amounts",
+    "status": "PASS"
+  },
+  {
+    "module": "Forms",
+    "name": "maintenance required description matches backend validation",
+    "status": "PASS"
+  },
+  {
+    "module": "Forms",
+    "name": "license required key matches backend validation",
+    "status": "PASS"
+  },
+  {
+    "module": "Assets",
+    "name": "add form rejects whitespace-only name visibly",
+    "status": "PASS"
+  },
+  {
+    "module": "Users",
+    "name": "duplicate user shows useful error",
+    "status": "PASS"
+  },
+  {
+    "module": "Users",
+    "name": "user edit/delete or disable controls exist",
+    "status": "PASS"
+  },
+  {
+    "module": "QR camera",
+    "name": "test browser has a functioning synthetic video device",
+    "status": "PASS"
+  },
+  {
+    "module": "QR camera",
+    "name": "Start camera preserves the rendered application",
+    "status": "PASS"
+  },
+  {
+    "module": "Responsive",
+    "name": "user provisioning remains readable at 390px",
+    "status": "PASS"
+  }
+]

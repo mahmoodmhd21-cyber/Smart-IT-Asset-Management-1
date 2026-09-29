@@ -1,0 +1,722 @@
+[
+  {
+    "module": "Login",
+    "name": "protected pages redirect without a session",
+    "status": "PASS",
+    "ms": 1104
+  },
+  {
+    "module": "Login",
+    "name": "required credentials prevent empty submission",
+    "status": "PASS",
+    "ms": 286
+  },
+  {
+    "module": "Login",
+    "name": "invalid credentials display an error",
+    "status": "PASS",
+    "ms": 664
+  },
+  {
+    "module": "Login",
+    "name": "show-password control is available",
+    "status": "PASS",
+    "ms": 24
+  },
+  {
+    "module": "Login",
+    "name": "valid credentials restore the requested asset route",
+    "status": "PASS",
+    "ms": 1358
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /dashboard",
+    "status": "PASS",
+    "ms": 2049
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets",
+    "status": "PASS",
+    "ms": 2341
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets/add",
+    "status": "PASS",
+    "ms": 1410
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /allocations",
+    "status": "PASS",
+    "ms": 2043
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /users",
+    "status": "PASS",
+    "ms": 1447
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /employees",
+    "status": "PASS",
+    "ms": 1724
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /licenses",
+    "status": "PASS",
+    "ms": 1855
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /maintainence",
+    "status": "PASS",
+    "ms": 1566
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /qr-codes",
+    "status": "PASS",
+    "ms": 1809
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /profile",
+    "status": "PASS",
+    "ms": 1290
+  },
+  {
+    "module": "Sidebar",
+    "name": "collapse, persist across navigation, expand with keyboard",
+    "status": "PASS",
+    "ms": 940
+  },
+  {
+    "module": "Assets",
+    "name": "create asset through form",
+    "status": "PASS",
+    "ms": 953
+  },
+  {
+    "module": "Assets",
+    "name": "edit form is prefilled and persists updates",
+    "status": "PASS",
+    "ms": 2076
+  },
+  {
+    "module": "Assets",
+    "name": "search and status filter work",
+    "status": "PASS",
+    "ms": 813
+  },
+  {
+    "module": "Assets",
+    "name": "cancel does not create an asset",
+    "status": "PASS",
+    "ms": 1442
+  },
+  {
+    "module": "Assets",
+    "name": "serial number can be entered",
+    "status": "PASS",
+    "ms": 1019
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate through modal",
+    "status": "PASS",
+    "ms": 1849
+  },
+  {
+    "module": "Allocations",
+    "name": "return action restores availability",
+    "status": "PASS",
+    "ms": 1271
+  },
+  {
+    "module": "Allocations",
+    "name": "delete returned allocation",
+    "status": "PASS",
+    "ms": 1506
+  },
+  {
+    "module": "Allocations",
+    "name": "deleting active allocation refreshes available-asset dropdown",
+    "status": "PASS",
+    "ms": 1942
+  },
+  {
+    "module": "Maintenance",
+    "name": "create Repair through form",
+    "status": "PASS",
+    "ms": 1451
+  },
+  {
+    "module": "Maintenance",
+    "name": "starting maintenance updates the Assets page",
+    "status": "PASS",
+    "ms": 769
+  },
+  {
+    "module": "Maintenance",
+    "name": "manual availability is blocked with a visible error",
+    "status": "PASS",
+    "ms": 1900
+  },
+  {
+    "module": "Maintenance",
+    "name": "complete repair through modal updates linked asset",
+    "status": "PASS",
+    "ms": 1048
+  },
+  {
+    "module": "Maintenance",
+    "name": "Upgrade form option saves successfully",
+    "status": "PASS",
+    "ms": 1713
+  },
+  {
+    "module": "Maintenance",
+    "name": "Inspection form option saves successfully",
+    "status": "PASS",
+    "ms": 2357
+  },
+  {
+    "module": "Maintenance",
+    "name": "Replacement form option saves successfully",
+    "status": "PASS",
+    "ms": 1362
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cleaning form option saves successfully",
+    "status": "PASS",
+    "ms": 1388
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled form option saves successfully",
+    "status": "PASS",
+    "ms": 1892
+  },
+  {
+    "module": "Maintenance",
+    "name": "status filter and delete completed record",
+    "status": "PASS",
+    "ms": 1983
+  },
+  {
+    "module": "Maintenance",
+    "name": "Escape closes the maintenance modal",
+    "status": "PASS",
+    "ms": 1150
+  },
+  {
+    "module": "Users",
+    "name": "create system user via form",
+    "status": "PASS",
+    "ms": 1444
+  },
+  {
+    "module": "Users",
+    "name": "successful creation shows confirmation",
+    "status": "PASS",
+    "ms": 14
+  },
+  {
+    "module": "Employees",
+    "name": "register company employee via form",
+    "status": "PASS",
+    "ms": 2025
+  },
+  {
+    "module": "Employees",
+    "name": "search and status filters",
+    "status": "PASS",
+    "ms": 190
+  },
+  {
+    "module": "Employees",
+    "name": "registered employee appears in allocation options",
+    "status": "PASS",
+    "ms": 848
+  },
+  {
+    "module": "Employees",
+    "name": "employee edit and delete controls exist",
+    "status": "PASS",
+    "ms": 671
+  },
+  {
+    "module": "Licenses",
+    "name": "create license through form",
+    "status": "PASS",
+    "ms": 968
+  },
+  {
+    "module": "Licenses",
+    "name": "type, usage, cost and notes survive reload",
+    "status": "PASS",
+    "ms": 666
+  },
+  {
+    "module": "Licenses",
+    "name": "edit software name",
+    "status": "PASS",
+    "ms": 756
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon saves through form",
+    "status": "PASS",
+    "ms": 890
+  },
+  {
+    "module": "Licenses",
+    "name": "delete license",
+    "status": "PASS",
+    "ms": 770
+  },
+  {
+    "module": "QR codes",
+    "name": "image renders, View selects asset and Download PNG works",
+    "status": "PASS",
+    "ms": 2856
+  },
+  {
+    "module": "QR codes",
+    "name": "invalid lookup displays error",
+    "status": "PASS",
+    "ms": 275
+  },
+  {
+    "module": "QR codes",
+    "name": "manual lookup and status update",
+    "status": "PASS",
+    "ms": 2180
+  },
+  {
+    "module": "QR codes",
+    "name": "regenerate invalidates previous token",
+    "status": "PASS",
+    "ms": 1177
+  },
+  {
+    "module": "QR codes",
+    "name": "camera start and stop using synthetic test camera",
+    "status": "PASS",
+    "ms": 4041
+  },
+  {
+    "module": "Profile",
+    "name": "name email and role displayed",
+    "status": "PASS",
+    "ms": 3121
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /dashboard",
+    "status": "PASS",
+    "ms": 3602
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets",
+    "status": "PASS",
+    "ms": 6049
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets/add",
+    "status": "PASS",
+    "ms": 5724
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /allocations",
+    "status": "PASS",
+    "ms": 4302
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /users",
+    "status": "PASS",
+    "ms": 4273
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /employees",
+    "status": "PASS",
+    "ms": 7305
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /licenses",
+    "status": "PASS",
+    "ms": 2335
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /maintainence",
+    "status": "PASS",
+    "ms": 4181
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /qr-codes",
+    "status": "PASS",
+    "ms": 4095
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /profile",
+    "status": "PASS",
+    "ms": 2952
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1440px",
+    "status": "PASS",
+    "ms": 1734
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1440px",
+    "status": "PASS",
+    "ms": 1098
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1440px",
+    "status": "PASS",
+    "ms": 1222
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1440px",
+    "status": "PASS",
+    "ms": 1522
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1440px",
+    "status": "PASS",
+    "ms": 1541
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1440px",
+    "status": "PASS",
+    "ms": 2036
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1440px",
+    "status": "PASS",
+    "ms": 1907
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1440px",
+    "status": "PASS",
+    "ms": 2668
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1440px",
+    "status": "PASS",
+    "ms": 1419
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1024px",
+    "status": "FAIL",
+    "detail": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:3301/dashboard\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:3301/dashboard\", waiting until \"networkidle\"\u001b[22m\n",
+    "ms": 448,
+    "screenshot": "screenshots/failure-73.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 31,
+    "screenshot": "screenshots/failure-74.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 13,
+    "screenshot": "screenshots/failure-75.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 3,
+    "screenshot": "screenshots/failure-76.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 4,
+    "screenshot": "screenshots/failure-77.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 5,
+    "screenshot": "screenshots/failure-78.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 4,
+    "screenshot": "screenshots/failure-79.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 4,
+    "screenshot": "screenshots/failure-80.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1024px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 3,
+    "screenshot": "screenshots/failure-81.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 45,
+    "screenshot": "screenshots/failure-82.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 8,
+    "screenshot": "screenshots/failure-83.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 6,
+    "screenshot": "screenshots/failure-84.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 6,
+    "screenshot": "screenshots/failure-85.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 6,
+    "screenshot": "screenshots/failure-86.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 8,
+    "screenshot": "screenshots/failure-87.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 10,
+    "screenshot": "screenshots/failure-88.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 8,
+    "screenshot": "screenshots/failure-89.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 768px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 18,
+    "screenshot": "screenshots/failure-90.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 75,
+    "screenshot": "screenshots/failure-91.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 4,
+    "screenshot": "screenshots/failure-92.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 6,
+    "screenshot": "screenshots/failure-93.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 5,
+    "screenshot": "screenshots/failure-94.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 5,
+    "screenshot": "screenshots/failure-95.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 4,
+    "screenshot": "screenshots/failure-96.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 13,
+    "screenshot": "screenshots/failure-97.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 7,
+    "screenshot": "screenshots/failure-98.png"
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 390px",
+    "status": "FAIL",
+    "detail": "page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "ms": 9,
+    "screenshot": "screenshots/failure-99.png"
+  },
+  {
+    "module": "Error handling",
+    "name": "/licenses visibly reports API failure",
+    "status": "PASS",
+    "ms": 1182
+  },
+  {
+    "module": "Error handling",
+    "name": "/maintainence visibly reports API failure",
+    "status": "PASS",
+    "ms": 818
+  },
+  {
+    "module": "Error handling",
+    "name": "/employees visibly reports API failure",
+    "status": "PASS",
+    "ms": 823
+  },
+  {
+    "module": "Error handling",
+    "name": "/dashboard visibly reports API failure",
+    "status": "PASS",
+    "ms": 846
+  },
+  {
+    "module": "Error handling",
+    "name": "/profile visibly reports API failure",
+    "status": "PASS",
+    "ms": 1073
+  },
+  {
+    "module": "Assets",
+    "name": "delete confirmation can be cancelled",
+    "status": "PASS",
+    "ms": 1115
+  },
+  {
+    "module": "Assets",
+    "name": "delete asset through UI",
+    "status": "PASS",
+    "ms": 1750
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot access user provisioning",
+    "status": "PASS",
+    "ms": 2330
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot open hidden employee administration route",
+    "status": "PASS",
+    "ms": 651
+  },
+  {
+    "module": "Session",
+    "name": "invalid token redirects to login",
+    "status": "PASS",
+    "ms": 658
+  },
+  {
+    "module": "Session",
+    "name": "logout clears session and protects routes",
+    "status": "PASS",
+    "ms": 2551
+  },
+  {
+    "module": "Accessibility",
+    "name": "login form automated accessibility",
+    "status": "PASS",
+    "ms": 1276
+  }
+]

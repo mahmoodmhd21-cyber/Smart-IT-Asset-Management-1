@@ -50,13 +50,12 @@ export function Sidebar() {
   const navItems = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, show: true },
     { to: "/assets", label: "Assets", icon: Server, show: true },
-    { to: "/qr-codes", label: "QR Codes", icon: QrCode, show: true },
     { to: "/allocations", label: "Allocations", icon: GitBranch, show: true },
-    { to: "/users", label: "Users", icon: Users, show: isAdmin },
-    { to: "/profile", label: "Profile", icon: User, show: true },
-    { to: "/employees", label: "Employees", icon: Users, show: isAdmin },
+    { to: "/maintainence", label: "Maintenance", icon: Wrench, show: true },
     { to: "/licenses", label: "Licenses", icon: ScrollText, show: true },
-    { to: "/maintainence", label: "Maintainence", icon: Wrench, show: true },
+    { to: "/qr-codes", label: "QR Codes", icon: QrCode, show: true },
+    { to: "/employees", label: "Employees", icon: Users, show: isAdmin },
+    { to: "/users", label: "Users", icon: Users, show: isAdmin },
   ];
 
   return (
@@ -116,6 +115,11 @@ export function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
+        {/* Account actions stay separate from inventory and administration modules. */}
+        <NavLink to="/profile" aria-label="Profile" className={({ isActive }) => `sidebar-action sidebar-link${isActive ? " is-active" : ""}`}>
+          <User size={17} aria-hidden="true" />
+          {!collapsed && <span>Profile</span>}
+        </NavLink>
         <div
           className="sidebar-user"
           title={[user?.fullName || "User", user?.role].filter(Boolean).join(" - ")}

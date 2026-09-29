@@ -125,7 +125,7 @@ async function main() {
     status(await api('DELETE', `/assets/${device._id}`), 409);
     status(await api('PATCH', `/allocations/${record._id}/return`), 200);
     assert.equal((await getAsset(device)).status, 'Available');
-    status(await api('PATCH', `/allocations/${record._id}/return`), 400);
+    status(await api('PATCH', `/allocations/${record._id}/return`), 409);
     status(await api('DELETE', `/allocations/${record._id}`), 200);
   });
   await check('Maintenance', 'completing last job restores Available', async () => {
@@ -200,7 +200,13 @@ async function main() {
   });
   await check('Employees', 'company employees can receive allocations', async () => {
     const device = await asset();
-    status(await api('POST', '/allocations', { assetId: device._id, employeeId: person._id }), 201);
+    // The preceding check deactivated this employee: verify the guard before reactivation.
+    status(await api('POST', '/allocations', { assetId: device._id, employeeId: person._id }), 404);
+    status(await api('PUT', `/employees/${person._id}`, { status: 'Active' }), 200);
+    const record = status(await api('POST', '/allocations', { assetId: device._id, employeeId: person._id }), 201);
+    status(await api('DELETE', `/employees/${person._id}`), 409);
+    status(await api('PATCH', `/allocations/${record._id}/return`), 200);
+    status(await api('DELETE', `/allocations/${record._id}`), 200);
   });
   await check('Employees', 'delete employee', async () => { status(await api('DELETE', `/employees/${person._id}`), 200); });
   const license = status(await api('POST', '/licenses', { softwareName: 'QA API License', vendor: 'QA', licenseKey: `QA-KEY-${state.runId}`, numberOfSeats: 10, assignedSeats: 3, licenseType: 'Subscription', cost: 99, notes: 'QA notes', status: 'Active' }), 201);

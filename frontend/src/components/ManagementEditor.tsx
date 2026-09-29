@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Save, X } from "lucide-react";
+import { containDialogFocus } from "./Modal";
 
 type Field = { name: string; label: string; type?: string; optional?: boolean; options?: string[] };
 
@@ -17,8 +18,9 @@ export default function ManagementEditor({ title, fields, initial, onSave, onClo
   useEffect(() => {
     // Native modal dialogs provide focus containment, Escape and focus restoration.
     const element = dialog.current!;
+    const opener = document.activeElement as HTMLElement | null;
     element.showModal();
-    return () => element.close();
+    return () => { element.close(); if (opener?.isConnected) opener.focus(); };
   }, []);
   async function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -29,7 +31,7 @@ export default function ManagementEditor({ title, fields, initial, onSave, onClo
     catch (err) { setError(err instanceof Error ? err.message : "Changes could not be saved."); }
     finally { setSaving(false); }
   }
-  return <dialog ref={dialog} aria-labelledby="management-title" onCancel={event => { event.preventDefault(); if (!saving) onClose(); }} className="m-auto w-[min(560px,calc(100%-32px))] max-h-[90vh] overflow-auto rounded-lg p-6 backdrop:bg-black/40">
+  return <dialog ref={dialog} aria-labelledby="management-title" onKeyDown={containDialogFocus} onCancel={event => { event.preventDefault(); if (!saving) onClose(); }} className="m-auto w-[min(560px,calc(100%-32px))] max-h-[90vh] overflow-auto rounded-lg p-6 backdrop:bg-black/40">
     <div className="mb-5 flex items-center justify-between gap-3">
       <h2 id="management-title" className="text-lg font-semibold">{title}</h2>
       <button type="button" onClick={onClose} disabled={saving} aria-label="Close editor" title="Close editor"><X size={20} /></button>

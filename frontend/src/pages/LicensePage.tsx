@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import Modal from "../components/Modal";
 import LoadError from "../components/LoadError";
 import { licenses, type License } from "../lib/api";
 import { KeyRound, Plus, Pencil, Trash2, X, CheckCircle, AlertTriangle, Clock } from "lucide-react";
@@ -10,7 +11,7 @@ const STATUS_OPTIONS = ["Active", "Expired", "Expiring Soon", "Suspended"] as co
 
 const STATUS_STYLES: Record<string, { bg: string; color: string; icon: typeof CheckCircle }> = {
   Active: { bg: "#dcfce7", color: "#15803d", icon: CheckCircle },
-  Expired: { bg: "#fee2e2", color: "#dc2626", icon: X },
+  Expired: { bg: "#fee2e2", color: "#b91c1c", icon: X },
   Suspended: { bg: "#e5e7eb", color: "#374151", icon: Clock },
   "Expiring Soon": { bg: "#fef9c3", color: "#a16207", icon: AlertTriangle },
 };
@@ -149,7 +150,7 @@ export default function LicensePage() {
             {loadError && <LoadError message={loadError} retry={fetchLicenses} />}
             {actionError && <p role="alert" className="mb-4 text-red-700">{actionError}</p>}
             {/* Header */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
+            <div className="page-toolbar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
               <div>
                 <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
                   Software Licenses
@@ -180,13 +181,13 @@ export default function LicensePage() {
             </div>
 
             {/* Table */}
-            <div
+            <div className="table-scroll"
               style={{
                 backgroundColor: "white",
                 borderRadius: "12px",
                 border: "1px solid #e2e8f0",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-                overflow: "hidden",
+                overflowX: "auto",
               }}
             >
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -201,9 +202,9 @@ export default function LicensePage() {
                 </thead>
                 <tbody>
                   {loading ? (
-                    <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading licenses…</td></tr>
+                    <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>Loading licenses…</td></tr>
                   ) : loadError ? <tr><td colSpan={8} className="p-5">License data unavailable.</td></tr> : licenseList.length === 0 ? (
-                    <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                    <tr><td colSpan={8} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>
                       <KeyRound size={32} style={{ margin: "0 auto 8px", color: "#cbd5e1" }} />
                       <p style={{ margin: 0 }}>No licenses yet. Add your first one.</p>
                     </td></tr>
@@ -220,7 +221,7 @@ export default function LicensePage() {
                               </div>
                               <div>
                                 <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "#0f172a" }}>{l.softwareName}</p>
-                                {l.licenseKey && <p style={{ margin: 0, fontSize: "0.75rem", color: "#94a3b8", fontFamily: "monospace" }}>{l.licenseKey.slice(0, 16)}…</p>}
+                                {l.licenseKey && <p style={{ margin: 0, fontSize: "0.75rem", color: "#64748b", fontFamily: "monospace" }}>{l.licenseKey.slice(0, 16)}…</p>}
                               </div>
                             </div>
                           </td>
@@ -228,7 +229,7 @@ export default function LicensePage() {
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>{l.licenseType || "Not recorded"}</td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#0f172a" }}>
                             <span style={{ fontWeight: 600 }}>{l.assignedSeats}</span>
-                            <span style={{ color: "#94a3b8" }}>/{l.numberOfSeats}</span>
+                            <span style={{ color: "#64748b" }}>/{l.numberOfSeats}</span>
                           </td>
                           <td style={{ padding: "14px 16px", fontSize: "0.875rem", color: "#64748b" }}>
                             {l.expiryDate ? new Date(l.expiryDate).toLocaleDateString() : "—"}
@@ -244,11 +245,11 @@ export default function LicensePage() {
                           </td>
                           <td style={{ padding: "14px 16px" }}>
                             <div style={{ display: "flex", gap: "6px" }}>
-                              <button onClick={() => openEdit(l)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                              <button aria-label="Edit" title="Edit" onClick={() => openEdit(l)} style={{ padding: "6px", backgroundColor: "#f1f5f9", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                 <Pencil size={14} color="#475569" />
                               </button>
                               <button aria-label={`Delete ${l.softwareName}`} title="Delete license" onClick={() => handleDelete(l._id)} style={{ padding: "6px", backgroundColor: "#fef2f2", border: "none", borderRadius: "6px", cursor: "pointer" }}>
-                                <Trash2 size={14} color="#dc2626" />
+                                <Trash2 size={14} color="#b91c1c" />
                               </button>
                             </div>
                           </td>
@@ -265,70 +266,70 @@ export default function LicensePage() {
 
       {/* Modal */}
       {showModal && (
-        <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: "16px" }}>
+        <Modal title={editing ? "Edit License" : "Add License"} busy={saving} onClose={() => setShowModal(false)}>
           <div style={{ backgroundColor: "white", borderRadius: "16px", width: "100%", maxWidth: "580px", maxHeight: "90vh", overflowY: "auto", boxShadow: "0 25px 50px rgba(0,0,0,0.25)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: "1px solid #e2e8f0" }}>
+            <div className="page-toolbar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: "1px solid #e2e8f0" }}>
               <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 700, color: "#0f172a" }}>
                 {editing ? "Edit License" : "Add License"}
               </h2>
-              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", cursor: "pointer" }}>
-                <X size={20} color="#94a3b8" />
+              <button aria-label="Close dialog" title="Close dialog" onClick={() => setShowModal(false)} style={{ background: "none", border: "none", cursor: "pointer" }}>
+                <X size={20} color="#64748b" />
               </button>
             </div>
             <form onSubmit={handleSubmit} style={{ padding: "24px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+              <div className="responsive-grid" style={{ display: "grid", minWidth: 0, gap: "16px" }}>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>Software Name *</label>
-                  <input name="softwareName" value={form.softwareName} onChange={handleChange} required style={fieldStyle} placeholder="e.g. Microsoft Office 365" />
+                  <label htmlFor="LicensePage-field-1" style={labelStyle}>Software Name *</label>
+                  <input id="LicensePage-field-1" name="softwareName" value={form.softwareName} onChange={handleChange} required style={fieldStyle} placeholder="e.g. Microsoft Office 365" />
                 </div>
                 <div>
-                  <label style={labelStyle}>Vendor *</label>
-                  <input name="vendor" value={form.vendor} onChange={handleChange} required style={fieldStyle} placeholder="Microsoft" />
+                  <label htmlFor="LicensePage-field-2" style={labelStyle}>Vendor *</label>
+                  <input id="LicensePage-field-2" name="vendor" value={form.vendor} onChange={handleChange} required style={fieldStyle} placeholder="Microsoft" />
                 </div>
                 <div>
-                  <label style={labelStyle}>License Type</label>
-                  <select name="licenseType" value={form.licenseType || ""} onChange={handleChange} style={fieldStyle}>
+                  <label htmlFor="LicensePage-field-3" style={labelStyle}>License Type</label>
+                  <select id="LicensePage-field-3" name="licenseType" value={form.licenseType || ""} onChange={handleChange} style={fieldStyle}>
                     <option value="">Not recorded</option>
                     {TYPE_OPTIONS.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>License Key *</label>
-                  <input name="licenseKey" required value={form.licenseKey} onChange={handleChange} style={fieldStyle} placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
+                  <label htmlFor="LicensePage-field-4" style={labelStyle}>License Key *</label>
+                  <input id="LicensePage-field-4" name="licenseKey" required value={form.licenseKey} onChange={handleChange} style={fieldStyle} placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
                 </div>
                 <div>
-                  <label style={labelStyle}>Purchased Seats *</label>
-                  <input name="numberOfSeats" type="number" required min={0} step={1} value={form.numberOfSeats} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="LicensePage-field-5" style={labelStyle}>Purchased Seats *</label>
+                  <input id="LicensePage-field-5" name="numberOfSeats" type="number" required min={0} step={1} value={form.numberOfSeats} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Assigned Seats *</label>
-                  <input name="assignedSeats" type="number" required min={0} max={form.numberOfSeats} step={1} value={form.assignedSeats} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="LicensePage-field-6" style={labelStyle}>Assigned Seats *</label>
+                  <input id="LicensePage-field-6" name="assignedSeats" type="number" required min={0} max={form.numberOfSeats} step={1} value={form.assignedSeats} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Purchase Date</label>
-                  <input name="purchaseDate" type="date" value={form.purchaseDate} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="LicensePage-field-7" style={labelStyle}>Purchase Date</label>
+                  <input id="LicensePage-field-7" name="purchaseDate" type="date" value={form.purchaseDate} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Expiry Date</label>
-                  <input name="expiryDate" type="date" value={form.expiryDate} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="LicensePage-field-8" style={labelStyle}>Expiry Date</label>
+                  <input id="LicensePage-field-8" name="expiryDate" type="date" value={form.expiryDate} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Cost ($)</label>
-                  <input name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
+                  <label htmlFor="LicensePage-field-9" style={labelStyle}>Cost ($)</label>
+                  <input id="LicensePage-field-9" name="cost" type="number" min={0} step="0.01" value={form.cost} onChange={handleChange} style={fieldStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Status</label>
-                  <select name="status" value={form.status} onChange={handleChange} style={fieldStyle}>
+                  <label htmlFor="LicensePage-field-10" style={labelStyle}>Status</label>
+                  <select id="LicensePage-field-10" name="status" value={form.status} onChange={handleChange} style={fieldStyle}>
                     {STATUS_OPTIONS.map((s) => <option key={s}>{s}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: "1/-1" }}>
-                  <label style={labelStyle}>Notes</label>
-                  <textarea name="notes" value={form.notes} onChange={handleChange} rows={2} style={{ ...fieldStyle, resize: "vertical" }} placeholder="Additional notes…" />
+                  <label htmlFor="LicensePage-field-11" style={labelStyle}>Notes</label>
+                  <textarea id="LicensePage-field-11" name="notes" value={form.notes} onChange={handleChange} rows={2} style={{ ...fieldStyle, resize: "vertical" }} placeholder="Additional notes…" />
                 </div>
               </div>
 
-              {error && <div style={{ marginTop: "12px", padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#dc2626", fontSize: "0.8125rem" }}>{error}</div>}
+              {error && <div style={{ marginTop: "12px", padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#b91c1c", fontSize: "0.8125rem" }}>{error}</div>}
 
               <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "20px" }}>
                 <button type="button" onClick={() => setShowModal(false)} style={{ padding: "10px 20px", border: "1px solid #e2e8f0", borderRadius: "8px", fontSize: "0.875rem", backgroundColor: "white", cursor: "pointer" }}>Cancel</button>
@@ -338,7 +339,7 @@ export default function LicensePage() {
               </div>
             </form>
           </div>
-        </div>
+        </Modal>
       )}
     </AuthGuard>
   );

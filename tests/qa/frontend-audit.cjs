@@ -49,9 +49,11 @@ async function goto(route) {
 async function fill(name, value) { await page.locator(`[name="${name}"]`).fill(String(value)); }
 async function select(name, value) { await page.locator(`select[name="${name}"]`).selectOption(value); }
 async function submit(method, endpoint, action) {
-  const responsePromise = page.waitForResponse((response) => new URL(response.url()).pathname === `/api${endpoint}` && response.request().method() === method, { timeout: 8000 });
-  await action();
-  const response = await responsePromise;
+  // Observe both promises immediately so a failed click cannot leave an unhandled timeout.
+  const [response] = await Promise.all([
+    page.waitForResponse((response) => new URL(response.url()).pathname === `/api${endpoint}` && response.request().method() === method, { timeout: 8000 }),
+    action(),
+  ]);
   return { status: response.status(), body: await response.json() };
 }
 function ok(response, expected = 200) {
@@ -70,12 +72,16 @@ async function maintenanceForm(device, type = 'Repair', status = 'In Progress') 
   await fill('maintenanceDate', '2026-09-24');
   await fill('description', 'QA browser maintenance');
 }
-async function login(email = state.email) {
+async function login(email = state.email, destination = '/dashboard') {
   await goto('/');
+  if (destination === '/dashboard') {
+    await page.evaluate(() => history.replaceState(null, '', location.href));
+    await page.reload({ waitUntil: 'networkidle' });
+  }
   await fill('email', email);
   await fill('password', state.password);
   await page.getByRole('button', { name: 'Sign In', exact: true }).click();
-  await page.waitForURL('**/dashboard');
+  await page.waitForURL(`**${destination}`);
   token = await page.evaluate(() => localStorage.getItem('authToken'));
 }
 
@@ -107,7 +113,7 @@ async function main() {
   await check('Login', 'show-password control is available', async () => {
     assert.ok(await page.getByRole('button', { name: /show password/i }).count() || await page.getByRole('checkbox', { name: /show password/i }).count(), 'No show-password control exists');
   });
-  await check('Login', 'valid credentials open dashboard', () => login());
+  await check('Login', 'valid credentials restore the requested asset route', () => login(state.email, '/assets'));
   if (!token) throw new Error('Cannot continue authenticated UI tests without a successful login');
 
   const routes = ['/dashboard', '/assets', '/assets/add', '/allocations', '/users', '/employees', '/licenses', '/maintainence', '/qr-codes', '/profile'];
@@ -327,9 +333,10 @@ async function main() {
     await goto('/qr-codes'); await page.getByPlaceholder('Paste a QR URL or token').fill(qr.token);
     await page.getByRole('button', { name: 'Retrieve', exact: true }).click();
     await page.getByRole('heading', { name: 'QA UI Laptop Updated' }).waitFor();
-    await page.locator('select').last().selectOption('Maintenance');
+    // This device already has open maintenance from the preceding workflow.
+    await page.locator('select').last().selectOption('Retired');
     ok(await submit('PATCH', '/qr/status', () => page.getByRole('button', { name: 'Update status' }).click()));
-    assert.equal((await api('GET', `/assets/${device._id}`)).status, 'Maintenance');
+    assert.equal((await api('GET', `/assets/${device._id}`)).status, 'Retired');
   });
   await check('QR codes', 'regenerate invalidates previous token', async () => {
     await page.locator('#qr-asset').selectOption(device._id);
@@ -340,7 +347,7 @@ async function main() {
   });
   await check('QR codes', 'camera start and stop using synthetic test camera', async () => {
     await goto('/qr-codes'); await page.getByRole('button', { name: 'Start camera' }).click();
-    await page.locator('#qr-reader video').waitFor();
+    await page.locator('[id^="qr-reader-"] video').waitFor();
     await page.getByRole('button', { name: 'Stop camera' }).click();
     await page.getByText('Camera is off', { exact: true }).waitFor();
   });
@@ -401,8 +408,11 @@ async function main() {
   });
   await check('Assets', 'delete asset through UI', async () => {
     await goto('/assets');
-    ok(await submit('DELETE', `/assets/${device._id}`, () => page.getByRole('row').filter({ hasText: 'QA UI Laptop Updated' }).getByTitle('Delete', { exact: true }).click()));
-    assert.ok(!(await api('GET', '/assets')).some((asset) => asset._id === device._id));
+    ok(await submit('DELETE', `/assets/${device._id}`, () => page.getByRole('row').filter({ hasText: 'QA UI Laptop Updated' }).getByTitle('Delete', { exact: true }).click()), 409);
+    const removable = await newAsset();
+    await goto('/assets');
+    ok(await submit('DELETE', `/assets/${removable._id}`, () => page.getByRole('row').filter({ hasText: removable.assetName }).getByTitle('Delete', { exact: true }).click()));
+    assert.ok(!(await api('GET', '/assets')).some((asset) => asset._id === removable._id));
   });
   await check('Roles', 'IT Staff cannot access user provisioning', async () => {
     await login(state.staffEmail); await goto('/users');

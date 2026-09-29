@@ -30,7 +30,21 @@ node tests/qa/summarize.cjs
 
 The environment seeds the isolated first admin directly in its disposable database; public registration is now forbidden. The API suite logs in and provisions the staff account used by the browser suites. Run it first, once per freshly created QA environment. The suite results are written after each case. Individual failing assertions are recorded as FAIL but do not stop the remaining cases; inspect the JSON results rather than relying only on the process exit code. Exit failures indicate fatal setup/runner errors.
 
-`summarize.cjs` aggregates the four dynamic suite result files and compares source hashes. Its controller/build/lint fields record this audit's observed baseline; rerun those commands and update these fields when using the script for a later release. They are not freshly executed by the summary script.
+`summarize.cjs` aggregates the four dynamic suite result files and compares source hashes. It links separate regression/build/lint evidence but never runs or certifies those commands. Inspect the linked results independently.
+
+## Complete Regression and Release Checks
+
+After copying source, installing locked dependencies and building the isolated frontend:
+
+```sh
+QA_APP_ROOT=/tmp/smart-it-qa-app QA_BROWSER=1 QA_PLAYWRIGHT=/tmp/smart-it-qa-tools/node_modules/playwright node tests/qa/run-command.cjs 600 node --test --test-concurrency=1 --test-reporter=spec --test-reporter-destination=artifacts/qa/final-regression-stable.txt tests/*.test.cjs tests/assetStatus.test.js
+```
+
+The release suite uses the real production Express configuration, 12 routes at four widths, axe scans, modal keyboard checks, Profile placement, synthetic camera startup, startup failure checks and login throttling. Each suite cleans up its disposable fixtures. Physical devices, other browsers, screen readers and the deployed host still need acceptance checks in `docs/DEPLOYMENT.md`.
+
+Do not rebuild or replace `frontend/dist` while browser suites are running: Vite clears that directory during builds, invalidating pages and dynamically imported QR assets already in use. Finish build/lint first, then run the suites against the unchanged output.
+
+If npm prefix resolution fails during setup, run `npm ci` from each isolated package directory directly. Do not regenerate lockfiles merely to work around a prefix-resolution error.
 
 Press Enter in the environment terminal after testing. It stops the two QA servers, drops only the timestamped database created by that environment, and stops/removes its disposable MongoDB instance. Generated evidence remains in `artifacts/qa/<run-id>/`. The temporary state file at `/tmp/smart-it-qa-state.json` contains disposable test credentials; do not publish it.
 

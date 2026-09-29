@@ -118,42 +118,42 @@ export default function EditAssetPage() {
             style={{ backgroundColor: "white", border: "1px solid #f3f4f6", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
           >
             {loading ? (
-              <div className="text-sm py-8 text-center" style={{ color: "#9ca3af" }}>
+              <div className="text-sm py-8 text-center" style={{ color: "#64748b" }}>
                 Loading asset...
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
                   <div style={{ gridColumn: "1 / -1" }}>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>
+                    <label htmlFor="EditAssetPage-field-1" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>
                       Asset Name *
                     </label>
-                    <input name="assetName" value={form.assetName} onChange={handleChange} required style={inputStyle} />
+                    <input id="EditAssetPage-field-1" name="assetName" value={form.assetName} onChange={handleChange} required style={inputStyle} />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Category</label>
-                    <select name="category" value={form.category} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
+                    <label htmlFor="EditAssetPage-field-2" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Category</label>
+                    <select id="EditAssetPage-field-2" name="category" value={form.category} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
                       <option value="">Select category</option>
                       {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Status</label>
-                    <select name="status" value={form.status} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
+                    <label htmlFor="EditAssetPage-field-3" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Status</label>
+                    <select id="EditAssetPage-field-3" name="status" value={form.status} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
                       {STATUSES.map((s) => <option key={s}>{s}</option>)}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Brand</label>
-                    <input name="brand" value={form.brand} onChange={handleChange} style={inputStyle} />
+                    <label htmlFor="EditAssetPage-field-4" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Brand</label>
+                    <input id="EditAssetPage-field-4" name="brand" value={form.brand} onChange={handleChange} style={inputStyle} />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Model</label>
-                    <input name="model" value={form.model} onChange={handleChange} style={inputStyle} />
+                    <label htmlFor="EditAssetPage-field-5" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Model</label>
+                    <input id="EditAssetPage-field-5" name="model" value={form.model} onChange={handleChange} style={inputStyle} />
                   </div>
                   <div>
                     <label htmlFor="serialNumber" className="block text-sm font-medium mb-1">Serial Number</label>
@@ -161,18 +161,18 @@ export default function EditAssetPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Location</label>
-                    <input name="location" value={form.location} onChange={handleChange} style={inputStyle} />
+                    <label htmlFor="EditAssetPage-field-6" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Location</label>
+                    <input id="EditAssetPage-field-6" name="location" value={form.location} onChange={handleChange} style={inputStyle} />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Purchase Date</label>
-                    <input name="purchaseDate" type="date" value={form.purchaseDate} onChange={handleChange} style={inputStyle} />
+                    <label htmlFor="EditAssetPage-field-7" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Purchase Date</label>
+                    <input id="EditAssetPage-field-7" name="purchaseDate" type="date" value={form.purchaseDate} onChange={handleChange} style={inputStyle} />
                   </div>
                 </div>
 
                 {error && (
-                  <div className="p-3 rounded-lg text-sm mb-5" style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626" }}>
+                  <div className="p-3 rounded-lg text-sm mb-5" style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", color: "#b91c1c" }}>
                     {error}
                   </div>
                 )}

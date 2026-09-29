@@ -74,7 +74,7 @@ export default function ProfilePage() {
                   <h2 className="text-white text-xl font-semibold">
                     {user?.fullName || "—"}
                   </h2>
-                  <p className="text-sm mt-0.5" style={{ color: "#bfdbfe" }}>
+                  <p className="text-sm mt-0.5" style={{ color: "#ffffff" }}>
                     {user?.email || "—"}
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export default function ProfilePage() {
 
               <div className="p-6">
                 {loading ? (
-                  <div className="text-sm py-4 text-center" style={{ color: "#9ca3af" }}>
+                  <div className="text-sm py-4 text-center" style={{ color: "#64748b" }}>
                     Loading profile...
                   </div>
                 ) : (

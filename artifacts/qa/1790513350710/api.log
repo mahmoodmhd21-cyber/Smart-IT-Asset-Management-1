@@ -1,0 +1,93 @@
+MongoDB connected successfully
+Server running on port 5301
+addEmployee error: MongoServerError: E11000 duplicate key error collection: smart_it_qa_1790513350710.employees index: employeeId_1 dup key: { employeeId: "QA-1790513350710" }
+    at InsertOneOperation.handleOk (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/insert.js:51:19)
+    at executeOperationWithRetries (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:194:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/operations/execute_operation.js:83:16)
+    at async Collection.insertOne (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/collection.js:154:16)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:434:16)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:42:22) {
+  errorLabelSet: Set(0) {},
+  errorResponse: {
+    index: 0,
+    code: 11000,
+    errmsg: 'E11000 duplicate key error collection: smart_it_qa_1790513350710.employees index: employeeId_1 dup key: { employeeId: "QA-1790513350710" }',
+    keyPattern: { employeeId: 1 },
+    keyValue: { employeeId: 'QA-1790513350710' }
+  },
+  index: 0,
+  code: 11000,
+  keyPattern: { employeeId: 1 },
+  keyValue: { employeeId: 'QA-1790513350710' }
+}
+deleteEmployee error: LifecycleError: Cannot delete an employee with allocation history. Deactivate them instead.
+    at /private/tmp/smart-it-qa-app/controllers/employeeController.js:144:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ClientSession.withTransaction (/private/tmp/smart-it-qa-app/node_modules/mongodb/lib/sessions.js:567:30)
+    at async transaction (/private/tmp/smart-it-qa-app/services/transaction.js:12:12)
+    at async deleteEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:139:21) {
+  status: 409
+}
+updateLicense error: ValidationError: License validation failed: assignedSeats: Assigned seats cannot exceed purchased seats.
+    at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3471:32)
+    at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+    at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+    at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+    at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+    at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+    at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+    at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+    at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+  errors: {
+    assignedSeats: ValidatorError: Assigned seats cannot exceed purchased seats.
+        at Document.invalidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3479:11)
+        at model.<anonymous> (/private/tmp/smart-it-qa-app/models/License.js:71:10)
+        at Kareem.execPre (/private/tmp/smart-it-qa-app/node_modules/kareem/index.js:59:39)
+        at model._execDocumentPreHooks (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:3226:29)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2718:30)
+        at model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:18)
+        at maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:19)
+        at trace (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/tracing.js:25:14)
+        at model.save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:673:10)
+        at /private/tmp/smart-it-qa-app/controllers/licenseController.js:123:21 {
+      properties: [Object],
+      kind: 'user defined',
+      path: 'assignedSeats',
+      value: undefined,
+      reason: undefined
+    }
+  },
+  _message: 'License validation failed'
+}
+(node:33682) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33682) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+Auth middleware error: jwt malformed
+addEmployee error: ValidationError: Employee validation failed: email: Path `email` is invalid (not-an-email).
+    at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2880:36)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+    at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7)
+    at async model.create (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:2763:5)
+    at async addEmployee (/private/tmp/smart-it-qa-app/controllers/employeeController.js:42:22) {
+  errors: {
+    email: ValidatorError: Path `email` is invalid (not-an-email).
+        at SchemaString.doValidate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/schemaType.js:1515:13)
+        at model.validate (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/document.js:2858:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async model.$__save (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:399:7)
+        at async maybeTracedSave (/private/tmp/smart-it-qa-app/node_modules/mongoose/lib/model.js:675:7) {
+      properties: [Object],
+      kind: 'regexp',
+      path: 'email',
+      value: 'not-an-email',
+      reason: undefined,
+      Symbol(mongoose#validatorError): true
+    }
+  },
+  _message: 'Employee validation failed'
+}

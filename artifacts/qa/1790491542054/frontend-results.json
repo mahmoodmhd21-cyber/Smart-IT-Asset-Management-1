@@ -1,0 +1,310 @@
+[
+  {
+    "module": "Login",
+    "name": "protected pages redirect without a session",
+    "status": "PASS",
+    "ms": 1240
+  },
+  {
+    "module": "Login",
+    "name": "required credentials prevent empty submission",
+    "status": "PASS",
+    "ms": 157
+  },
+  {
+    "module": "Login",
+    "name": "invalid credentials display an error",
+    "status": "PASS",
+    "ms": 823
+  },
+  {
+    "module": "Login",
+    "name": "show-password control is available",
+    "status": "PASS",
+    "ms": 3
+  },
+  {
+    "module": "Login",
+    "name": "valid credentials restore the requested asset route",
+    "status": "PASS",
+    "ms": 1965
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /dashboard",
+    "status": "PASS",
+    "ms": 2279
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets",
+    "status": "PASS",
+    "ms": 2004
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets/add",
+    "status": "PASS",
+    "ms": 1341
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /allocations",
+    "status": "PASS",
+    "ms": 1581
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /users",
+    "status": "PASS",
+    "ms": 1438
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /employees",
+    "status": "PASS",
+    "ms": 1273
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /licenses",
+    "status": "PASS",
+    "ms": 1229
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /maintainence",
+    "status": "PASS",
+    "ms": 1482
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /qr-codes",
+    "status": "PASS",
+    "ms": 2127
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /profile",
+    "status": "PASS",
+    "ms": 1248
+  },
+  {
+    "module": "Sidebar",
+    "name": "collapse, persist across navigation, expand with keyboard",
+    "status": "PASS",
+    "ms": 1631
+  },
+  {
+    "module": "Assets",
+    "name": "create asset through form",
+    "status": "PASS",
+    "ms": 1208
+  },
+  {
+    "module": "Assets",
+    "name": "edit form is prefilled and persists updates",
+    "status": "PASS",
+    "ms": 1257
+  },
+  {
+    "module": "Assets",
+    "name": "search and status filter work",
+    "status": "PASS",
+    "ms": 1000
+  },
+  {
+    "module": "Assets",
+    "name": "cancel does not create an asset",
+    "status": "PASS",
+    "ms": 928
+  },
+  {
+    "module": "Assets",
+    "name": "serial number can be entered",
+    "status": "PASS",
+    "ms": 693
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate through modal",
+    "status": "PASS",
+    "ms": 1366
+  },
+  {
+    "module": "Allocations",
+    "name": "return action restores availability",
+    "status": "PASS",
+    "ms": 790
+  },
+  {
+    "module": "Allocations",
+    "name": "delete returned allocation",
+    "status": "PASS",
+    "ms": 1010
+  },
+  {
+    "module": "Allocations",
+    "name": "deleting active allocation refreshes available-asset dropdown",
+    "status": "PASS",
+    "ms": 712
+  },
+  {
+    "module": "Maintenance",
+    "name": "create Repair through form",
+    "status": "PASS",
+    "ms": 779
+  },
+  {
+    "module": "Maintenance",
+    "name": "starting maintenance updates the Assets page",
+    "status": "PASS",
+    "ms": 588
+  },
+  {
+    "module": "Maintenance",
+    "name": "manual availability is blocked with a visible error",
+    "status": "PASS",
+    "ms": 670
+  },
+  {
+    "module": "Maintenance",
+    "name": "complete repair through modal updates linked asset",
+    "status": "PASS",
+    "ms": 887
+  },
+  {
+    "module": "Maintenance",
+    "name": "Upgrade form option saves successfully",
+    "status": "PASS",
+    "ms": 810
+  },
+  {
+    "module": "Maintenance",
+    "name": "Inspection form option saves successfully",
+    "status": "PASS",
+    "ms": 836
+  },
+  {
+    "module": "Maintenance",
+    "name": "Replacement form option saves successfully",
+    "status": "PASS",
+    "ms": 757
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cleaning form option saves successfully",
+    "status": "PASS",
+    "ms": 794
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled form option saves successfully",
+    "status": "PASS",
+    "ms": 904
+  },
+  {
+    "module": "Maintenance",
+    "name": "status filter and delete completed record",
+    "status": "PASS",
+    "ms": 882
+  },
+  {
+    "module": "Maintenance",
+    "name": "Escape closes the maintenance modal",
+    "status": "PASS",
+    "ms": 738
+  },
+  {
+    "module": "Users",
+    "name": "create system user via form",
+    "status": "PASS",
+    "ms": 814
+  },
+  {
+    "module": "Users",
+    "name": "successful creation shows confirmation",
+    "status": "PASS",
+    "ms": 2
+  },
+  {
+    "module": "Employees",
+    "name": "register company employee via form",
+    "status": "PASS",
+    "ms": 1275
+  },
+  {
+    "module": "Employees",
+    "name": "search and status filters",
+    "status": "PASS",
+    "ms": 82
+  },
+  {
+    "module": "Employees",
+    "name": "registered employee appears in allocation options",
+    "status": "PASS",
+    "ms": 627
+  },
+  {
+    "module": "Employees",
+    "name": "employee edit and delete controls exist",
+    "status": "PASS",
+    "ms": 568
+  },
+  {
+    "module": "Licenses",
+    "name": "create license through form",
+    "status": "PASS",
+    "ms": 747
+  },
+  {
+    "module": "Licenses",
+    "name": "type, usage, cost and notes survive reload",
+    "status": "PASS",
+    "ms": 556
+  },
+  {
+    "module": "Licenses",
+    "name": "edit software name",
+    "status": "PASS",
+    "ms": 670
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon saves through form",
+    "status": "PASS",
+    "ms": 1629
+  },
+  {
+    "module": "Licenses",
+    "name": "delete license",
+    "status": "PASS",
+    "ms": 870
+  },
+  {
+    "module": "QR codes",
+    "name": "image renders, View selects asset and Download PNG works",
+    "status": "PASS",
+    "ms": 1005
+  },
+  {
+    "module": "QR codes",
+    "name": "invalid lookup displays error",
+    "status": "PASS",
+    "ms": 90
+  },
+  {
+    "module": "QR codes",
+    "name": "manual lookup and status update",
+    "status": "FAIL",
+    "detail": "locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Update status' })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled class=\"rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white disabled:opacity-50\">Update status</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    11 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "ms": 7275,
+    "screenshot": "screenshots/failure-50.png"
+  },
+  {
+    "module": "QR codes",
+    "name": "regenerate invalidates previous token",
+    "status": "PASS",
+    "ms": 206
+  }
+]

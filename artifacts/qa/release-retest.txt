@@ -1,0 +1,189 @@
+◇ injected env (2) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+▶ Release server, accessibility, layouts and navigation
+  ✔ production serves deep links, rejects missing API/assets and sets security headers (20.815ms)
+  ✔ / fits 1440px and tables remain reachable (917.279458ms)
+  ✔ / fits 1024px and tables remain reachable (741.486917ms)
+  ✔ / fits 768px and tables remain reachable (767.71675ms)
+  ✔ / fits 390px and tables remain reachable (795.877208ms)
+  ✔ / axe WCAG A/AA scan (5720.831708ms)
+  ✔ /dashboard fits 1440px and tables remain reachable (1677.085ms)
+  ✔ /dashboard fits 1024px and tables remain reachable (1008.11625ms)
+  ✔ /dashboard fits 768px and tables remain reachable (1028.496208ms)
+  ✔ /dashboard fits 390px and tables remain reachable (839.199625ms)
+  ✔ /dashboard axe WCAG A/AA scan (1395.060875ms)
+  ✔ /assets fits 1440px and tables remain reachable (653.205583ms)
+  ✔ /assets fits 1024px and tables remain reachable (2530.665792ms)
+  ✔ /assets fits 768px and tables remain reachable (867.1065ms)
+  ✔ /assets fits 390px and tables remain reachable (667.648875ms)
+  ✔ /assets axe WCAG A/AA scan (2511.004708ms)
+  ✔ /assets/add fits 1440px and tables remain reachable (666.798958ms)
+  ✔ /assets/add fits 1024px and tables remain reachable (667.15475ms)
+  ✔ /assets/add fits 768px and tables remain reachable (614.636959ms)
+  ✔ /assets/add fits 390px and tables remain reachable (732.197375ms)
+  ✔ /assets/add axe WCAG A/AA scan (1932.754209ms)
+  ✔ /assets/6ab8bae4ad3f2533d4b90786/edit fits 1440px and tables remain reachable (1732.710458ms)
+  ✔ /assets/6ab8bae4ad3f2533d4b90786/edit fits 1024px and tables remain reachable (943.088708ms)
+  ✔ /assets/6ab8bae4ad3f2533d4b90786/edit fits 768px and tables remain reachable (719.318875ms)
+  ✔ /assets/6ab8bae4ad3f2533d4b90786/edit fits 390px and tables remain reachable (713.661833ms)
+  ✔ /assets/6ab8bae4ad3f2533d4b90786/edit axe WCAG A/AA scan (2454.952708ms)
+  ✔ /allocations fits 1440px and tables remain reachable (1721.989917ms)
+  ✔ /allocations fits 1024px and tables remain reachable (828.024666ms)
+  ✔ /allocations fits 768px and tables remain reachable (667.526416ms)
+  ✔ /allocations fits 390px and tables remain reachable (871.004208ms)
+  ✔ /allocations axe WCAG A/AA scan (1122.012ms)
+  ✔ /users fits 1440px and tables remain reachable (779.096125ms)
+  ✔ /users fits 1024px and tables remain reachable (791.444917ms)
+  ✔ /users fits 768px and tables remain reachable (1773.821666ms)
+  ✔ /users fits 390px and tables remain reachable (1191.496042ms)
+  ✔ /users axe WCAG A/AA scan (2442.434292ms)
+  ✔ /employees fits 1440px and tables remain reachable (1195.447625ms)
+  ✔ /employees fits 1024px and tables remain reachable (1128.23575ms)
+  ✔ /employees fits 768px and tables remain reachable (662.373125ms)
+  ✔ /employees fits 390px and tables remain reachable (729.377291ms)
+  ✔ /employees axe WCAG A/AA scan (2014.852792ms)
+  ✔ /licenses fits 1440px and tables remain reachable (674.32125ms)
+  ✔ /licenses fits 1024px and tables remain reachable (615.67275ms)
+  ✔ /licenses fits 768px and tables remain reachable (678.447375ms)
+  ✔ /licenses fits 390px and tables remain reachable (625.225708ms)
+  ✔ /licenses axe WCAG A/AA scan (1185.714334ms)
+  ✔ /maintainence fits 1440px and tables remain reachable (637.418875ms)
+  ✔ /maintainence fits 1024px and tables remain reachable (623.320125ms)
+  ✔ /maintainence fits 768px and tables remain reachable (628.112083ms)
+  ✔ /maintainence fits 390px and tables remain reachable (607.752875ms)
+  ✖ /maintainence axe WCAG A/AA scan (1350.363667ms)
+  ✔ /qr-codes fits 1440px and tables remain reachable (912.167459ms)
+  ✔ /qr-codes fits 1024px and tables remain reachable (911.069167ms)
+  ✔ /qr-codes fits 768px and tables remain reachable (1391.390333ms)
+  ✔ /qr-codes fits 390px and tables remain reachable (891.019625ms)
+  ✔ /qr-codes axe WCAG A/AA scan (2211.730834ms)
+  ✔ /profile fits 1440px and tables remain reachable (749.242042ms)
+  ✔ /profile fits 1024px and tables remain reachable (782.458291ms)
+  ✔ /profile fits 768px and tables remain reachable (893.67425ms)
+  ✔ /profile fits 390px and tables remain reachable (685.090792ms)
+  ✔ /profile axe WCAG A/AA scan (1923.398958ms)
+  ✖ /allocations modal keyboard focus, Escape, mobile sizing and axe (3385.107666ms)
+  ✖ /licenses modal keyboard focus, Escape, mobile sizing and axe (797.08525ms)
+  ✖ /maintainence modal keyboard focus, Escape, mobile sizing and axe (642.418ms)
+  ✔ Profile is in the account footer and collapse preserves its accessible link (199.001083ms)
+  ✔ camera startup works under production CSP and stops cleanly (1850.664292ms)
+  ✔ login throttle returns 429 after repeated attempts (166.973667ms)
+✖ Release server, accessibility, layouts and navigation (88732.999375ms)
+ℹ tests 68
+ℹ suites 0
+ℹ pass 63
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89178.681958
+
+✖ failing tests:
+
+test at tests/releaseReadiness.test.cjs:85:15
+✖ /maintainence axe WCAG A/AA scan (1350.363667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   {
+  +     id: 'color-contrast',
+  +     nodes: [
+  +       [
+  +         'div:nth-child(2) > button:nth-child(2)'
+  +       ],
+  +       [
+  +         'div:nth-child(2) > button:nth-child(3)'
+  +       ],
+  +       [
+  +         'button:nth-child(4)'
+  +       ],
+  +       [
+  +         'button:nth-child(5)'
+  +       ]
+  +     ]
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:91:16)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:85:7)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'color-contrast', nodes: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/releaseReadiness.test.cjs:95:15
+✖ /allocations modal keyboard focus, Escape, mobile sizing and axe (3385.107666ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   {
+  +     id: 'color-contrast',
+  +     nodes: [
+  +       [
+  +         '.text-xs'
+  +       ]
+  +     ]
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:109:16)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:95:7)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'color-contrast', nodes: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/releaseReadiness.test.cjs:95:15
+✖ /licenses modal keyboard focus, Escape, mobile sizing and axe (797.08525ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await dialog.evaluate(el => el.contains(document.activeElement)))
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:103:18)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:472:9)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:95:7)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/releaseReadiness.test.cjs:95:15
+✖ /maintainence modal keyboard focus, Escape, mobile sizing and axe (642.418ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await dialog.evaluate(el => el.contains(document.activeElement)))
+  
+      at TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:103:18)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async TestContext.<anonymous> (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/releaseReadiness.test.cjs:95:7)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 import AuthGuard from "../components/AuthGuard";
+import Modal from "../components/Modal";
 import { allocations, assets, employees, type Allocation, type Asset, type Employee } from "../lib/api";
 import { Plus, RotateCcw, Trash2, X } from "lucide-react";
 
@@ -127,13 +128,13 @@ export default function AllocationsPage() {
             style={{ backgroundColor: "white", border: "1px solid #f3f4f6", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
           >
             {loading ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#9ca3af" }}>Loading allocations...</div>
+              <div className="p-12 text-center text-sm" style={{ color: "#64748b" }}>Loading allocations...</div>
             ) : error ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#dc2626" }}>{error}</div>
+              <div className="p-12 text-center text-sm" style={{ color: "#b91c1c" }}>{error}</div>
             ) : list.length === 0 ? (
-              <div className="p-12 text-center text-sm" style={{ color: "#9ca3af" }}>No allocations yet</div>
+              <div className="p-12 text-center text-sm" style={{ color: "#64748b" }}>No allocations yet</div>
             ) : (
-              <div style={{ overflowX: "auto" }}>
+              <div className="table-scroll" style={{ overflowX: "auto" }}>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-xs uppercase tracking-wide" style={{ borderBottom: "1px solid #f3f4f6", color: "#6b7280" }}>
@@ -156,7 +157,7 @@ export default function AllocationsPage() {
                           </td>
                           <td className="px-6 py-4" style={{ color: "#374151" }}>
                             <div>{al.employee?.fullName || al.user?.fullName || "Unavailable assignee"}</div>
-                            <div className="text-xs mt-0.5" style={{ color: "#9ca3af" }}>
+                            <div className="text-xs mt-0.5" style={{ color: "#64748b" }}>
                               {al.employee?.employeeId || (al.user ? "Legacy account assignment" : "Missing reference")}
                             </div>
                           </td>
@@ -177,11 +178,11 @@ export default function AllocationsPage() {
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
                               {al.allocationStatus === "Allocated" && (
-                                <button onClick={() => handleReturn(al._id)} className="p-1.5 rounded-lg" style={{ color: "#9ca3af" }} title="Return">
+                                <button onClick={() => handleReturn(al._id)} className="p-1.5 rounded-lg" style={{ color: "#64748b" }} title="Return">
                                   <RotateCcw size={15} />
                                 </button>
                               )}
-                              <button onClick={() => handleDelete(al._id)} className="p-1.5 rounded-lg" style={{ color: "#9ca3af" }} title="Delete">
+                              <button onClick={() => handleDelete(al._id)} className="p-1.5 rounded-lg" style={{ color: "#64748b" }} title="Delete">
                                 <Trash2 size={15} />
                               </button>
                             </div>
@@ -198,35 +199,32 @@ export default function AllocationsPage() {
       </div>
 
       {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-        >
+        <Modal title="New Allocation" busy={submitting} onClose={() => setShowModal(false)}>
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
             <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: "1px solid #f3f4f6" }}>
               <h2 className="text-base font-semibold" style={{ color: "#111827" }}>New Allocation</h2>
-              <button onClick={() => setShowModal(false)} style={{ color: "#9ca3af" }}>
+              <button aria-label="Close dialog" title="Close dialog" onClick={() => setShowModal(false)} style={{ color: "#64748b" }}>
                 <X size={20} />
               </button>
             </div>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Asset *</label>
-                <select name="asset" value={form.asset} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
+                <label htmlFor="AllocationsPage-field-1" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Asset *</label>
+                <select id="AllocationsPage-field-1" name="asset" value={form.asset} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
                   <option value="">Select available asset</option>
                   {availableAssets.map((a) => (
                     <option key={a._id} value={a._id}>{a.assetName}</option>
                   ))}
                 </select>
                 {availableAssets.length === 0 && (
-                  <p className="text-xs mt-1" style={{ color: "#d97706" }}>No available assets to allocate.</p>
+                  <p className="text-xs mt-1" style={{ color: "#92400e" }}>No available assets to allocate.</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Assign To *</label>
+                <label htmlFor="AllocationsPage-field-2" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Assign To *</label>
                 {/* Updated dropdown mapping to use u.id and u.name */}
-                <select name="employee" aria-label="Employee" value={form.employee} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
+                <select id="AllocationsPage-field-2" name="employee" aria-label="Employee" value={form.employee} onChange={handleChange} style={{ ...inputStyle, backgroundColor: "white" }}>
                   <option value="">Select employee</option>
                   {assignees.map((employee) => (
                     <option key={employee._id} value={employee._id}>{employee.fullName} ({employee.employeeId})</option>
@@ -235,13 +233,13 @@ export default function AllocationsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Allocation Date *</label>
-                <input name="allocationDate" type="date" value={form.allocationDate} onChange={handleChange} required style={inputStyle} />
+                <label htmlFor="AllocationsPage-field-3" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Allocation Date *</label>
+                <input id="AllocationsPage-field-3" name="allocationDate" type="date" value={form.allocationDate} onChange={handleChange} required style={inputStyle} />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Remarks</label>
-                <textarea
+                <label htmlFor="AllocationsPage-field-4" className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>Remarks</label>
+                <textarea id="AllocationsPage-field-4"
                   name="remarks"
                   value={form.remarks}
                   onChange={handleChange}
@@ -252,7 +250,7 @@ export default function AllocationsPage() {
               </div>
 
               {formError && (
-                <div className="p-3 rounded-lg text-sm" style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626" }}>
+                <div className="p-3 rounded-lg text-sm" style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", color: "#b91c1c" }}>
                   {formError}
                 </div>
               )}
@@ -277,7 +275,7 @@ export default function AllocationsPage() {
               </div>
             </form>
           </div>
-        </div>
+        </Modal>
       )}
     </AuthGuard>
   );

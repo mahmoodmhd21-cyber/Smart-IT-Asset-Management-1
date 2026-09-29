@@ -1,0 +1,17 @@
+[
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  }
+]

@@ -5,8 +5,7 @@ const connectDB = async () => {
     const uri = process.env.MONGO_URI;
 
     if (!uri) {
-        console.warn("MONGO_URI is missing. API routes that need the database will fail until it is configured.");
-        return null;
+        throw new Error("MONGO_URI is required.");
     }
 
     try {
@@ -17,8 +16,7 @@ const connectDB = async () => {
         console.log("MongoDB connected successfully");
         return mongoose.connection;
     } catch (error) {
-        console.error("MongoDB connection failed:", error.message);
-        return null;
+        throw new Error(`MongoDB connection failed: ${error.message}`);
     }
 };
 

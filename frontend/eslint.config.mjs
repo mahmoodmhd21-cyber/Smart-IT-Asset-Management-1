@@ -1,18 +1,19 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import hooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+// Lint the active Vite application, not the retired Next/static implementations.
+export default tseslint.config(
+  { ignores: ["dist/**", "node_modules/**", "app/**", "components/**", "lib/**", "next-env.d.ts"] },
+  {
+    files: ["src/**/*.{ts,tsx}", "vite.config.ts"],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    plugins: { "react-hooks": hooks },
+    rules: {
+      "react-hooks/rules-of-hooks": "error",
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", caughtErrors: "none" }],
+    },
+  },
+);

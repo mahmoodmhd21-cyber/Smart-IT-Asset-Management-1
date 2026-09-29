@@ -35,7 +35,7 @@ export default function DashboardPage() {
     { label: "Total Assets", value: total, icon: Server, color: "#2563eb", bg: "#eff6ff" },
     { label: "Available", value: available, icon: CheckCircle, color: "#16a34a", bg: "#f0fdf4" },
     { label: "Allocated", value: allocated, icon: GitBranch, color: "#d97706", bg: "#fffbeb" },
-    { label: "Maintenance", value: maintenance, icon: AlertCircle, color: "#dc2626", bg: "#fef2f2" },
+    { label: "Maintenance", value: maintenance, icon: AlertCircle, color: "#b91c1c", bg: "#fef2f2" },
   ];
 
   const recentAllocations = allocationList
@@ -57,7 +57,7 @@ export default function DashboardPage() {
           </div>
 
           {error ? <LoadError message={error} retry={loadDashboard} /> : loading ? (
-            <div style={{ color: "#9ca3af" }} className="text-sm">
+            <div style={{ color: "#64748b" }} className="text-sm">
               Loading...
             </div>
           ) : (
@@ -99,7 +99,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     {recentAllocations.length === 0 ? (
-                      <p className="px-6 py-8 text-sm text-center" style={{ color: "#9ca3af" }}>
+                      <p className="px-6 py-8 text-sm text-center" style={{ color: "#64748b" }}>
                         No active allocations
                       </p>
                     ) : (

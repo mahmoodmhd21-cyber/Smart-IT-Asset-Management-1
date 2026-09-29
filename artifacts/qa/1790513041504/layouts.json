@@ -1,0 +1,65 @@
+[
+  {
+    "route": "/dashboard",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/assets",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/assets/add",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/users",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/employees",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/licenses",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/maintainence",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/qr-codes",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  },
+  {
+    "route": "/profile",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "clippedTables": 0
+  }
+]

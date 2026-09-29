@@ -1,0 +1,40 @@
+{
+  "runId": "1790513350710",
+  "node": "v24.17.0",
+  "suites": [
+    {
+      "file": "api-results.json",
+      "total": 40,
+      "passed": 40,
+      "failed": 0
+    },
+    {
+      "file": "frontend-results.json",
+      "total": 111,
+      "passed": 111,
+      "failed": 0
+    },
+    {
+      "file": "edge-results.json",
+      "total": 11,
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "file": "control-results.json",
+      "total": 28,
+      "passed": 28,
+      "failed": 0
+    }
+  ],
+  "passed": 190,
+  "failed": 0,
+  "separateEvidence": {
+    "regression": "artifacts/qa/final-regression-stable.txt",
+    "build": "artifacts/qa/release-build.txt",
+    "lint": "artifacts/qa/release-lint.txt",
+    "note": "These commands are not executed by this summary script; inspect their separate results."
+  },
+  "sourceFiles": 59,
+  "sourceDrift": []
+}

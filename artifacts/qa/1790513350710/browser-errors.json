@@ -1,0 +1,87 @@
+[
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/assets/6ab9113bdf747989a9493b27/edit",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/qr-codes",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/licenses",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/maintainence",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/employees",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/dashboard",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/dashboard",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/profile",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/assets",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/assets",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  },
+  {
+    "url": "http://127.0.0.1:3301/",
+    "type": "console",
+    "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  }
+]

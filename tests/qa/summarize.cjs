@@ -13,9 +13,13 @@ for (const file of suites) {
   summary.passed += passed;
   summary.failed += failed;
 }
-summary.controllerRegression = { passed: 17, failed: 0 };
-summary.build = { passed: true, method: 'npm ci followed by npm run build in an isolated copy using unchanged lockfiles' };
-summary.lint = { passed: false, reason: "Cannot find package 'eslint-config-next'" };
+// Never present the original audit's hard-coded build/lint/controller results as fresh checks.
+summary.separateEvidence = {
+  regression: 'artifacts/qa/final-regression-stable.txt',
+  build: 'artifacts/qa/release-build.txt',
+  lint: 'artifacts/qa/release-lint.txt',
+  note: 'These commands are not executed by this summary script; inspect their separate results.',
+};
 
 const manifest = [];
 function inspect(relative) {
@@ -29,7 +33,7 @@ function inspect(relative) {
     manifest.push({ file: relative, sha256: sourceHash, matchesTestedCopy: sourceHash === copiedHash });
   }
 }
-for (const name of ['server.js', 'controllers', 'models', 'routes', 'middleware', 'config', 'frontend/src', 'package.json', 'package-lock.json', 'frontend/package.json', 'frontend/package-lock.json']) inspect(name);
+for (const name of ['server.js', 'controllers', 'models', 'routes', 'middleware', 'config', 'services', 'frontend/src', 'frontend/eslint.config.mjs', 'package.json', 'package-lock.json', 'frontend/package.json', 'frontend/package-lock.json']) inspect(name);
 summary.sourceFiles = manifest.length;
 summary.sourceDrift = manifest.filter((file) => !file.matchesTestedCopy);
 fs.writeFileSync(path.join(state.output, 'source-manifest.json'), JSON.stringify(manifest, null, 2));

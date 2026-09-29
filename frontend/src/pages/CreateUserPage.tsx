@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 // FIX: Imported both auth and employees services
 import { auth, employees, getCurrentUser, type Employee } from "../lib/api"; 
-import { UserPlus, Briefcase, Shield, UserCheck, Users, UserX, LogOut, Pencil } from "lucide-react";
+import { UserPlus, UserCheck, UserX, LogOut, Pencil } from "lucide-react";
 import LoadError from "../components/LoadError";
 import ManagementEditor from "../components/ManagementEditor";
 
@@ -238,7 +238,7 @@ export default function CreateUserPage() {
             </button>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "28px", alignItems: "start" }}>
+          <div className="provisioning-grid" style={{ display: "grid", minWidth: 0, gap: "28px", alignItems: "start" }}>
             
             {/* Left Column: Context-Aware Creation Form */}
             <div style={{ backgroundColor: "white", borderRadius: "12px", border: "1px solid #e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", overflow: "hidden" }}>
@@ -258,23 +258,23 @@ export default function CreateUserPage() {
                     // --- USER FORM FIELDS ---
                     <>
                       <div>
-                        <label style={labelStyle}>Full Name</label>
-                        <input name="fullName" value={userForm.fullName} onChange={handleUserChange} placeholder="John Doe" required style={fieldStyle} />
+                        <label htmlFor="CreateUserPage-field-1" style={labelStyle}>Full Name</label>
+                        <input id="CreateUserPage-field-1" name="fullName" value={userForm.fullName} onChange={handleUserChange} placeholder="John Doe" required style={fieldStyle} />
                       </div>
 
                       <div>
-                        <label style={labelStyle}>Email Address</label>
-                        <input name="email" type="email" value={userForm.email} onChange={handleUserChange} placeholder="john@company.com" required style={fieldStyle} />
+                        <label htmlFor="CreateUserPage-field-2" style={labelStyle}>Email Address</label>
+                        <input id="CreateUserPage-field-2" name="email" type="email" value={userForm.email} onChange={handleUserChange} placeholder="john@company.com" required style={fieldStyle} />
                       </div>
 
                       <div>
-                        <label style={labelStyle}>Password</label>
-                        <input name="password" type="password" value={userForm.password} onChange={handleUserChange} placeholder="Min. 6 characters" required minLength={6} style={fieldStyle} />
+                        <label htmlFor="CreateUserPage-field-3" style={labelStyle}>Password</label>
+                        <input id="CreateUserPage-field-3" name="password" type="password" value={userForm.password} onChange={handleUserChange} placeholder="Min. 6 characters" required minLength={6} style={fieldStyle} />
                       </div>
 
                       <div>
-                        <label style={labelStyle}>System Role</label>
-                        <select name="role" value={userForm.role} onChange={handleUserChange} style={fieldStyle}>
+                        <label htmlFor="CreateUserPage-field-4" style={labelStyle}>System Role</label>
+                        <select id="CreateUserPage-field-4" name="role" value={userForm.role} onChange={handleUserChange} style={fieldStyle}>
                           {USER_ROLES.map((r) => (
                             <option key={r} value={r}>{r}</option>
                           ))}
@@ -284,41 +284,41 @@ export default function CreateUserPage() {
                   ) : (
                     // --- EMPLOYEE FORM FIELDS ---
                     <>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div className="responsive-grid" style={{ display: "grid", minWidth: 0, gap: "12px" }}>
                         <div>
-                          <label style={labelStyle}>Full Name</label>
-                          <input name="fullName" value={employeeForm.fullName} onChange={handleEmployeeChange} placeholder="Jane Doe" required style={fieldStyle} />
+                          <label htmlFor="CreateUserPage-field-5" style={labelStyle}>Full Name</label>
+                          <input id="CreateUserPage-field-5" name="fullName" value={employeeForm.fullName} onChange={handleEmployeeChange} placeholder="Jane Doe" required style={fieldStyle} />
                         </div>
                         <div>
-                          <label style={labelStyle}>Employee ID</label>
-                          <input name="employeeId" value={employeeForm.employeeId} onChange={handleEmployeeChange} placeholder="EMP-1024" required style={fieldStyle} />
+                          <label htmlFor="CreateUserPage-field-6" style={labelStyle}>Employee ID</label>
+                          <input id="CreateUserPage-field-6" name="employeeId" value={employeeForm.employeeId} onChange={handleEmployeeChange} placeholder="EMP-1024" required style={fieldStyle} />
                         </div>
                       </div>
 
                       <div>
-                        <label style={labelStyle}>Email Address</label>
-                        <input name="email" type="email" value={employeeForm.email} onChange={handleEmployeeChange} placeholder="jane@company.com" required style={fieldStyle} />
+                        <label htmlFor="CreateUserPage-field-7" style={labelStyle}>Email Address</label>
+                        <input id="CreateUserPage-field-7" name="email" type="email" value={employeeForm.email} onChange={handleEmployeeChange} placeholder="jane@company.com" required style={fieldStyle} />
                       </div>
 
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div className="responsive-grid" style={{ display: "grid", minWidth: 0, gap: "12px" }}>
                         <div>
-                          <label style={labelStyle}>Department</label>
-                          <input name="department" value={employeeForm.department} onChange={handleEmployeeChange} placeholder="Engineering" required style={fieldStyle} />
+                          <label htmlFor="CreateUserPage-field-8" style={labelStyle}>Department</label>
+                          <input id="CreateUserPage-field-8" name="department" value={employeeForm.department} onChange={handleEmployeeChange} placeholder="Engineering" required style={fieldStyle} />
                         </div>
                         <div>
-                          <label style={labelStyle}>Designation</label>
-                          <input name="designation" value={employeeForm.designation} onChange={handleEmployeeChange} placeholder="Software Engineer" required style={fieldStyle} />
+                          <label htmlFor="CreateUserPage-field-9" style={labelStyle}>Designation</label>
+                          <input id="CreateUserPage-field-9" name="designation" value={employeeForm.designation} onChange={handleEmployeeChange} placeholder="Software Engineer" required style={fieldStyle} />
                         </div>
                       </div>
 
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div className="responsive-grid" style={{ display: "grid", minWidth: 0, gap: "12px" }}>
                         <div>
-                          <label style={labelStyle}>Phone Number (Optional)</label>
-                          <input name="phone" value={employeeForm.phone} onChange={handleEmployeeChange} placeholder="+12345678" style={fieldStyle} />
+                          <label htmlFor="CreateUserPage-field-10" style={labelStyle}>Phone Number (Optional)</label>
+                          <input id="CreateUserPage-field-10" name="phone" value={employeeForm.phone} onChange={handleEmployeeChange} placeholder="+12345678" style={fieldStyle} />
                         </div>
                         <div>
-                          <label style={labelStyle}>Status</label>
-                          <select name="status" value={employeeForm.status} onChange={handleEmployeeChange} style={fieldStyle}>
+                          <label htmlFor="CreateUserPage-field-11" style={labelStyle}>Status</label>
+                          <select id="CreateUserPage-field-11" name="status" value={employeeForm.status} onChange={handleEmployeeChange} style={fieldStyle}>
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                           </select>
@@ -327,7 +327,7 @@ export default function CreateUserPage() {
                     </>
                   )}
 
-                  {error && <div style={{ padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#dc2626", fontSize: "0.8125rem" }}>{error}</div>}
+                  {error && <div style={{ padding: "10px 14px", backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", color: "#b91c1c", fontSize: "0.8125rem" }}>{error}</div>}
                   {success && <div style={{ padding: "10px 14px", backgroundColor: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "8px", color: "#15803d", fontSize: "0.8125rem" }}>{success}</div>}
 
                   <button type="submit" disabled={loading} style={{ width: "100%", padding: "11px", backgroundColor: loading ? "#93c5fd" : "#2563eb", color: "white", border: "none", borderRadius: "8px", fontSize: "0.875rem", fontWeight: 600, cursor: loading ? "not-allowed" : "pointer", marginTop: "4px" }}>
@@ -350,21 +350,21 @@ export default function CreateUserPage() {
 
               <div style={{ maxHeight: "480px", overflowY: "auto" }}>
                 {listLoading ? (
-                  <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>Loading directory…</div>
+                  <div style={{ padding: "40px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>Loading directory…</div>
                 ) : listError ? <p className="p-5">Directory data unavailable.</p> : activeTab === "user" ? (
                   // SYSTEM USERS LIST RENDERER
                   userList.length === 0 ? (
-                    <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>No users found.</div>
+                    <div style={{ padding: "40px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>No users found.</div>
                   ) : (
                     userList.map((u, i) => (
-                      <div key={u.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", borderBottom: i < userList.length - 1 ? "1px solid #f1f5f9" : "none" }}>
+                      <div className="page-toolbar" key={u.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", borderBottom: i < userList.length - 1 ? "1px solid #f1f5f9" : "none" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                           <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "0.875rem", flexShrink: 0 }}>
                             {u.name?.charAt(0).toUpperCase() || "?"}
                           </div>
                           <div>
                             <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "#0f172a" }}>{u.name}</p>
-                            <p style={{ margin: "1px 0 0", fontSize: "0.75rem", color: "#94a3b8" }}>{u.email || "No Email"}</p>
+                            <p style={{ margin: "1px 0 0", fontSize: "0.75rem", color: "#64748b" }}>{u.email || "No Email"}</p>
                           </div>
                         </div>
                         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
@@ -392,17 +392,17 @@ export default function CreateUserPage() {
                 ) : (
                   // EMPLOYEES LIST RENDERER
                   employeeList.length === 0 ? (
-                    <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>No employees found.</div>
+                    <div style={{ padding: "40px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>No employees found.</div>
                   ) : (
                     employeeList.map((emp, i) => (
-                      <div key={emp._id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", borderBottom: i < employeeList.length - 1 ? "1px solid #f1f5f9" : "none" }}>
+                      <div className="page-toolbar" key={emp._id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", borderBottom: i < employeeList.length - 1 ? "1px solid #f1f5f9" : "none" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                           <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "0.875rem", flexShrink: 0 }}>
                             {emp.fullName?.charAt(0).toUpperCase() || "?"}
                           </div>
                           <div>
                             <p style={{ margin: 0, fontSize: "0.875rem", fontWeight: 600, color: "#0f172a" }}>{emp.fullName}</p>
-                            <p style={{ margin: "1px 0 0", fontSize: "0.75rem", color: "#94a3b8" }}>{emp.employeeId} • {emp.designation}</p>
+                            <p style={{ margin: "1px 0 0", fontSize: "0.75rem", color: "#64748b" }}>{emp.employeeId} • {emp.designation}</p>
                           </div>
                         </div>
                         <span style={{ fontSize: "0.75rem", fontWeight: 600, color: emp.status === "Active" ? "#15803d" : "#4b5563" }}>

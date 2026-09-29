@@ -173,7 +173,7 @@ export default function QRCodePage() {
         <main className="min-w-0 flex-1 overflow-auto p-4 md:p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-900">QR Code Management</h1>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-600">
               {records.length} of {assetList.length} assets have generated QR codes
             </p>
           </div>
@@ -200,7 +200,7 @@ export default function QRCodePage() {
                 </div>
                 <div>
                   <h2 className="text-base font-semibold text-gray-900">Generate asset label</h2>
-                  <p className="text-sm text-gray-500">Create and download a printable QR code</p>
+                  <p className="text-sm text-gray-600">Create and download a printable QR code</p>
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ export default function QRCodePage() {
                     className="h-64 w-64 object-contain"
                   />
                 ) : (
-                  <div className="text-center text-gray-400">
+                  <div className="text-center text-gray-600">
                     <QrCode className="mx-auto mb-3" size={54} strokeWidth={1.25} />
                     <p className="text-sm">No QR code generated for this asset</p>
                   </div>
@@ -277,13 +277,13 @@ export default function QRCodePage() {
                 </div>
                 <div>
                   <h2 className="text-base font-semibold text-gray-900">Scan and identify</h2>
-                  <p className="text-sm text-gray-500">Retrieve the linked asset and manage its status</p>
+                  <p className="text-sm text-gray-600">Retrieve the linked asset and manage its status</p>
                 </div>
               </div>
 
               <QRScanner onDecode={handleLookup} />
 
-              <div className="my-4 flex items-center gap-3 text-xs uppercase text-gray-400">
+              <div className="my-4 flex items-center gap-3 text-xs uppercase text-gray-600">
                 <span className="h-px flex-1 bg-gray-200" />
                 Manual lookup
                 <span className="h-px flex-1 bg-gray-200" />
@@ -297,6 +297,7 @@ export default function QRCodePage() {
                     if (event.key === "Enter") void handleLookup();
                   }}
                   placeholder="Paste a QR URL or token"
+                  aria-label="QR URL or token"
                   className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
                 />
                 <button
@@ -312,11 +313,11 @@ export default function QRCodePage() {
                 <div className="mt-5 border-t border-gray-200 pt-5">
                   <div className="mb-4 flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs font-medium uppercase text-gray-400">Identified asset</p>
+                      <p className="text-xs font-medium uppercase text-gray-600">Identified asset</p>
                       <h3 className="mt-1 text-lg font-semibold text-gray-900">
                         {scannedRecord.asset.assetName}
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-600">
                         {[scannedRecord.asset.brand, scannedRecord.asset.model]
                           .filter(Boolean)
                           .join(" · ") || "No brand or model"}
@@ -327,19 +328,19 @@ export default function QRCodePage() {
 
                   <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
                     <div>
-                      <dt className="text-gray-400">Category</dt>
+                      <dt className="text-gray-600">Category</dt>
                       <dd className="font-medium text-gray-700">{scannedRecord.asset.category || "—"}</dd>
                     </div>
                     <div>
-                      <dt className="text-gray-400">Location</dt>
+                      <dt className="text-gray-600">Location</dt>
                       <dd className="font-medium text-gray-700">{scannedRecord.asset.location || "—"}</dd>
                     </div>
                     <div>
-                      <dt className="text-gray-400">Scans</dt>
+                      <dt className="text-gray-600">Scans</dt>
                       <dd className="font-medium text-gray-700">{scannedRecord.scanCount}</dd>
                     </div>
                     <div>
-                      <dt className="text-gray-400">Current status</dt>
+                      <dt className="text-gray-600">Current status</dt>
                       <dd>
                         <span
                           className="inline-flex rounded-full px-2 py-0.5 text-xs font-medium"
@@ -353,6 +354,7 @@ export default function QRCodePage() {
 
                   <div className="mt-5 flex gap-2 border-t border-gray-100 pt-4">
                     <select
+                      aria-label="New asset status"
                       value={nextStatus}
                       onChange={(event) => setNextStatus(event.target.value as Asset["status"])}
                       className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500"
@@ -378,19 +380,19 @@ export default function QRCodePage() {
             <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
               <div>
                 <h2 className="text-base font-semibold text-gray-900">Generated codes</h2>
-                <p className="text-sm text-gray-500">Scan activity for registered asset labels</p>
+                <p className="text-sm text-gray-600">Scan activity for registered asset labels</p>
               </div>
             </div>
 
             {loading ? (
-              <div className="p-10 text-center text-sm text-gray-400">Loading QR records...</div>
+              <div className="p-10 text-center text-sm text-gray-600">Loading QR records...</div>
             ) : records.length === 0 ? (
-              <div className="p-10 text-center text-sm text-gray-400">No QR codes generated yet</div>
+              <div className="p-10 text-center text-sm text-gray-600">No QR codes generated yet</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-gray-100 bg-gray-50 text-left text-xs uppercase text-gray-500">
+                    <tr className="border-b border-gray-100 bg-gray-50 text-left text-xs uppercase text-gray-600">
                       <th className="px-5 py-3 font-medium">Asset</th>
                       <th className="px-5 py-3 font-medium">Status</th>
                       <th className="px-5 py-3 font-medium">Generated</th>
@@ -404,7 +406,7 @@ export default function QRCodePage() {
                       <tr key={record._id} className="border-b border-gray-50">
                         <td className="px-5 py-3.5">
                           <p className="font-medium text-gray-900">{record.asset.assetName}</p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-gray-600">
                             {[record.asset.brand, record.asset.model].filter(Boolean).join(" ") || "No model"}
                           </p>
                         </td>
@@ -416,11 +418,11 @@ export default function QRCodePage() {
                             {record.asset.status}
                           </span>
                         </td>
-                        <td className="px-5 py-3.5 text-gray-500">
+                        <td className="px-5 py-3.5 text-gray-600">
                           {new Date(record.generatedAt).toLocaleDateString()}
                         </td>
                         <td className="px-5 py-3.5 font-medium text-gray-700">{record.scanCount}</td>
-                        <td className="px-5 py-3.5 text-gray-500">
+                        <td className="px-5 py-3.5 text-gray-600">
                           {record.lastScannedAt
                             ? new Date(record.lastScannedAt).toLocaleString()
                             : "Never"}

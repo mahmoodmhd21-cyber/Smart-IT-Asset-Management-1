@@ -80,7 +80,7 @@ export default function LoginPage() {
             <h1 style={{ color: "white", fontSize: "1.25rem", fontWeight: 700, margin: 0 }}>
               Smart IT Asset
             </h1>
-            <p style={{ color: "#94a3b8", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#64748b", fontSize: "0.875rem", margin: 0 }}>
               Management System
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} style={{ padding: "28px 32px 32px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
               <div>
-                <label
+                <label htmlFor="login-email"
                   style={{
                     display: "block",
                     fontSize: "0.875rem",
@@ -177,7 +177,7 @@ export default function LoginPage() {
                     backgroundColor: "#fef2f2",
                     border: "1px solid #fecaca",
                     borderRadius: "8px",
-                    color: "#dc2626",
+                    color: "#b91c1c",
                     fontSize: "0.875rem",
                   }}
                 >

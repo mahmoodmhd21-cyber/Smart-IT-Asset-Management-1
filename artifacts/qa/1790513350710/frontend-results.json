@@ -1,0 +1,668 @@
+[
+  {
+    "module": "Login",
+    "name": "protected pages redirect without a session",
+    "status": "PASS",
+    "ms": 960
+  },
+  {
+    "module": "Login",
+    "name": "required credentials prevent empty submission",
+    "status": "PASS",
+    "ms": 113
+  },
+  {
+    "module": "Login",
+    "name": "invalid credentials display an error",
+    "status": "PASS",
+    "ms": 424
+  },
+  {
+    "module": "Login",
+    "name": "show-password control is available",
+    "status": "PASS",
+    "ms": 5
+  },
+  {
+    "module": "Login",
+    "name": "valid credentials restore the requested asset route",
+    "status": "PASS",
+    "ms": 1132
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /dashboard",
+    "status": "PASS",
+    "ms": 2532
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets",
+    "status": "PASS",
+    "ms": 1544
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /assets/add",
+    "status": "PASS",
+    "ms": 1470
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /allocations",
+    "status": "PASS",
+    "ms": 1583
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /users",
+    "status": "PASS",
+    "ms": 2313
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /employees",
+    "status": "PASS",
+    "ms": 1663
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /licenses",
+    "status": "PASS",
+    "ms": 1286
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /maintainence",
+    "status": "PASS",
+    "ms": 1639
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /qr-codes",
+    "status": "PASS",
+    "ms": 3049
+  },
+  {
+    "module": "Navigation",
+    "name": "load and refresh /profile",
+    "status": "PASS",
+    "ms": 6766
+  },
+  {
+    "module": "Sidebar",
+    "name": "collapse, persist across navigation, expand with keyboard",
+    "status": "PASS",
+    "ms": 1027
+  },
+  {
+    "module": "Assets",
+    "name": "create asset through form",
+    "status": "PASS",
+    "ms": 888
+  },
+  {
+    "module": "Assets",
+    "name": "edit form is prefilled and persists updates",
+    "status": "PASS",
+    "ms": 1047
+  },
+  {
+    "module": "Assets",
+    "name": "search and status filter work",
+    "status": "PASS",
+    "ms": 1174
+  },
+  {
+    "module": "Assets",
+    "name": "cancel does not create an asset",
+    "status": "PASS",
+    "ms": 1929
+  },
+  {
+    "module": "Assets",
+    "name": "serial number can be entered",
+    "status": "PASS",
+    "ms": 771
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate through modal",
+    "status": "PASS",
+    "ms": 948
+  },
+  {
+    "module": "Allocations",
+    "name": "return action restores availability",
+    "status": "PASS",
+    "ms": 1042
+  },
+  {
+    "module": "Allocations",
+    "name": "delete returned allocation",
+    "status": "PASS",
+    "ms": 1206
+  },
+  {
+    "module": "Allocations",
+    "name": "deleting active allocation refreshes available-asset dropdown",
+    "status": "PASS",
+    "ms": 1200
+  },
+  {
+    "module": "Maintenance",
+    "name": "create Repair through form",
+    "status": "PASS",
+    "ms": 2248
+  },
+  {
+    "module": "Maintenance",
+    "name": "starting maintenance updates the Assets page",
+    "status": "PASS",
+    "ms": 4203
+  },
+  {
+    "module": "Maintenance",
+    "name": "manual availability is blocked with a visible error",
+    "status": "PASS",
+    "ms": 2921
+  },
+  {
+    "module": "Maintenance",
+    "name": "complete repair through modal updates linked asset",
+    "status": "PASS",
+    "ms": 3475
+  },
+  {
+    "module": "Maintenance",
+    "name": "Upgrade form option saves successfully",
+    "status": "PASS",
+    "ms": 2390
+  },
+  {
+    "module": "Maintenance",
+    "name": "Inspection form option saves successfully",
+    "status": "PASS",
+    "ms": 2560
+  },
+  {
+    "module": "Maintenance",
+    "name": "Replacement form option saves successfully",
+    "status": "PASS",
+    "ms": 1808
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cleaning form option saves successfully",
+    "status": "PASS",
+    "ms": 1408
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled form option saves successfully",
+    "status": "PASS",
+    "ms": 1598
+  },
+  {
+    "module": "Maintenance",
+    "name": "status filter and delete completed record",
+    "status": "PASS",
+    "ms": 1681
+  },
+  {
+    "module": "Maintenance",
+    "name": "Escape closes the maintenance modal",
+    "status": "PASS",
+    "ms": 1629
+  },
+  {
+    "module": "Users",
+    "name": "create system user via form",
+    "status": "PASS",
+    "ms": 2533
+  },
+  {
+    "module": "Users",
+    "name": "successful creation shows confirmation",
+    "status": "PASS",
+    "ms": 7
+  },
+  {
+    "module": "Employees",
+    "name": "register company employee via form",
+    "status": "PASS",
+    "ms": 2777
+  },
+  {
+    "module": "Employees",
+    "name": "search and status filters",
+    "status": "PASS",
+    "ms": 197
+  },
+  {
+    "module": "Employees",
+    "name": "registered employee appears in allocation options",
+    "status": "PASS",
+    "ms": 855
+  },
+  {
+    "module": "Employees",
+    "name": "employee edit and delete controls exist",
+    "status": "PASS",
+    "ms": 622
+  },
+  {
+    "module": "Licenses",
+    "name": "create license through form",
+    "status": "PASS",
+    "ms": 3351
+  },
+  {
+    "module": "Licenses",
+    "name": "type, usage, cost and notes survive reload",
+    "status": "PASS",
+    "ms": 1262
+  },
+  {
+    "module": "Licenses",
+    "name": "edit software name",
+    "status": "PASS",
+    "ms": 1906
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon saves through form",
+    "status": "PASS",
+    "ms": 1072
+  },
+  {
+    "module": "Licenses",
+    "name": "delete license",
+    "status": "PASS",
+    "ms": 918
+  },
+  {
+    "module": "QR codes",
+    "name": "image renders, View selects asset and Download PNG works",
+    "status": "PASS",
+    "ms": 1431
+  },
+  {
+    "module": "QR codes",
+    "name": "invalid lookup displays error",
+    "status": "PASS",
+    "ms": 123
+  },
+  {
+    "module": "QR codes",
+    "name": "manual lookup and status update",
+    "status": "PASS",
+    "ms": 1545
+  },
+  {
+    "module": "QR codes",
+    "name": "regenerate invalidates previous token",
+    "status": "PASS",
+    "ms": 548
+  },
+  {
+    "module": "QR codes",
+    "name": "camera start and stop using synthetic test camera",
+    "status": "PASS",
+    "ms": 4936
+  },
+  {
+    "module": "Profile",
+    "name": "name email and role displayed",
+    "status": "PASS",
+    "ms": 1362
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /dashboard",
+    "status": "PASS",
+    "ms": 2757
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets",
+    "status": "PASS",
+    "ms": 2358
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /assets/add",
+    "status": "PASS",
+    "ms": 2112
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /allocations",
+    "status": "PASS",
+    "ms": 1779
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /users",
+    "status": "PASS",
+    "ms": 2972
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /employees",
+    "status": "PASS",
+    "ms": 2300
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /licenses",
+    "status": "PASS",
+    "ms": 2218
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /maintainence",
+    "status": "PASS",
+    "ms": 5362
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /qr-codes",
+    "status": "PASS",
+    "ms": 17436
+  },
+  {
+    "module": "Accessibility",
+    "name": "WCAG A/AA automated scan /profile",
+    "status": "PASS",
+    "ms": 4757
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1440px",
+    "status": "PASS",
+    "ms": 1188
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1440px",
+    "status": "PASS",
+    "ms": 4070
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1440px",
+    "status": "PASS",
+    "ms": 708
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1440px",
+    "status": "PASS",
+    "ms": 1033
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1440px",
+    "status": "PASS",
+    "ms": 889
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1440px",
+    "status": "PASS",
+    "ms": 1002
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1440px",
+    "status": "PASS",
+    "ms": 1289
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1440px",
+    "status": "PASS",
+    "ms": 1435
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1440px",
+    "status": "PASS",
+    "ms": 855
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 1024px",
+    "status": "PASS",
+    "ms": 970
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 1024px",
+    "status": "PASS",
+    "ms": 964
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 1024px",
+    "status": "PASS",
+    "ms": 739
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 1024px",
+    "status": "PASS",
+    "ms": 818
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 1024px",
+    "status": "PASS",
+    "ms": 1087
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 1024px",
+    "status": "PASS",
+    "ms": 1137
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 1024px",
+    "status": "PASS",
+    "ms": 1280
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 1024px",
+    "status": "PASS",
+    "ms": 1787
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 1024px",
+    "status": "PASS",
+    "ms": 750
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 768px",
+    "status": "PASS",
+    "ms": 874
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 768px",
+    "status": "PASS",
+    "ms": 1194
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 768px",
+    "status": "PASS",
+    "ms": 2045
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 768px",
+    "status": "PASS",
+    "ms": 1443
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 768px",
+    "status": "PASS",
+    "ms": 765
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 768px",
+    "status": "PASS",
+    "ms": 843
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 768px",
+    "status": "PASS",
+    "ms": 1250
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 768px",
+    "status": "PASS",
+    "ms": 1352
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 768px",
+    "status": "PASS",
+    "ms": 755
+  },
+  {
+    "module": "Responsive",
+    "name": "/dashboard at 390px",
+    "status": "PASS",
+    "ms": 1014
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets at 390px",
+    "status": "PASS",
+    "ms": 2066
+  },
+  {
+    "module": "Responsive",
+    "name": "/assets/add at 390px",
+    "status": "PASS",
+    "ms": 1850
+  },
+  {
+    "module": "Responsive",
+    "name": "/users at 390px",
+    "status": "PASS",
+    "ms": 3185
+  },
+  {
+    "module": "Responsive",
+    "name": "/employees at 390px",
+    "status": "PASS",
+    "ms": 1819
+  },
+  {
+    "module": "Responsive",
+    "name": "/licenses at 390px",
+    "status": "PASS",
+    "ms": 1497
+  },
+  {
+    "module": "Responsive",
+    "name": "/maintainence at 390px",
+    "status": "PASS",
+    "ms": 1218
+  },
+  {
+    "module": "Responsive",
+    "name": "/qr-codes at 390px",
+    "status": "PASS",
+    "ms": 2055
+  },
+  {
+    "module": "Responsive",
+    "name": "/profile at 390px",
+    "status": "PASS",
+    "ms": 1024
+  },
+  {
+    "module": "Error handling",
+    "name": "/licenses visibly reports API failure",
+    "status": "PASS",
+    "ms": 931
+  },
+  {
+    "module": "Error handling",
+    "name": "/maintainence visibly reports API failure",
+    "status": "PASS",
+    "ms": 632
+  },
+  {
+    "module": "Error handling",
+    "name": "/employees visibly reports API failure",
+    "status": "PASS",
+    "ms": 1706
+  },
+  {
+    "module": "Error handling",
+    "name": "/dashboard visibly reports API failure",
+    "status": "PASS",
+    "ms": 852
+  },
+  {
+    "module": "Error handling",
+    "name": "/profile visibly reports API failure",
+    "status": "PASS",
+    "ms": 981
+  },
+  {
+    "module": "Assets",
+    "name": "delete confirmation can be cancelled",
+    "status": "PASS",
+    "ms": 1685
+  },
+  {
+    "module": "Assets",
+    "name": "delete asset through UI",
+    "status": "PASS",
+    "ms": 2969
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot access user provisioning",
+    "status": "PASS",
+    "ms": 5872
+  },
+  {
+    "module": "Roles",
+    "name": "IT Staff cannot open hidden employee administration route",
+    "status": "PASS",
+    "ms": 816
+  },
+  {
+    "module": "Session",
+    "name": "invalid token redirects to login",
+    "status": "PASS",
+    "ms": 680
+  },
+  {
+    "module": "Session",
+    "name": "logout clears session and protects routes",
+    "status": "PASS",
+    "ms": 2364
+  },
+  {
+    "module": "Accessibility",
+    "name": "login form automated accessibility",
+    "status": "PASS",
+    "ms": 1284
+  }
+]

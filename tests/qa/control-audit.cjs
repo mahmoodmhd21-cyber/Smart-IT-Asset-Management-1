@@ -27,10 +27,10 @@ async function main() {
   await page.locator('[name="password"]').fill(state.password);
   await page.getByRole('button', { name: 'Sign In', exact: true }).click();
   await page.waitForURL('**/dashboard');
-  const navigation = await page.locator('.sidebar-nav a').evaluateAll((links) => links.map((link) => ({ label: link.getAttribute('aria-label'), href: link.getAttribute('href') })));
+  const navigation = await page.locator('.sidebar-nav a, .sidebar-footer a').evaluateAll((links) => links.map((link) => ({ label: link.getAttribute('aria-label'), href: link.getAttribute('href') })));
   for (const link of navigation) {
     await check('Navigation', `sidebar ${link.label} link`, async () => {
-      await page.locator('.sidebar-nav').getByRole('link', { name: link.label, exact: true }).click();
+      await page.locator('#app-sidebar').getByRole('link', { name: link.label, exact: true }).click();
       await page.waitForURL(state.frontend + link.href);
       assert.ok(await page.locator('main h1').isVisible());
     });
@@ -85,7 +85,7 @@ async function main() {
     await page.getByText('Email already exists.', { exact: true }).waitFor();
   });
   await check('Users', 'user edit/delete or disable controls exist', async () => {
-    assert.ok(await page.getByRole('button', { name: /edit user|delete user|disable user|deactivate/i }).count(), 'User provisioning only supports creation; no account edit, revoke or delete controls');
+    assert.ok(await page.getByRole('button', { name: /^Disable / }).count(), 'User directory must provide account deactivation controls');
   });
   await check('QR camera', 'test browser has a functioning synthetic video device', async () => {
     await goto('/qr-codes');

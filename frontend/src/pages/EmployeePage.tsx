@@ -101,7 +101,7 @@ export default function EmployeePage() {
                       boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div className="page-toolbar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span style={{ fontSize: "0.8125rem", fontWeight: 500 }}>{tab.name} Employees</span>
                       <Icon size={15} />
                     </div>
@@ -115,7 +115,7 @@ export default function EmployeePage() {
             <div style={{ marginBottom: "20px", position: "relative" }}>
               <Search
                 size={16}
-                style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }}
+                style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "#64748b" }}
               />
               <input
                 value={search}
@@ -135,7 +135,7 @@ export default function EmployeePage() {
             </div>
 
             {/* Table */}
-            <div
+            <div className="table-scroll"
               style={{
                 backgroundColor: "white",
                 borderRadius: "12px",
@@ -168,13 +168,13 @@ export default function EmployeePage() {
                 <tbody>
                   {loading ? (
                     <tr>
-                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>
                         Loading employees…
                       </td>
                     </tr>
                   ) : loadError ? <tr><td colSpan={6} className="p-5">Employee data unavailable.</td></tr> : filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#94a3b8", fontSize: "0.875rem" }}>
+                      <td colSpan={6} style={{ padding: "48px", textAlign: "center", color: "#64748b", fontSize: "0.875rem" }}>
                         No employees found.
                       </td>
                     </tr>
@@ -255,7 +255,7 @@ export default function EmployeePage() {
               </table>
             </div>
 
-            <p style={{ marginTop: "12px", fontSize: "0.8125rem", color: "#94a3b8" }}>
+            <p style={{ marginTop: "12px", fontSize: "0.8125rem", color: "#64748b" }}>
               {loadError ? "Employee count unavailable" : `Showing ${filtered.length} of ${employeeList.length} employees`}
             </p>
           </div>

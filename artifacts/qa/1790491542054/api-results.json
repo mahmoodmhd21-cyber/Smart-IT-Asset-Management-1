@@ -1,0 +1,204 @@
+[
+  {
+    "module": "Authentication",
+    "name": "valid login and profile",
+    "status": "PASS"
+  },
+  {
+    "module": "Authentication",
+    "name": "invalid password rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authentication",
+    "name": "anonymous administrator registration blocked",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /assets is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /allocations is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /employees is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /licenses is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /maintenance is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /qr is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous GET /auth/users is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "IT Staff cannot create an Admin",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset creation is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset update is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Authorization",
+    "name": "anonymous asset deletion is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Assets",
+    "name": "asset create/read/update/delete and QR cleanup",
+    "status": "PASS"
+  },
+  {
+    "module": "Assets",
+    "name": "serial number survives saving",
+    "status": "PASS"
+  },
+  {
+    "module": "Assets",
+    "name": "invalid status returns validation error",
+    "status": "PASS"
+  },
+  {
+    "module": "Allocations",
+    "name": "allocate, prevent duplicates, return, delete",
+    "status": "FAIL",
+    "detail": "Expected HTTP 400; got 409: {\"success\":false,\"message\":\"Allocation is not active.\"}\n\n409 !== 400\n"
+  },
+  {
+    "module": "Maintenance",
+    "name": "completing last job restores Available",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "another unfinished job prevents release",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Scheduled maintenance makes device unavailable",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "In Progress maintenance makes device unavailable",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Repair is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Upgrade is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Inspection is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Replacement is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "form option Cleaning is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "Cancelled option is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "returning an allocation preserves ongoing maintenance",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "deleting allocation preserves ongoing maintenance",
+    "status": "PASS"
+  },
+  {
+    "module": "QR codes",
+    "name": "status endpoint respects unfinished maintenance",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "deleting asset cannot orphan maintenance",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "nonexistent asset reference is rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Employees",
+    "name": "employee update and duplicate validation",
+    "status": "PASS"
+  },
+  {
+    "module": "Employees",
+    "name": "company employees can receive allocations",
+    "status": "FAIL",
+    "detail": "Expected HTTP 201; got 404: {\"success\":false,\"message\":\"Active employee not found.\"}\n\n404 !== 201\n"
+  },
+  {
+    "module": "Employees",
+    "name": "delete employee",
+    "status": "PASS"
+  },
+  {
+    "module": "Licenses",
+    "name": "all form fields persist",
+    "status": "PASS"
+  },
+  {
+    "module": "Licenses",
+    "name": "Expiring Soon form option is accepted",
+    "status": "PASS"
+  },
+  {
+    "module": "Licenses",
+    "name": "seat usage cannot exceed licensed seats",
+    "status": "PASS"
+  },
+  {
+    "module": "Licenses",
+    "name": "edit supported fields and delete",
+    "status": "PASS"
+  }
+]

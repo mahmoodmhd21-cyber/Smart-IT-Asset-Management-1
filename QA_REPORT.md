@@ -2,6 +2,8 @@
 
 **Assessment: NOT READY FOR PRODUCTION.**
 
+**Latest implementation pass: September 27, 2026.** Steps 1-7 have local code fixes; the Step 8 four-suite audit now passes **190/190 checks**. Production sign-off still requires the chosen host/domain, secret rotation, three historical employee mappings, real-browser/device checks and operational acceptance. The September 24 tables below are the original baseline, not current failure counts.
+
 Audit date: September 24, 2026. Tested the current working-tree source, including the sidebar and maintenance fixes. The 47 audited source/configuration files match the isolated test copy; see the source manifest. Application code was not changed during this audit.
 
 ## Results and Scope
@@ -197,9 +199,32 @@ These passes do not override the authorization, concurrency and cross-module fai
 3. **Implemented and retested September 26, 2026; three historical employee mappings await an owner decision:** Align maintenance/license/employee contracts and protect referential integrity. New allocations use Employees; unmapped history is preserved.
 4. **Implemented and retested September 26, 2026:** Fix the QR camera DOM/lifecycle crash and add QR-route error recovery. Physical-camera and cross-browser checks remain in step 8.
 5. **Implemented and retested September 26, 2026:** Correct session handling, error feedback, missing management controls and serial-number support. See the Step 5 retest and serial policy below.
-6. Correct tablet/mobile clipping, form validation and accessibility failures.
-7. Repair linting, patch/triage dependencies and configure the intended production deployment.
-8. Rerun this audit, then test supported real browsers/devices, physical QR scanning and operational deployment/recovery procedures.
+6. **Implemented September 27, 2026:** Responsive tables/forms, accessible control labels and contrast, modal focus containment/restoration, and existing form-validation regressions.
+7. **Implemented locally September 27, 2026:** Active Vite lint configuration, compatible dependency patches, same-origin production serving and server hardening. Actual host configuration and CI/container execution remain acceptance gates.
+8. **Automated audit and combined regressions passed September 27, 2026; external acceptance pending:** Supported real browsers/devices, physical QR scanning and operational deployment/recovery procedures still need sign-off.
+
+### Steps 6-8 and Navigation: September 27, 2026
+
+| Final audit suite | Passed | Failed |
+| --- | ---: | ---: |
+| Browser workflows, accessibility and responsive layouts | 111 | 0 |
+| Additional navigation, controls and keyboard checks | 28 | 0 |
+| API workflows and authorization | 40 | 0 |
+| Concurrency, validation and deployment edge cases | 11 | 0 |
+| **Total** | **190** | **0** |
+
+Final audit [summary](artifacts/qa/1790513350710/summary.json) and [source manifest](artifacts/qa/1790513350710/source-manifest.json): all 59 audited files match the tested copy. All 11 broad-audit axe page scans have zero detected violations. The disposable database and both audit servers were removed/stopped. This remains selected automated coverage, not proof that every possible browser, input or failure mode works.
+
+The separate final combined regression run passes **258 tests including parent tests**, with zero failures, skips or cancellations (328.6 seconds). It covers access control, lifecycle/concurrency/rollback, module contracts, QR camera behavior, sessions/management and production release readiness. Release checks cover 12 routes at 1440/1024/768/390px, plus 15 axe page/modal scans with zero detected violations. Both build and zero-warning lint pass; 48 JavaScript files pass syntax checks and the scoped source diff passes whitespace checks. All disposable MongoDB and test processes have exited. The existing local MongoDB service was left untouched. Frontend-only preview is at `http://127.0.0.1:3000/`; the real backend remains stopped, so this preview does not provide a working login until that backend is started.
+
+- **Responsive and accessible UI:** Tables scroll within their region instead of clipping the page; forms collapse to one column on narrow screens. Labels and icon-button names are associated with controls. Text contrast and focus indicators were corrected, including the populated Cancelled maintenance badge. Allocation, license and maintenance dialogs support contained keyboard focus, Escape and restoration to the invoking button.
+- **Navigation:** Main modules are Dashboard, Assets, Allocations, Maintenance, Licenses, QR Codes, Employees and Users (last two Admin-only). Profile now belongs to the separate account footer above identity and Sign Out, including collapsed mode.
+- **Tooling and dependencies:** Removed the obsolete Next lint configuration from the active Vite frontend. Fresh isolated lockfile installs, TypeScript/Vite build and lint with zero warnings pass. Both npm installs report zero audit vulnerabilities. This is a point-in-time dependency check, not security certification.
+- **Server and deployment:** Express serves the current React production build and deep links, provides readiness health checks and explicit API 404s, limits request size/login attempts, restricts CORS and sets security headers. Startup waits for MongoDB and fails on missing/unreachable configuration. Added a non-root Docker definition, CI workflow, environment template and deployment checklist; Docker and hosted CI have not been executed.
+- **Secrets:** The previously tracked `.env` is staged for removal from Git while the local file is preserved. Earlier commits still contain its history. Credential rotation/history remediation are not completed by ignoring or untracking the file.
+- **Release gates:** Confirm the actual deployment domain/proxy, TLS and network controls; rotate exposed secrets; resolve the three historical allocation mappings; perform physical printed-QR and supported-browser/screen-reader checks; validate backup restore, failover, load, monitoring and rollback on the target environment. No real inventory was modified by this retest.
+- **Evidence:** [stable-build regression results](artifacts/qa/final-regression-stable.txt), [build](artifacts/qa/release-build.txt), [lint](artifacts/qa/release-lint.txt), [release accessibility](artifacts/qa/release/accessibility.json), [deployment checklist](docs/DEPLOYMENT.md), [reproduction](tests/qa/README.md).
+- **Retest setup:** An intermediate rerun rebuilt `frontend/dist` while browsers were consuming it. This caused one document failure followed by dependent layout failures, plus two QR timeouts. Those results are retained in `1790513041504` and `final-regression.txt`; a fresh fixture set and unchanged build are used for the final retest. They must not be treated as passing runs.
 
 ### Step 5 Retest: September 26, 2026
 

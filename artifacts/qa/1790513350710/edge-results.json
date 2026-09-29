@@ -1,0 +1,57 @@
+[
+  {
+    "module": "Concurrency",
+    "name": "simultaneous allocations cannot double-book one asset",
+    "status": "PASS"
+  },
+  {
+    "module": "QR codes",
+    "name": "QR status cannot release an actively allocated asset",
+    "status": "PASS"
+  },
+  {
+    "module": "Maintenance",
+    "name": "reopening a completed job restores Maintenance status",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "blank asset name returns a client error",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid employee email rejected",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid ID /assets/not-an-id",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid ID /maintenance/not-an-id",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid ID /allocations/not-an-id",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid ID /licenses/not-an-id",
+    "status": "PASS"
+  },
+  {
+    "module": "Validation",
+    "name": "invalid ID /employees/not-an-id",
+    "status": "PASS"
+  },
+  {
+    "module": "Deployment",
+    "name": "backend start serves the built React dashboard",
+    "status": "PASS"
+  }
+]

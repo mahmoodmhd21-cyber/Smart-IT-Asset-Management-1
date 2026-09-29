@@ -1,0 +1,66 @@
+[
+  {
+    "route": "/dashboard",
+    "violations": []
+  },
+  {
+    "route": "/assets",
+    "violations": []
+  },
+  {
+    "route": "/assets/add",
+    "violations": []
+  },
+  {
+    "route": "/allocations",
+    "violations": []
+  },
+  {
+    "route": "/users",
+    "violations": []
+  },
+  {
+    "route": "/employees",
+    "violations": []
+  },
+  {
+    "route": "/licenses",
+    "violations": []
+  },
+  {
+    "route": "/maintainence",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "tr:nth-child(11) > td:nth-child(6) > span"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "tr:nth-child(20) > td:nth-child(6) > span"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.34 (foreground color: #64748b, background color: #f1f5f9, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/qr-codes",
+    "violations": []
+  },
+  {
+    "route": "/profile",
+    "violations": []
+  },
+  {
+    "route": "/",
+    "violations": []
+  }
+]
