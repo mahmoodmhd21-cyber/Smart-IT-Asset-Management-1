@@ -66,12 +66,10 @@ Use `mongodb://127.0.0.1:27018/smart_it_dev?replicaSet=devrs` as the development
 
 ## Retesting
 
-The regression fixture launches its own mongod on a free loopback port, initializes a disposable replica set, then stops it and removes its temporary directory. It never reads the real application's `.env` or reconfigures the running MongoDB instance.
-
-After refreshing the isolated source copy and building its frontend:
+Regression suites remain in `tests/`, with isolated setup instructions in `tests/qa/README.md`. The fixture uses a disposable MongoDB replica set, not the real application's database. After preparing the isolated copy and building its frontend:
 
 ```sh
 QA_APP_ROOT=/tmp/smart-it-qa-app QA_BROWSER=1 QA_PLAYWRIGHT=/tmp/smart-it-qa-tools/node_modules/playwright node --test --test-concurrency=1 tests/assetLifecycle.test.cjs tests/accessControl.test.cjs tests/assetStatus.test.js
 ```
 
-`mongod` must be on PATH, or set `QA_MONGOD` to its executable path. Omitting `QA_BROWSER=1` skips browser checks. See `tests/qa/README.md` for isolated dependency installation. The old stubbed controller tests have been replaced by direct policy tests plus real controller/transaction tests, covering the original maintenance-completion regression and stronger concurrency/rollback invariants.
+Generated evidence is ignored by Git. Historical results remain described in `QA_REPORT.md`; they do not substitute for retesting subsequent code changes.

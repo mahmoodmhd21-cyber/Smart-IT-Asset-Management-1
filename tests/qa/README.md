@@ -1,5 +1,7 @@
 # Local Release Audit
 
+Tests and CI are versioned with the application but excluded from its runtime container. Generated `artifacts/` output is ignored by Git. GitHub Actions retains new regression output and screenshots as downloadable artifacts for 14 days; historical screenshots are no longer kept in this repository.
+
 These scripts audit the current working tree using an isolated copy and disposable MongoDB database. They deliberately test failure and unauthorized-access cases. They are not intended for a shared, staging or production database.
 
 Requirements: Node, npm, `mongod` on PATH (or `QA_MONGOD` set to its executable path), installed Google Chrome, and free ports 3301/5301. The runner launches a separate disposable MongoDB replica set on a free port; an existing local database is not required or changed.

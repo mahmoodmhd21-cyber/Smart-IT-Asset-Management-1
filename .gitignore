@@ -1,3 +1,4 @@
+# Dependencies and private local configuration must never be committed.
 node_modules/
 .env
 .env.*
@@ -5,3 +6,5 @@ node_modules/
 frontend/dist/
 frontend/*.tsbuildinfo
 .DS_Store
+# Generated QA output is not application source.
+/artifacts/

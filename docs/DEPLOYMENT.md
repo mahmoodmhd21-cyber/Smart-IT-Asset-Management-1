@@ -27,9 +27,21 @@ docker build -t smart-it-assets .
 docker run --env-file /secure/path/asset.env -p 127.0.0.1:5000:5000 smart-it-assets
 ```
 
-The container definition and GitHub workflow are supplied but must be validated on the chosen host/CI runner. They have not been executed in this local verification. The environment file is excluded from container builds.
+The container definition and GitHub Actions workflow are supplied but must be validated on the chosen host/CI runner. The workflow runs lint, build, dependency audits and regression tests, retaining generated QA output as downloadable artifacts for 14 days. Tests stay in the source repository but are excluded from the runtime container, along with private environment files and generated artifacts. A workflow definition alone is not evidence of a successful CI run.
 
 ## Secrets and Existing Data
+
+### Render Environment Variables
+
+Set `MONGO_URI` and a privately generated `JWT_SECRET` in the **backend service's Environment settings**, not in Git or React. Set `NODE_ENV=production`; the server already reads Render's `PORT` environment variable. Never use a `VITE_` prefix for secrets or share backend secrets with the frontend service.
+
+For a separately hosted React frontend, set its public build variable `VITE_BACKEND_URL=https://smart-it-asset-api.onrender.com`, replacing the example with the actual backend origin (no `/api` suffix). Both JSON requests and authenticated QR-image requests use this origin. Rebuild/redeploy the frontend after changing it. Leave it blank for same-origin hosting or local Vite proxy development.
+
+On the backend, set `CORS_ORIGINS` to the exact separate frontend origin, including `https://` and without a trailing slash. Keep the existing backend build/start requirements above: production startup currently requires the React build even when an external frontend also uses the API. A separately hosted static frontend needs SPA fallback routing to `index.html`.
+
+Only `.env.example` templates may be committed. Private `.env` files and `node_modules/` are ignored at every directory level. Ignore rules do not prevent deliberate force-adds and do not remove previously committed history. These changes do not configure a Render account or rotate credentials automatically.
+
+References: [Render environment settings](https://render.com/docs/configure-environment-variables), [Vite public build-time variables](https://vite.dev/guide/env-and-mode).
 
 `.env` has been removed from the Git index without deleting the local file. This does not remove secrets from earlier commits. Rotate exposed JWT/database credentials before release and arrange history remediation if the repository was shared. JWT rotation logs out existing users. Do not commit private backups or audit state files containing disposable credentials.
 

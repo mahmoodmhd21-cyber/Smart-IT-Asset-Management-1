@@ -1,5 +1,7 @@
 import { clearSession, handleUnauthorized } from "./session";
-const API_BASE = "/api";
+// Vite embeds this public URL at build time. Never put server secrets in VITE_* variables.
+const backendUrl = (import.meta.env.VITE_BACKEND_URL || "").trim().replace(/\/+$/, "");
+const API_BASE = `${backendUrl}/api`;
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;

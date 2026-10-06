@@ -1,5 +1,7 @@
 # Go-Live Audit: Smart IT Asset Management
 
+> Repository cleanup, October 6, 2026: Automated regression tests and the GitHub Actions workflow are retained alongside application code. Generated QA artifacts/screenshots, Postman files and the redundant lockfile were removed. Results below describe historical runs, not current verification. Removed evidence paths refer to older material; new CI runs retain output as downloadable artifacts for 14 days instead of committing it. This cleanup does not resolve the remaining production acceptance gates.
+
 **Assessment: NOT READY FOR PRODUCTION.**
 
 **Latest implementation pass: September 27, 2026.** Steps 1-7 have local code fixes; the Step 8 four-suite audit now passes **190/190 checks**. Production sign-off still requires the chosen host/domain, secret rotation, three historical employee mappings, real-browser/device checks and operational acceptance. The September 24 tables below are the original baseline, not current failure counts.
@@ -57,7 +59,7 @@ Failures overlap: 83 failing checks do not mean 83 separate defects. This is a s
 
 **Source:** `routes/authRoutes.js:24`, `routes/assetRoutes.js:27`, `routes/allocationRoutes.js:25`, `routes/employeeRoutes.js:13`, `routes/licenseRoutes.js:13`, `routes/maintenanceRoutes.js:13`, `routes/qrCodeRoutes.js:14`.
 
-**Evidence:** [API results](artifacts/qa/1790242873282/api-results.json), Authorization and Authentication cases.
+**Evidence:** API results (removed: `artifacts/qa/1790242873282/api-results.json`), Authorization and Authentication cases.
 
 ### P1-02: Concurrent allocations double-book a device
 
@@ -69,7 +71,7 @@ The existing check-then-create sequence is not atomic. The successful sequential
 
 **Source:** `controllers/allocationController.js:39`, `controllers/allocationController.js:48`, `controllers/allocationController.js:63`, `models/Allocation.js`.
 
-**Evidence:** [concurrency result](artifacts/qa/1790242873282/edge-results.json).
+**Evidence:** concurrency result (removed: `artifacts/qa/1790242873282/edge-results.json`).
 
 ### P1-03: Asset status is inconsistent across workflows
 
@@ -123,7 +125,7 @@ Allocation options come from system Users, and the allocation schema references 
 
 **Source:** `frontend/src/pages/QRCodePage.tsx:75`, `frontend/src/pages/QRCodePage.tsx:168`, `frontend/src/pages/QRCodePage.tsx:324`.
 
-**Evidence:** [blank-page screenshot](artifacts/qa/1790242873282/screenshots/failure-52.png), [camera errors](artifacts/qa/1790242873282/camera-errors.json), [control results](artifacts/qa/1790242873282/control-results.json).
+**Evidence:** blank-page screenshot (removed: `artifacts/qa/1790242873282/screenshots/failure-52.png`), camera errors (removed: `artifacts/qa/1790242873282/camera-errors.json`), control results (removed: `artifacts/qa/1790242873282/control-results.json`).
 
 ### P1-08: Maintenance history can point to nonexistent assets
 
@@ -146,7 +148,7 @@ Allocation options come from system Users, and the allocation schema references 
 | P2 | License/maintenance/employee/dashboard/profile pages suppress failed fetches and show empty or stale data | Add visible error and retry states, and distinguish unavailable data from a genuinely empty list | `LicensePage.tsx:69`, `MaintainencePage.tsx:66`, `EmployeePage.tsx:22`, `DashboardPage.tsx:20`, `ProfilePage.tsx:15` under `frontend/src/pages` |
 | P2 | Tablet tables clip columns: Employees at 1024/768px; licenses and maintenance at 768px; all three at 390px | Use scrollable table wrappers and responsive widths; keep action/status columns reachable | `EmployeePage.tsx:124`, `LicensePage.tsx:179`, `MaintainencePage.tsx:200` |
 | P2 | Provisioning stays two-column on mobile; Full Name input shrinks to 74px; directory content also clips on tablet | Stack sections below a suitable breakpoint and allow text/columns to shrink or wrap | `frontend/src/pages/CreateUserPage.tsx:218` |
-| P2 | Automated scans find unlabeled selects/buttons and insufficient contrast on nine app pages | Associate labels with inputs, name icon buttons, and correct failing color pairs; rerun axe and manual screen-reader tests | [Accessibility details](artifacts/qa/1790242873282/accessibility.json) |
+| P2 | Automated scans find unlabeled selects/buttons and insufficient contrast on nine app pages | Associate labels with inputs, name icon buttons, and correct failing color pairs; rerun axe and manual screen-reader tests | Accessibility details (removed: `artifacts/qa/1790242873282/accessibility.json`) |
 | P2 | Keyboard Tab escapes allocation/license/maintenance modals; Escape does not close maintenance | Use accessible dialog semantics, focus trapping/restoration and Escape handling | Modal sections in the three page components |
 | P2 | Cost inputs in licenses and maintenance reject 12.50 because default step is 1 | Use an appropriate decimal step and validate/store currency consistently | `LicensePage.tsx:306`, `MaintainencePage.tsx:321` |
 | P2 | Maintenance description and license key are required by backend but not marked/validated as required in forms | Align visible labels, HTML constraints and server validation | `MaintainencePage.tsx:325`, `LicensePage.tsx:286` |
@@ -167,7 +169,7 @@ Allocation options come from system Users, and the allocation schema references 
 
 **Action:** review and update affected dependency versions, regenerate lockfiles deliberately, then rebuild and rerun regression tests. Avoid a blind forced dependency upgrade.
 
-Evidence: [backend audit JSON](artifacts/qa/1790242873282/backend-dependencies.json), [frontend audit JSON](artifacts/qa/1790242873282/frontend-dependencies.json).
+Evidence: backend audit JSON (removed: `artifacts/qa/1790242873282/backend-dependencies.json`), frontend audit JSON (removed: `artifacts/qa/1790242873282/frontend-dependencies.json`).
 
 Additional source-review concerns, not deployment-environment tests:
 
@@ -213,7 +215,7 @@ These passes do not override the authorization, concurrency and cross-module fai
 | Concurrency, validation and deployment edge cases | 11 | 0 |
 | **Total** | **190** | **0** |
 
-Final audit [summary](artifacts/qa/1790513350710/summary.json) and [source manifest](artifacts/qa/1790513350710/source-manifest.json): all 59 audited files match the tested copy. All 11 broad-audit axe page scans have zero detected violations. The disposable database and both audit servers were removed/stopped. This remains selected automated coverage, not proof that every possible browser, input or failure mode works.
+Final audit summary (removed: `artifacts/qa/1790513350710/summary.json`) and source manifest (removed: `artifacts/qa/1790513350710/source-manifest.json`): all 59 audited files match the tested copy. All 11 broad-audit axe page scans have zero detected violations. The disposable database and both audit servers were removed/stopped. This remains selected automated coverage, not proof that every possible browser, input or failure mode works.
 
 The separate final combined regression run passes **258 tests including parent tests**, with zero failures, skips or cancellations (328.6 seconds). It covers access control, lifecycle/concurrency/rollback, module contracts, QR camera behavior, sessions/management and production release readiness. Release checks cover 12 routes at 1440/1024/768/390px, plus 15 axe page/modal scans with zero detected violations. Both build and zero-warning lint pass; 48 JavaScript files pass syntax checks and the scoped source diff passes whitespace checks. All disposable MongoDB and test processes have exited. The existing local MongoDB service was left untouched. Frontend-only preview is at `http://127.0.0.1:3000/`; the real backend remains stopped, so this preview does not provide a working login until that backend is started.
 
@@ -223,7 +225,7 @@ The separate final combined regression run passes **258 tests including parent t
 - **Server and deployment:** Express serves the current React production build and deep links, provides readiness health checks and explicit API 404s, limits request size/login attempts, restricts CORS and sets security headers. Startup waits for MongoDB and fails on missing/unreachable configuration. Added a non-root Docker definition, CI workflow, environment template and deployment checklist; Docker and hosted CI have not been executed.
 - **Secrets:** The previously tracked `.env` is staged for removal from Git while the local file is preserved. Earlier commits still contain its history. Credential rotation/history remediation are not completed by ignoring or untracking the file.
 - **Release gates:** Confirm the actual deployment domain/proxy, TLS and network controls; rotate exposed secrets; resolve the three historical allocation mappings; perform physical printed-QR and supported-browser/screen-reader checks; validate backup restore, failover, load, monitoring and rollback on the target environment. No real inventory was modified by this retest.
-- **Evidence:** [stable-build regression results](artifacts/qa/final-regression-stable.txt), [build](artifacts/qa/release-build.txt), [lint](artifacts/qa/release-lint.txt), [release accessibility](artifacts/qa/release/accessibility.json), [deployment checklist](docs/DEPLOYMENT.md), [reproduction](tests/qa/README.md).
+- **Evidence:** stable-build regression results (removed: `artifacts/qa/final-regression-stable.txt`), build (removed: `artifacts/qa/release-build.txt`), lint (removed: `artifacts/qa/release-lint.txt`), release accessibility (removed: `artifacts/qa/release/accessibility.json`), [deployment checklist](docs/DEPLOYMENT.md), [reproduction](tests/qa/README.md).
 - **Retest setup:** An intermediate rerun rebuilt `frontend/dist` while browsers were consuming it. This caused one document failure followed by dependent layout failures, plus two QR timeouts. Those results are retained in `1790513041504` and `final-regression.txt`; a fresh fixture set and unchanged build are used for the final retest. They must not be treated as passing runs.
 
 ### Step 5 Retest: September 26, 2026
@@ -233,7 +235,7 @@ The separate final combined regression run passes **258 tests including parent t
 - **Feedback:** Dashboard, profile, employee, license, maintenance and account-directory fetch failures show visible retry states instead of silently presenting empty/current data. Profile no longer presents cached details as a successful fetch. License/maintenance deletion errors remain visible without removing the row. Provisioning success messages survive the immediate directory refresh. Allocation availability refresh was already corrected in Step 2 and remains covered by regression tests.
 - **Serial numbers:** Add, prefilled edit, list and search now include optional `serialNumber`. Values are trimmed, limited to 120 characters, and persisted. Non-empty serials currently use global, case-insensitive database uniqueness; blanks remain optional for legacy inventory. Concurrent duplicates return 409. Index creation failure blocks serial writes safely. This default uniqueness policy should be confirmed against manufacturer conventions before deployment; see [serial-number policy](docs/ASSET_SERIAL_NUMBERS.md). No existing business data was migrated.
 - **Verification:** The combined security, status, lifecycle, contracts, camera and Step 5 suites report **189 passing tests including parent tests**, zero failures and zero skips. The 26 new Step 5 scenarios cover real API and Chrome workflows, including server/network failures, duplicate serial writes, account authorization/revocation, employee history conflicts, save-error retention, cancellation, and deletion feedback. TypeScript/Vite production build passes in the isolated lockfile installation. JavaScript syntax checks and `git diff --check` pass. New editor screenshot inspected.
-- **Evidence:** [combined results](artifacts/qa/step5-regression.txt), [regression suite](tests/sessionManagement.test.cjs), [employee editor](artifacts/qa/step5/employee-editor.png), [permissions and sessions](docs/ACCESS_CONTROL.md).
+- **Evidence:** combined results (removed: `artifacts/qa/step5-regression.txt`), [regression suite](tests/sessionManagement.test.cjs), employee editor (removed: `artifacts/qa/step5/employee-editor.png`), [permissions and sessions](docs/ACCESS_CONTROL.md).
 - **Limits:** Tests use disposable replica sets and temporary browser/API fixtures, not real inventory. The frontend preview remains available on port 3000; the real backend is stopped and was not restarted by this step. This is not the full original audit, production deployment verification, or cross-browser/accessibility certification. Steps 6-8 and the three historical allocation mappings from Step 3 remain outstanding; the application is still not ready for production.
 
 ### Step 4 Retest: September 26, 2026
@@ -242,7 +244,7 @@ The separate final combined regression run passes **258 tests including parent t
 - **Fix:** `frontend/src/components/QRScanner.tsx` owns the scanner lifecycle and gives the library an imperative child separate from React's overlay. Duplicate starts and repeated decode callbacks are guarded. Cleanup waits for startup/playback, releases tracks, and removes its host, including when permission resolves after navigation. Browser permission prompts cannot be programmatically cancelled; a pending stop completes when the browser resolves that request.
 - **Recovery:** `QRCodeBoundary.tsx` contains unexpected QR-route render failures, retaining navigation and a retry button. Camera permission/device errors remain visible within the page. This boundary does not claim to catch arbitrary asynchronous errors elsewhere in the app.
 - **Browser coverage:** `tests/qrCamera.test.cjs` exercises ten scenarios using the production React build, real `html5-qrcode`, Chrome synthetic media and isolated API fixtures. Repeated start/stop and duplicate clicks; 1440/1024/768px camera layouts; denied/missing/busy cameras and retry; navigation during pending/running sessions; pending stop; unavailable media API; actual decoding of a generated QR stream with exactly one lookup; render failure and retry all pass. Node reports **11 passing tests including the parent test**, with zero failures or skips.
-- **Evidence:** [camera test results](artifacts/qa/camera-retest.txt), [combined regression results](artifacts/qa/step4-regression.txt), [desktop screenshot](artifacts/qa/camera/1440.png), [tablet screenshot](artifacts/qa/camera/768.png).
+- **Evidence:** camera test results (removed: `artifacts/qa/camera-retest.txt`), combined regression results (removed: `artifacts/qa/step4-regression.txt`), desktop screenshot (removed: `artifacts/qa/camera/1440.png`), tablet screenshot (removed: `artifacts/qa/camera/768.png`).
 - **Combined regression:** The camera, access-control, asset-lifecycle, module-contract and asset-status suites report **162 passing tests including parent tests**, zero failures and zero skips against the final build. Database suites use disposable replica sets, not the development database.
 - **Build:** TypeScript and the Vite production build pass in a clean isolated install using the repository lockfiles. The workspace dependency installation stalled and was stopped by the 70-second timeout; it is not reported as a successful workspace build.
 - **Limits:** No real application records were changed by camera tests. Physical cameras/printed labels, Safari/Firefox/Edge, phone layouts, and the full original audit remain unverified. Step 4 does not resolve the outstanding session, accessibility, dependency or deployment findings.
@@ -259,7 +261,7 @@ The original findings and 207-check totals above remain the September 24 baselin
 - **Verification:** Node reports 87 passing tests (69 access-control subtests, their parent test, and 17 existing status regressions), zero failures. Chrome exercised login, staff allocation options, private QR rendering/download, and admin disable/enable/revoke controls. The production TypeScript/Vite build passed in the isolated lockfile installation. `git diff --check` passed. Disposable test databases were removed and temporary HTTP/browser processes closed.
 - **Limits:** This is a targeted step-1 retest, not a repeat of the full audit or production security certification. Existing UI session-expiry redirects, account editing, camera startup, lint, dependencies and deployment hardening remain in their scheduled steps. The existing development servers were not restarted or changed.
 
-Evidence: [test output](artifacts/qa/access-control-retest.txt), [regression test](tests/accessControl.test.cjs), [permissions and setup](docs/ACCESS_CONTROL.md).
+Evidence: test output (removed: `artifacts/qa/access-control-retest.txt`), [regression test](tests/accessControl.test.cjs), [permissions and setup](docs/ACCESS_CONTROL.md).
 
 ### Step 2 Retest: September 25, 2026
 
@@ -275,7 +277,7 @@ Evidence: [test output](artifacts/qa/access-control-retest.txt), [regression tes
 - The old 17 controller-mock tests were replaced by policy tests and real transactional controller coverage. Retirement is preserved, but legacy Allocated labels without an actual allocation are now reconciled rather than blindly retained. Missing referenced assets now produce 404 instead of permitting orphan maintenance updates.
 - All test MongoDB processes, temporary directories, HTTP listeners and Chrome instances were cleaned up. The full original audit, physical-device testing, and production failover/load/backup recovery have not been rerun.
 
-Evidence: [test output](artifacts/qa/lifecycle-retest.txt), [transactional regression](tests/assetLifecycle.test.cjs), [policy tests](tests/assetStatus.test.js), [deployment and status rules](docs/ASSET_LIFECYCLE.md). Run the documented preflight and index setup after a backed-up replica-set configuration; do not replace existing data with the empty development example.
+Evidence: test output (removed: `artifacts/qa/lifecycle-retest.txt`), [transactional regression](tests/assetLifecycle.test.cjs), [policy tests](tests/assetStatus.test.js), [deployment and status rules](docs/ASSET_LIFECYCLE.md). Run the documented preflight and index setup after a backed-up replica-set configuration; do not replace existing data with the empty development example.
 
 ### Local Conversion Verified: September 26, 2026
 
@@ -301,21 +303,21 @@ Evidence: [test output](artifacts/qa/lifecycle-retest.txt), [transactional regre
 - **Verification:** 151 Node tests passed, zero failures, including the security/status/lifecycle regressions, 29 new contract/browser cases and parent tests. Chrome verified employee registration followed by allocation, license save/reload/edit with decimal cost, and Upgrade maintenance followed by cancellation. TypeScript/Vite production build, 32 JavaScript syntax checks and `git diff --check` passed. Testing used disposable replica sets; real business records were only read for migration planning.
 - Backend restarted with the verified source. The existing frontend remains at `http://localhost:3000`. Camera startup, session/error UX, missing broader management features, accessibility/layout, dependencies and production deployment work remain in their scheduled steps. This is not a full rerun of the original 207-check audit.
 
-Evidence: [combined test output](artifacts/qa/contracts-retest.txt), [contract tests](tests/moduleContracts.test.cjs), [contracts and migration procedure](docs/MODULE_CONTRACTS.md).
+Evidence: combined test output (removed: `artifacts/qa/contracts-retest.txt`), [contract tests](tests/moduleContracts.test.cjs), [contracts and migration procedure](docs/MODULE_CONTRACTS.md).
 
 ## Evidence and Reproduction
 
-- [Summary counts and build/lint outcome](artifacts/qa/1790242873282/summary.json)
-- [Source snapshot hashes](artifacts/qa/1790242873282/source-manifest.json)
-- [Browser results, including screenshot paths](artifacts/qa/1790242873282/frontend-results.json)
-- [Additional control results](artifacts/qa/1790242873282/control-results.json)
-- [API results](artifacts/qa/1790242873282/api-results.json)
-- [Concurrency and edge results](artifacts/qa/1790242873282/edge-results.json)
-- [Accessibility violations and selectors](artifacts/qa/1790242873282/accessibility.json)
-- [Viewport measurements](artifacts/qa/1790242873282/layouts.json)
-- [Browser errors](artifacts/qa/1790242873282/browser-errors.json)
-- [Clipped employee table at 768px](artifacts/qa/1790242873282/screenshots/employees-768.png)
-- [Narrow provisioning form at 390px](artifacts/qa/1790242873282/screenshots/users-390.png)
+- Summary counts and build/lint outcome (removed: `artifacts/qa/1790242873282/summary.json`)
+- Source snapshot hashes (removed: `artifacts/qa/1790242873282/source-manifest.json`)
+- Browser results, including screenshot paths (removed: `artifacts/qa/1790242873282/frontend-results.json`)
+- Additional control results (removed: `artifacts/qa/1790242873282/control-results.json`)
+- API results (removed: `artifacts/qa/1790242873282/api-results.json`)
+- Concurrency and edge results (removed: `artifacts/qa/1790242873282/edge-results.json`)
+- Accessibility violations and selectors (removed: `artifacts/qa/1790242873282/accessibility.json`)
+- Viewport measurements (removed: `artifacts/qa/1790242873282/layouts.json`)
+- Browser errors (removed: `artifacts/qa/1790242873282/browser-errors.json`)
+- Clipped employee table at 768px (removed: `artifacts/qa/1790242873282/screenshots/employees-768.png`)
+- Narrow provisioning form at 390px (removed: `artifacts/qa/1790242873282/screenshots/users-390.png`)
 - [Audit runner instructions](tests/qa/README.md)
 
-The scripts and evidence are retained for retesting. The audit did not apply application fixes or modify real saved records.
+The test scripts remain available in `tests/`; see `tests/qa/README.md` for reproduction. Historical generated evidence was removed during cleanup. New evidence belongs in ignored `artifacts/` or downloadable CI artifacts, not in Git.

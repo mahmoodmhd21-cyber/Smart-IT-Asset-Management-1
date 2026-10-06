@@ -32,9 +32,12 @@ jobs:
         env:
           QA_BROWSER: '1'
           QA_PLAYWRIGHT: /tmp/smart-it-qa-tools/node_modules/playwright
-        run: node tests/qa/run-command.cjs 600 node --test --test-concurrency=1 tests/*.test.cjs tests/assetStatus.test.js
+        run: |
+          mkdir -p artifacts/qa
+          node tests/qa/run-command.cjs 600 node --test --test-concurrency=1 --test-reporter=spec --test-reporter-destination=artifacts/qa/ci-regression.txt tests/*.test.cjs tests/assetStatus.test.js
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: qa-evidence
-          path: artifacts/qa/release
+          path: artifacts/qa/
+          retention-days: 14

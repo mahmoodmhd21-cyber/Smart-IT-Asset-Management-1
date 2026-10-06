@@ -1,2 +1,0 @@
-Error: Cannot continue authenticated UI tests without a successful login
-    at main (/Users/MahmoodMohammed/Documents/Smart-IT-Asset-Management/tests/qa/frontend-audit.cjs:111:21)

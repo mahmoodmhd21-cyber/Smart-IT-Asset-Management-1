@@ -49,9 +49,7 @@ The September 26 dry run found three legacy assignments with no unique employee 
 
 ## Verification
 
-`tests/moduleContracts.test.cjs` uses a disposable replica set and real HTTP controllers. It covers all maintenance types and license statuses, complete license field round-trips, partial/concurrent seat validation, migration dry-run/idempotency, employee and QR deletion races, and Chrome workflows for registration/allocation, license save/reload/edit and maintenance cancellation.
-
-Run with the existing lifecycle/security suites using the isolated setup in `tests/qa/README.md`:
+The contract regression suite remains in `tests/moduleContracts.test.cjs`. It covers license round-trips, capacity validation, employee mapping, reference races and browser workflows using disposable fixtures. Follow `tests/qa/README.md` to prepare an isolated build, then run:
 
 ```sh
 QA_APP_ROOT=/tmp/smart-it-qa-app QA_BROWSER=1 QA_PLAYWRIGHT=/tmp/smart-it-qa-tools/node_modules/playwright node --test --test-concurrency=1 tests/moduleContracts.test.cjs tests/assetLifecycle.test.cjs tests/accessControl.test.cjs tests/assetStatus.test.js
