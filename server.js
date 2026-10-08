@@ -1,7 +1,6 @@
 const path = require("path");
 // Resolve configuration beside the server, not a caller's working directory.
 require("dotenv").config({ path: path.join(__dirname, ".env"), quiet: true });
-const fs = require("fs");
 const helmet = require("helmet");
 const { rateLimit } = require("express-rate-limit");
 const mongoose = require("mongoose");
@@ -23,10 +22,6 @@ const qrCodeRoutes = require("./routes/qrCodeRoutes");
 // Create express application
 const app = express();
 const production = process.env.NODE_ENV === "production";
-const build = path.join(__dirname, "frontend", "dist");
-if (production && !fs.existsSync(path.join(build, "index.html"))) {
-    throw new Error("Frontend build missing. Run npm ci and npm run build in frontend before production startup.");
-}
 
 // Middleware
 app.disable("x-powered-by");
@@ -61,13 +56,8 @@ app.use("/api/maintenance", maintenanceRoutes);
 app.use("/api/qr", qrCodeRoutes);
 
 app.use("/api", (req, res) => res.status(404).json({ message: "API route not found." }));
-// Serve the current React build, never the obsolete public HTML implementation.
-app.use(express.static(build, { redirect: false, index: false }));
-app.get("*", (req, res) => {
-    if (path.extname(req.path)) return res.sendStatus(404);
-    if (fs.existsSync(path.join(build, "index.html"))) return res.sendFile(path.join(build, "index.html"));
-    return res.status(200).send("Smart IT Asset Management API Running");
-});
+// The frontend is hosted separately; this service only serves the API.
+app.get("/", (req, res) => res.status(200).send("Smart IT Asset Management API Running"));
 app.use((err, req, res, next) => {
     if (res.headersSent) return next(err);
     const status = err.type === "entity.too.large" ? 413 : err instanceof SyntaxError ? 400 : 500;
