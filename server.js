@@ -36,7 +36,8 @@ app.use(helmet({ contentSecurityPolicy: { directives: {
     "upgrade-insecure-requests": production ? [] : null,
 } } }));
 app.use((req, res, next) => { res.setHeader("Permissions-Policy", "camera=(self), microphone=(), geolocation=()"); next(); });
-const origins = (process.env.CORS_ORIGINS || "").split(",").map(value => value.trim()).filter(Boolean);
+// Browser origins never include a trailing slash; normalize pasted site URLs.
+const origins = (process.env.CORS_ORIGINS || "").split(",").map(value => value.trim().replace(/\/+$/, "")).filter(Boolean);
 app.use(cors({ origin: (origin, callback) => callback(null, !origin || origins.includes(origin)) }));
 app.use(express.json({ limit: "64kb" }));
 app.use("/api", (req, res, next) => { res.setHeader("Cache-Control", "no-store"); next(); });

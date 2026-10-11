@@ -37,7 +37,11 @@ Set `MONGO_URI` and a privately generated `JWT_SECRET` in the **backend service'
 
 For a separately hosted React frontend, set its public build variable `VITE_BACKEND_URL=https://smart-it-asset-api.onrender.com`, replacing the example with the actual backend origin (no `/api` suffix). Both JSON requests and authenticated QR-image requests use this origin. Rebuild/redeploy the frontend after changing it. Leave it blank for same-origin hosting or local Vite proxy development.
 
-On the backend, set `CORS_ORIGINS` to the exact separate frontend origin, including `https://` and without a trailing slash. Keep the existing backend build/start requirements above: production startup currently requires the React build even when an external frontend also uses the API. A separately hosted static frontend needs SPA fallback routing to `index.html`.
+On the backend, set `CORS_ORIGINS` to the exact separate frontend origin, including `https://`. Trailing slashes are normalized, but different domains and ports are not interchangeable. The Render backend is API-only and does not require the frontend build. A separately hosted static frontend needs SPA fallback routing to `index.html`.
+
+For the current deployment, use `CORS_ORIGINS=http://localhost:3000,https://smart-it-asset-management-frontend.vercel.app` on Render. Vercel's public build setting is `VITE_BACKEND_URL=https://smart-it-asset-management-1.onrender.com`. Save and redeploy the relevant service after changing its environment settings.
+
+For local development with `VITE_BACKEND_URL` unset, run `npm start` in the repository root as well as `npm run dev` in `frontend`. Vite on port 3000 proxies `/api` to the backend on port 5000. An `ECONNREFUSED` proxy error means the backend is not listening, not that the password is wrong. Confirm `http://localhost:5000/health` returns `{"ready":true}` before testing login. Alternatively, point the local frontend's public `VITE_BACKEND_URL` at Render and restart Vite; this requires the localhost origin in Render's CORS allowlist.
 
 Only `.env.example` templates may be committed. Private `.env` files and `node_modules/` are ignored at every directory level. Ignore rules do not prevent deliberate force-adds and do not remove previously committed history. These changes do not configure a Render account or rotate credentials automatically.
 
