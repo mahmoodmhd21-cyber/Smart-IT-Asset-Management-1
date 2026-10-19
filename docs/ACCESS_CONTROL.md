@@ -1,5 +1,19 @@
 # Access Control
 
+## Operator Password Recovery
+
+For an existing account with a forgotten or mismatched password, run this from the repository root in your own terminal:
+
+```sh
+node scripts/reset-password.js demo@example.com
+```
+
+The command uses the backend `MONGO_URI` (environment or the root `.env`) and displays only its host/database before asking for `RESET`. Confirm those match the intended Render database before continuing. Do not paste database credentials into chat. New passwords are entered twice without terminal echo; use at least 12 characters and at most 72 UTF-8 bytes. Do not pass passwords as command-line arguments.
+
+Recovery updates only the existing account's password hash and session version. It does not create accounts, change roles, enable disabled users, or alter asset history. Existing sessions are revoked. A concurrent password/account-state change causes recovery to fail rather than silently overwrite it. Never expose this operator command through a public HTTP route.
+
+If local and Render configurations point to different databases, a local reset will not fix the hosted account. Re-running first-admin bootstrap is not a recovery procedure; it deliberately refuses databases with existing accounts.
+
 ## Permissions
 
 - Login is public. Account registration is Admin-only, including creation of IT Staff.
